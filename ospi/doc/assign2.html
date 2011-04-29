@@ -1,0 +1,724 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<?xml-stylesheet type="text/xsl" href="../etc/mathml.xsl"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>OSPI</title>
+
+    <style type="text/css">
+    <!--
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+    
+  </head>
+  
+  <body>
+    
+	
+     
+    
+
+
+
+<div class="contents">
+<dl>
+<dt>
+<a href="#sec1">Part 1: MNA Formulation</a>
+</dt>
+<dt>
+<a href="#sec2">Part 2: Implementation</a>
+</dt>
+<dt>
+<a href="#sec3">Part 3: Testing</a>
+</dt>
+<dt>
+<a href="#sec4">Part 4: Verification</a>
+</dt>
+<dt>
+<a href="#sec5">Part 5: Comparison</a>
+</dt>
+<dt>
+<a href="#sec6">Part 6: Future Work</a>
+</dt>
+</dl>
+</div>
+
+
+<h3><a name="sec1" id="sec1"></a>
+Part 1: MNA Formulation</h3>
+
+<p class="first">The MNA G, C, and b matrices are shown below.  These matrices were
+constructed automatically from the input circuit description. The f
+matrix is impossible to print because it is composed of compiled
+functions.</p>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mi>ar_matrix</mi><mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>0.0004</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.0004</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>5e-05</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-5e-05</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>3.50018e-05</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-3.50018e-05</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>-0.0004</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.1004</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.1</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-5e-05</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>5e-05</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-3.50018e-05</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.0714636</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.0714286</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.0001</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.1</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.0714286</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.0714286</cn>
+</matrixrow>
+</matrix>
+</math>
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mi>cr_matrix</mi><mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.02</cn>
+<cn>0</cn>
+<cn>-0.02</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0.02</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>-0.02</cn>
+<cn>0</cn>
+<cn>0.02</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+</matrix>
+</math>
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mi>br_vec</mi><mo>=</mo>
+<vector>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</vector>
+</math>
+<br/>
+
+
+
+<h3><a name="sec2" id="sec2"></a>
+Part 2: Implementation</h3>
+
+<p class="first">The solution was written in OCAML and developed using the GNU
+Scientific Library (GSL).  The GSL is written in C but has bindings
+for many different languages including OCAML.  The solution is written
+to be a completely general purpose simulation engine (i.e. nothing is
+hardcoded) and it meant to be completely extensible.  Therefore, all
+of the circuit parameters are inputs to the program and it is
+completely programmable.</p>
+
+<p>Some key points about the solution:</p>
+
+<ul>
+<li>source stepping is included in both the DC solver and the HB solver</li>
+<li>in both cases, the source stepper is hardcoded to use 50 linear
+steps</li>
+<li>the GSL multi-dimensional linear solver is used in order to solve
+sets of non-linear equations.  The solver requires that the output
+vector and Jacobian are computed periodically.  Several different
+algorithms are available, but I use the Newton solver in all cases.</li>
+<li>I chose the maximum number of iterations to be 100 and an error
+epsilon of 1e-7 for the non-linear solvers</li>
+<li>Once the HB solver has computed the final solution, it computes the
+maximum ratio (for all circuit nodes) of the highest harmonic to
+the fundamental.  If the ratio exceeds a threshold of 1e-3, a
+warning is issued to the user.</li>
+</ul>
+
+<p>Instead of including all the code, I have elected to choose several
+key pieces of the solution and include it with comments.</p>
+
+<p>The first pieces of code shows the declaration of the main circuit,
+invoking first a DC analysis and then a Harmonic Balance analysis.
+The analysis engines automatically store the results in a database.
+After the analysis is done, the calculation of the measurements of
+interest are shown including DC shift, Gain, 2nd/3rd order harmonic
+distortion, and THD.  Finally, the plotter is invoked to display the
+results... some plots will be shown later.</p>
+
+
+    <pre>
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c </span><span class="tuareg-font-lock-operator">=</span> new_circuit <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">vcc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rsig</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> re</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rl</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c2 </span><span class="tuareg-font-lock-operator">=</span>
+    15.<span class="tuareg-font-lock-operator">,</span> 2.5e3<span class="tuareg-font-lock-operator">,</span> 28.57e3<span class="tuareg-font-lock-operator">,</span> 20e3<span class="tuareg-font-lock-operator">,</span> 10e3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3 <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">harmonics </span><span class="tuareg-font-lock-operator">=</span> 20
+  <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">*.</span> pi <span class="tuareg-font-lock-operator">*.</span> 10e3 <span class="tuareg-font-lock-governing">in</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 1 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">50 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ac</span><span class="tuareg-font-lock-operator">:</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="type">Source</span>.vac <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src_type</span><span class="tuareg-font-lock-operator">:</span>`COS <span class="tuareg-font-lock-operator">~</span><span class="variable-name">freq</span><span class="tuareg-font-lock-operator">:</span><span class="type">f </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">mag</span><span class="tuareg-font-lock-operator">:</span><span class="type">100e</span><span class="tuareg-font-lock-operator">-</span><span class="type">3 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">phase</span><span class="tuareg-font-lock-operator">:(</span>pi <span class="tuareg-font-lock-operator">/.</span> 6.<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">());</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 4 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">51 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dc</span><span class="tuareg-font-lock-operator">:</span><span class="type">vcc</span><span class="tuareg-font-lock-operator">;</span>
+<span class="comment">  c#vsrc 7 0 ~id:52 ~dc:(-.vcc);
+</span>  c<span class="tuareg-font-lock-operator">#</span>res 1 2 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rsig</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 3 4 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rc</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 6 7 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">re</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 6 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c2</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 3 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c1</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 5 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rl</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="type">BJT</span>.bjt_subckt c <span class="tuareg-font-lock-operator">~</span><span class="variable-name">nb</span><span class="tuareg-font-lock-operator">:</span><span class="type">2 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">nc</span><span class="tuareg-font-lock-operator">:</span><span class="type">3 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ne</span><span class="tuareg-font-lock-operator">:</span><span class="type">6 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ns</span><span class="tuareg-font-lock-operator">:</span><span class="type">0</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>dc <span class="string">"DC"</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>hb <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">~</span>harmonics <span class="tuareg-font-lock-operator">~</span><span class="variable-name">w</span><span class="tuareg-font-lock-operator">:</span><span class="type">f</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f1 </span><span class="tuareg-font-lock-operator">=</span> f <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f2 </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">*.</span> f <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f3 </span><span class="tuareg-font-lock-operator">=</span> 3. <span class="tuareg-font-lock-operator">*.</span> f <span class="tuareg-font-lock-governing">in</span>
+  printf <span class="string">"DC shift: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vdc <span class="string">"DC"</span> 5<span class="tuareg-font-lock-operator">);</span>
+  printf <span class="string">"Gain: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 1 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  printf <span class="string">"2nd HD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f2</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  printf <span class="string">"3rd HD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f3</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">sum </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0. <span class="tuareg-font-lock-governing">in</span>
+  <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 2 <span class="keyword">to</span> harmonics <span class="keyword">do</span>
+    sum <span class="tuareg-font-lock-operator">:=</span> <span class="tuareg-font-lock-operator">!</span>sum <span class="tuareg-font-lock-operator">+.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:((</span>float i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">*.</span> f<span class="tuareg-font-lock-operator">))</span>
+  <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+  printf <span class="string">"THD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">(!</span>sum <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  c<span class="tuareg-font-lock-operator">#</span>plot `HB_TIME <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">[</span>1<span class="tuareg-font-lock-operator">];</span>
+  c<span class="tuareg-font-lock-operator">#</span>plot `HB_TIME <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">[</span>5<span class="tuareg-font-lock-operator">]</span></pre>
+
+
+<p>In the first piece of code, there is a reference to the BJT
+subcircuit.  The code for this subcircuit and associated non-linear
+equations is shown below.  This is one of the trickier parts of the
+code because the subcircuit must be able to function in any part of
+the circuit including various nodes being connected to ground.</p>
+
+<p>Because the non-linear functions are compiled and reused, they must be
+able to dynamically lookup the correct location in the output vector
+and/or Jacobian in which to insert computed results.  This is
+accomplished through simple lookup functions which are passed into the
+functions during creation.  It is worth noting that all of the input
+node names and IDs are mapped to internal names when the circuit is
+instantiated which creates some of the complication.</p>
+
+&lt;commnet&gt;Insert BJT code here &lt;/comment&gt;
+
+<p>The DC solver is shown below.  The main function to observe is the
+&quot;solve_at&quot; function which is a non-linear source-stepping solver
+taking a total of 50 steps.  The DC module also supports DC sweeps
+which can be seen in the &quot;sweep&quot; and &quot;create_sweep&quot; functions.  This
+required that the DC sources all have &quot;id's&quot; and the actual voltage
+values are parameterizable at runtime.</p>
+
+
+
+<p>The final piece of code that I've included it the actual Harmonic
+Balance solver module.  There are several things that I will draw
+attention to.  At the top of the module is the main declaration of the
+data structure for the HB analysis including various constants and
+matrices which are computed once and then reused.</p>
+
+<p>The &quot;create&quot; function is where the HB analysis is initialized.  All of
+the constant vectors and matrices are pre-computed and/or initialized
+at this point and stored in the HB data structure.  It is expected
+that the DC analysis has already been run at this point.  The function
+called &quot;solve&quot; attempts to solve the HB equations.  It first tries
+directly computing the solution (i.e. without homotopy).  If this
+fails, it falls back to a source stepping algorithm which is found in
+the function called &quot;solve_with_stepping&quot;.  The stepping algorithm is
+very simple.  Since the DC solution may have been source-stepped
+previously, only the AC sources are scaled by alpha.  The stepping
+algorithm is hard-coded to try to compute the solution in 50 linear
+steps which was found to work by experimentation.</p>
+
+
+<h3><a name="sec3" id="sec3"></a>
+Part 3: Testing</h3>
+
+<ul>
+<li>the DC analysis which was always performed prior to HB analysis
+required source stepping in order to converge</li>
+<li>for the HB anlaysis, only the cases of 100mV and 500mV required source
+stepping</li>
+<li>I chose an arbitrary ratio of 1e-3 for the highest harmonic to the
+fundamental.  In all cases except the 100mV and 500mV case, I was
+able to achieve this ratio by increasing the number of samples.  I
+feel relatively confident that I could have achieved this ratio for
+these cases, if I was willing to be a bit more patient with the
+run-time.  Unfortunately, the fan on my laptop is not running
+properly, so I am hesitant to the run the CPU full-out for a long
+time.</li>
+</ul>
+
+<h4>Results</h4>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Amplitude</th>
+      <th>M</th>
+      <th>Max Ratio</th>
+      <th>DC shift</th>
+      <th>Gain</th>
+      <th>2nd HD</th>
+      <th>3rd HD</th>
+      <th>THD</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1 mV</td>
+      <td>5</td>
+      <td>1.26e-10</td>
+      <td>0</td>
+      <td>1.949</td>
+      <td>-2.3525</td>
+      <td>-5.96242</td>
+      <td>-4.70492</td>
+    </tr>
+    <tr>
+      <td>5 mV</td>
+      <td>5</td>
+      <td>7.706e-8</td>
+      <td>0</td>
+      <td>1.948</td>
+      <td>-1.6537</td>
+      <td>-4.5656</td>
+      <td>-3.3074</td>
+    </tr>
+    <tr>
+      <td>10 mV</td>
+      <td>5</td>
+      <td>9.514e-7</td>
+      <td>0</td>
+      <td>1.945</td>
+      <td>-1.351</td>
+      <td>-3.9597</td>
+      <td>-2.7016</td>
+    </tr>
+    <tr>
+      <td>50 mV</td>
+      <td>7</td>
+      <td>7.5956e-6</td>
+      <td>0</td>
+      <td>1.8696</td>
+      <td>-0.6287</td>
+      <td>-1.9575</td>
+      <td>-1.25616</td>
+    </tr>
+    <tr>
+      <td>100 mV</td>
+      <td>20</td>
+      <td>0.00231</td>
+      <td>0</td>
+      <td>1.6857</td>
+      <td>-0.4728</td>
+      <td>-1.3028</td>
+      <td>-0.87289</td>
+    </tr>
+    <tr>
+      <td>500 mV</td>
+      <td>20</td>
+      <td>0.01789</td>
+      <td>0</td>
+      <td>1.012</td>
+      <td>-0.3951</td>
+      <td>-0.9591</td>
+      <td>-0.52478</td>
+    </tr>
+  </tbody>
+</table>
+
+
+&lt;insert graphs here&gt;
+
+
+
+<h4>Comments</h4>
+
+<ul>
+<li>the run-time increased significantly when the harmonic truncation
+was increased in order to produce more accurate results</li>
+<li>many more sampling points were required as soon as the input
+amplitude was increased to a point where there was a lot of
+distortion</li>
+</ul>
+
+
+
+<h3><a name="sec4" id="sec4"></a>
+Part 4: Verification</h3>
+
+
+
+
+<h3><a name="sec5" id="sec5"></a>
+Part 5: Comparison</h3>
+
+
+<h3><a name="sec6" id="sec6"></a>
+Part 6: Future Work</h3>
+
+<ul>
+<li>source stepping algorithm should be much more sophisticated.  Other
+types of homotopy may be more appropriate and require less steps
+(such as varying transistor gain)</li>
+<li>automatic adjustment of the number of harmonics would be nice</li>
+<li>there is a lot of duplicated calculation that should be cleaned up</li>
+<li>experiment with algorithms other than standard Newton Raphson</li>
+<li>many more unit tests should be written</li>
+<li>add a &quot;netlist&quot;/scripted front-end (easier for testing)</li>
+</ul>
+
+
+
+</body>
+</html>

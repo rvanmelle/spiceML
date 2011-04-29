@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>assign2.ml</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #bc8f8f;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c </span><span class="tuareg-font-lock-operator">=</span> new_circuit <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">vcc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rsig</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> re</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rl</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c2 </span><span class="tuareg-font-lock-operator">=</span>
+    15.<span class="tuareg-font-lock-operator">,</span> 2.5e3<span class="tuareg-font-lock-operator">,</span> 28.57e3<span class="tuareg-font-lock-operator">,</span> 20e3<span class="tuareg-font-lock-operator">,</span> 10e3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3 <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">harmonics </span><span class="tuareg-font-lock-operator">=</span> 20
+  <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">*.</span> pi <span class="tuareg-font-lock-operator">*.</span> 10e3 <span class="tuareg-font-lock-governing">in</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 1 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">50 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ac</span><span class="tuareg-font-lock-operator">:</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="type">Source</span>.vac <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src_type</span><span class="tuareg-font-lock-operator">:</span>`COS <span class="tuareg-font-lock-operator">~</span><span class="variable-name">freq</span><span class="tuareg-font-lock-operator">:</span><span class="type">f </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">mag</span><span class="tuareg-font-lock-operator">:</span><span class="type">100e</span><span class="tuareg-font-lock-operator">-</span><span class="type">3 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">phase</span><span class="tuareg-font-lock-operator">:(</span>pi <span class="tuareg-font-lock-operator">/.</span> 6.<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">());</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 4 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">51 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dc</span><span class="tuareg-font-lock-operator">:</span><span class="type">vcc</span><span class="tuareg-font-lock-operator">;</span>
+<span class="comment">  c#vsrc 7 0 ~id:52 ~dc:(-.vcc);
+</span>  c<span class="tuareg-font-lock-operator">#</span>res 1 2 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rsig</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 3 4 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rc</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 6 7 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">re</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 6 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c2</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 3 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c1</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 5 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rl</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="type">BJT</span>.bjt_subckt c <span class="tuareg-font-lock-operator">~</span><span class="variable-name">nb</span><span class="tuareg-font-lock-operator">:</span><span class="type">2 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">nc</span><span class="tuareg-font-lock-operator">:</span><span class="type">3 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ne</span><span class="tuareg-font-lock-operator">:</span><span class="type">6 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ns</span><span class="tuareg-font-lock-operator">:</span><span class="type">0</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>dc <span class="string">"DC"</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>hb <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">~</span>harmonics <span class="tuareg-font-lock-operator">~</span><span class="variable-name">w</span><span class="tuareg-font-lock-operator">:</span><span class="type">f</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f1 </span><span class="tuareg-font-lock-operator">=</span> f <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f2 </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">*.</span> f <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f3 </span><span class="tuareg-font-lock-operator">=</span> 3. <span class="tuareg-font-lock-operator">*.</span> f <span class="tuareg-font-lock-governing">in</span>
+  printf <span class="string">"DC shift: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vdc <span class="string">"DC"</span> 5<span class="tuareg-font-lock-operator">);</span>
+  printf <span class="string">"Gain: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 1 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  printf <span class="string">"2nd HD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f2</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  printf <span class="string">"3rd HD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f3</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">sum </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0. <span class="tuareg-font-lock-governing">in</span>
+  <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 2 <span class="keyword">to</span> harmonics <span class="keyword">do</span>
+    sum <span class="tuareg-font-lock-operator">:=</span> <span class="tuareg-font-lock-operator">!</span>sum <span class="tuareg-font-lock-operator">+.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:((</span>float i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">*.</span> f<span class="tuareg-font-lock-operator">))</span>
+  <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+  printf <span class="string">"THD: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">(!</span>sum <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">)));</span>
+  c<span class="tuareg-font-lock-operator">#</span>plot `HB_TIME <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">[</span>1<span class="tuareg-font-lock-operator">];</span>
+  c<span class="tuareg-font-lock-operator">#</span>plot `HB_TIME <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">[</span>5<span class="tuareg-font-lock-operator">]</span></pre>
+  </body>
+</html>

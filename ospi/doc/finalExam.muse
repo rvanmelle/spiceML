@@ -1,0 +1,72 @@
+* ELG7132D:  Final Exam
+
+*** By: Reid van Melle
+*** Student No: 5107751
+
+*** Question #1
+
+Submitted on paper.
+
+*** Question #2, Part a, b, c
+
+Submitted on paper.
+
+NOTE: I'm relatively certain that there is something in my derivation
+of the kernels because when I tried to plot the results, only the
+first order response was valid.  The other responses contained
+overflow or nan errors.  When I examined things closer, some of the
+kernels were returning numbers which were simply too small and I
+believe causing underflow errors.  However, I think that my
+calculations in the code are correct which means there is very likely
+an error in the hand derivation.
+
+I did not have time to debug this fully... obviously.
+
+*** Question #2, Part d
+
+Here is the code the computes and plots the 1st, 2nd, and 3rd order
+responses.  Only the first order response actually plots succesfully
+and I'm pretty sure this is the wrong answer as well so I didn't
+bother including the actual plot.
+
+<include file="../finalExam/plot_response.html" markup="nil">
+
+*** Question #2, Part e
+
+The derivation of the 3rd order Volterra kernel for three independent
+frequencies would be performed in a similar manner to that for two
+independent frequencies.  However, the number of unique terms would be
+much much larger.
+
+*** Question #2, Part f
+
+First, I've submitted the code snippet that is used to build the
+circuit and invoke the Volterra-based analysis.  As usual, the
+solution is entirely general.  Note how declarations for **src1**,
+**src2**, and **conductance** are passed into the routine including
+information about how they are to be hooked to the circuits.  The
+values for g1, g2, and g3 are passed in as functions to be computed
+based on the DC solution.
+
+<include file="../finalExam/test_volterra.html" markup="nil">
+
+Finally, the incomplete implementation of the method of nonlinear
+currents is shown below.  Only the first order response is computed
+before I ran out of time.
+
+<include file="../finalExam/volterra.html" markup="nil">
+
+*** Question #2, Part g
+
+Since my computer account appears to be expired, I tried to get
+comparison results using my own multi-tone harmonic balance analysis.
+The code which builds the circuit and invoked the analysis is shown
+below:
+
+<include file="../finalExam/test_multihb.html" markup="nil">
+
+Unfortunately, there were some convergence problems during the HB
+source-stepping process and the system never gets past around "=alpha
+0.15=" for any cases where the input signals are relatively large.
+This is something that I will continue to work on to correct.  I
+believe I need a more robust homotopy method.

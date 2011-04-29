@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<?xml-stylesheet type="text/xsl" href="../etc/mathml.xsl"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <head>
+    <title>OSPI</title>
+
+<link href="../../doc-src/static/blueprint/screen.css" type="text/css" media="screen"/>
+<link href="../../doc-src/static/blueprint/print.css" type="text/css" media="print"/>
+    
+    <style type="text/css">
+    <![CDATA[
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .comment {
+        color: #FF0000;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    ]]>
+    </style>
+    
+  </head>
+  
+  <body>
+
+    <div class="container">
+      <div class="column span-14">
+    
+	
+     
+    
+
+
+
+<h2><a name="sec1" id="sec1"></a>
+ELG7132D: Assign 4</h2>
+
+<h4>By: Reid van Melle</h4>
+
+
+<h4>Student No: 5107751</h4>
+
+
+<h3><a name="sec2" id="sec2"></a>
+Table of Contents</h3>
+
+<div class="contents">
+<dl>
+<dt>
+<a href="#sec1">ELG7132D: Assign 4</a>
+</dt>
+<dd>
+<dl>
+<dt>
+<a href="#sec2">Table of Contents</a>
+</dt>
+<dt>
+<a href="#sec3">Part I</a>
+</dt>
+<dt>
+<a href="#sec4">Part II: Question 1</a>
+</dt>
+<dt>
+<a href="#sec5">Part III: Testing</a>
+</dt>
+<dt>
+<a href="#sec6">Part IV: Comparison</a>
+</dt>
+<dt>
+<a href="#sec7">Part IV: Source Code</a>
+</dt>
+<dt>
+<a href="#sec8">Part V: Future Work</a>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+
+
+
+<h3><a name="sec3" id="sec3"></a>
+Part I</h3>
+
+<p class="first">I never did this part of the assignment, because it seemed to offer no
+benefit other than requiring larger modifications to the source code
+developed in Assignment #2.  Instead, I made the minimum number of
+modifications necessary in order to make my single-tone code from
+Assignment #2 work for this assignment.</p>
+
+<p>The box truncation code was taken directly from Assignment #3 without
+modification and used to produce forward and reverse frequency
+mappings for this assignment.</p>
+
+
+<h3><a name="sec4" id="sec4"></a>
+Part II: Question 1</h3>
+
+<p class="first">The entire circuit, all values, and most configuration options are
+inputs to the circuit.  As in past assignments, I used the language
+OCAML and bindings for the GNU Scientific Library to develop solutions
+for the assignment.  All results were obtained using a standard NEWTON
+RAPHSON solver with an absolute error threshold of 1e-9 and a maximum
+number of iterations of 200.</p>
+
+
+<h3><a name="sec5" id="sec5"></a>
+Part III: Testing</h3>
+
+<p class="first">Tables of results are shown below for a number of different input
+amplitude sizes.</p>
+
+<h4>Input Amplitude = 1mV</h4>
+
+<p class="first">  <table class="muse-table" border="2" cellpadding="5">
+<tr><th>Sweep</th><th>5</th></tr><tr><td>0</td><td>0 / 0</td></tr>
+<tr><td>100</td><td>0.000468897 / -3.12264</td></tr>
+<tr><td>200</td><td>1.59136e-08 / 0.0538235</td></tr>
+<tr><td>9800</td><td>2.02716e-11 / -2.67521</td></tr>
+<tr><td>9900</td><td>8.37689e-07 / 0.573158</td></tr>
+<tr><td>10000</td><td>0.0746796 / 2.61998</td></tr>
+<tr><td>10100</td><td>0.0746606 / 2.64066</td></tr>
+<tr><td>10200</td><td>8.46706e-07 / -0.574038</td></tr>
+<tr><td>19800</td><td>5.16683e-13 / -1.97038</td></tr>
+<tr><td>19900</td><td>1.05633e-08 / 1.1014</td></tr>
+<tr><td>20000</td><td>0.00023449 / 2.10604</td></tr>
+<tr><td>20100</td><td>0.000468332 / 2.16537</td></tr>
+<tr><td>20200</td><td>0.000233727 / 2.2246</td></tr>
+<tr><td>29800</td><td>3.44928e-16 / -2.71376</td></tr>
+<tr><td>29900</td><td>1.04088e-11 / -1.62573</td></tr>
+<tr><td>30000</td><td>2.79524e-07 / -1.58636</td></tr>
+<tr><td>30100</td><td>8.5343e-07 / -1.63536</td></tr>
+<tr><td>30200</td><td>8.72548e-07 / -1.67201</td></tr>
+<tr><td>39900</td><td>2.24687e-13 / -0.853213</td></tr>
+<tr><td>40000</td><td>2.64224e-09 / -2.04688</td></tr>
+<tr><td>40100</td><td>1.05456e-08 / -1.92694</td></tr>
+<tr><td>40200</td><td>1.57409e-08 / -1.80828</td></tr>
+<tr><td>50000</td><td>2.16004e-12 / 0.290468</td></tr>
+<tr><td>50100</td><td>1.44504e-11 / 0.0137203</td></tr>
+<tr><td>50200</td><td>3.81738e-11 / -0.0535819</td></tr>
+<tr><td>60100</td><td>2.06778e-13 / 0.270901</td></tr>
+<tr><td>60200</td><td>5.35638e-13 / 0.427877</td></tr>
+<tr><td>70200</td><td>2.08593e-15 / 2.60195</td></tr>
+</table></p>
+
+
+
+<h4>Input Amplitude = 5mV</h4>
+
+<p class="first">  <table class="muse-table" border="2" cellpadding="5">
+<tr><th>Sweep</th><th>5</th></tr><tr><td>0</td><td>0 / 0</td></tr>
+<tr><td>100</td><td>0.0117187 / -3.12272</td></tr>
+<tr><td>200</td><td>4.85728e-06 / 0.0772287</td></tr>
+<tr><td>9800</td><td>2.40367e-07 / -2.5507</td></tr>
+<tr><td>9900</td><td>0.000102984 / 0.573323</td></tr>
+<tr><td>10000</td><td>0.372394 / 2.62002</td></tr>
+<tr><td>10100</td><td>0.372298 / 2.64068</td></tr>
+<tr><td>10200</td><td>0.000102913 / -0.562009</td></tr>
+<tr><td>19800</td><td>1.27653e-09 / 0.920178</td></tr>
+<tr><td>19900</td><td>3.08678e-06 / 1.09779</td></tr>
+<tr><td>20000</td><td>0.00585759 / 2.10592</td></tr>
+<tr><td>20100</td><td>0.0117046 / 2.16509</td></tr>
+<tr><td>20200</td><td>0.00586845 / 2.22294</td></tr>
+<tr><td>29800</td><td>2.47601e-10 / 1.99666</td></tr>
+<tr><td>29900</td><td>1.17592e-07 / -1.52299</td></tr>
+<tr><td>30000</td><td>3.4168e-05 / -1.58675</td></tr>
+<tr><td>30100</td><td>0.000104955 / -1.63782</td></tr>
+<tr><td>30200</td><td>0.000105905 / -1.66824</td></tr>
+<tr><td>39900</td><td>6.82579e-10 / 2.13042</td></tr>
+<tr><td>40000</td><td>7.74594e-07 / -2.01858</td></tr>
+<tr><td>40100</td><td>3.11468e-06 / -1.82249</td></tr>
+<tr><td>40200</td><td>4.89707e-06 / -1.66563</td></tr>
+<tr><td>50000</td><td>2.33431e-08 / 0.544583</td></tr>
+<tr><td>50100</td><td>1.19948e-07 / 0.58718</td></tr>
+<tr><td>50200</td><td>2.49313e-07 / 0.636051</td></tr>
+<tr><td>60100</td><td>1.10785e-09 / 2.36953</td></tr>
+<tr><td>60200</td><td>3.85166e-09 / 2.30034</td></tr>
+<tr><td>70200</td><td>2.3517e-10 / -3.08574</td></tr>
+</table></p>
+
+
+
+<h4>Input Amplitude = 10mV</h4>
+
+<p class="first">  <table class="muse-table" border="2" cellpadding="5">
+<tr><th>Sweep</th><th>5</th></tr><tr><td>0</td><td>0 / 0</td></tr>
+<tr><td>100</td><td>0.0467966 / -3.12294</td></tr>
+<tr><td>200</td><td>8.37507e-05 / 0.0511593</td></tr>
+<tr><td>9800</td><td>7.60122e-06 / -2.54078</td></tr>
+<tr><td>9900</td><td>0.000781731 / 0.573841</td></tr>
+<tr><td>10000</td><td>0.738585 / 2.62015</td></tr>
+<tr><td>10100</td><td>0.738395 / 2.64076</td></tr>
+<tr><td>10200</td><td>0.000760783 / -0.545446</td></tr>
+<tr><td>19800</td><td>3.11671e-08 / 1.10567</td></tr>
+<tr><td>19900</td><td>5.11187e-05 / 1.09776</td></tr>
+<tr><td>20000</td><td>0.0233535 / 2.10559</td></tr>
+<tr><td>20100</td><td>0.0467397 / 2.16431</td></tr>
+<tr><td>20200</td><td>0.0235327 / 2.22049</td></tr>
+<tr><td>29800</td><td>3.50831e-08 / 1.958</td></tr>
+<tr><td>29900</td><td>3.63673e-06 / -1.52408</td></tr>
+<tr><td>30000</td><td>0.000254703 / -1.58772</td></tr>
+<tr><td>30100</td><td>0.000797594 / -1.64527</td></tr>
+<tr><td>30200</td><td>0.000782779 / -1.66813</td></tr>
+<tr><td>39900</td><td>2.86724e-08 / 2.02239</td></tr>
+<tr><td>40000</td><td>1.28699e-05 / -2.02776</td></tr>
+<tr><td>40100</td><td>5.14951e-05 / -1.83909</td></tr>
+<tr><td>40200</td><td>8.32173e-05 / -1.71788</td></tr>
+<tr><td>50000</td><td>6.99653e-07 / 0.545801</td></tr>
+<tr><td>50100</td><td>3.71221e-06 / 0.57432</td></tr>
+<tr><td>50200</td><td>7.81963e-06 / 0.614693</td></tr>
+<tr><td>60100</td><td>6.03398e-08 / 2.20489</td></tr>
+<tr><td>60200</td><td>2.13863e-07 / 2.11733</td></tr>
+<tr><td>70200</td><td>3.24733e-08 / 3.07486</td></tr>
+</table></p>
+
+
+
+<h4>Input Amplitude = 50mV</h4>
+
+<p class="first">  <table class="muse-table" border="2" cellpadding="5">
+<tr><th>Sweep</th><th>5</th></tr><tr><td>0</td><td>0 / 0</td></tr>
+<tr><td>100</td><td>0.722659 / 3.11988</td></tr>
+<tr><td>200</td><td>0.144799 / 0.307292</td></tr>
+<tr><td>9800</td><td>0.0400198 / 0.571435</td></tr>
+<tr><td>9900</td><td>0.215811 / 0.6134</td></tr>
+<tr><td>10000</td><td>2.73362 / 2.62616</td></tr>
+<tr><td>10100</td><td>2.77728 / 2.63247</td></tr>
+<tr><td>10200</td><td>0.120466 / 0.177017</td></tr>
+<tr><td>19800</td><td>0.0314748 / -0.507471</td></tr>
+<tr><td>19900</td><td>0.148348 / 1.03655</td></tr>
+<tr><td>20000</td><td>0.202792 / 2.13267</td></tr>
+<tr><td>20100</td><td>0.715465 / 2.12825</td></tr>
+<tr><td>20200</td><td>0.340301 / 2.01855</td></tr>
+<tr><td>29800</td><td>0.047035 / -0.181824</td></tr>
+<tr><td>29900</td><td>0.0436531 / 0.868547</td></tr>
+<tr><td>30000</td><td>0.151833 / -1.5371</td></tr>
+<tr><td>30100</td><td>0.225575 / -1.49561</td></tr>
+<tr><td>30200</td><td>0.12086 / -0.902487</td></tr>
+<tr><td>39900</td><td>0.041529 / 0.0962467</td></tr>
+<tr><td>40000</td><td>0.0550004 / -1.84664</td></tr>
+<tr><td>40100</td><td>0.160825 / -1.9954</td></tr>
+<tr><td>40200</td><td>0.153953 / -1.69041</td></tr>
+<tr><td>50000</td><td>0.0251004 / 0.0193912</td></tr>
+<tr><td>50100</td><td>0.0427635 / -2.69565</td></tr>
+<tr><td>50200</td><td>0.0573528 / -2.31651</td></tr>
+<tr><td>60100</td><td>0.0245479 / 0.777912</td></tr>
+<tr><td>60200</td><td>0.0271551 / 2.30273</td></tr>
+<tr><td>70200</td><td>0.0351983 / 0.808478</td></tr>
+</table></p>
+
+
+
+
+<h3><a name="sec6" id="sec6"></a>
+Part IV: Comparison</h3>
+
+<h4>3rd Order Intermodulation Distortion</h4>
+
+<p class="first">Results from both my program (OSPI) and ADS are shown in the table
+below for the 3rd order intermodulation distortion.  The results match
+very well for the cases with less distortion and a smaller number of
+harmonics.  The cases with 100mV and 500mV input amplitudes fail
+miserably.  I believe that this is because I was not able to run with
+enough harmonics.  Unfortunately, running with more was not an option
+due to a problem with either the GSL Library or the OCAML bindings.
+Whenever I tried to create a problem of size &gt; 1000, I encountered a
+segmentation fault.  With an MNA size of around 14, this limited my
+program to around 35 harmonics.</p>
+
+<ul>
+<li>calculated as 20*log10(HB[9.9kHz] / HB[10.1kHz])</li>
+</ul>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Amplitude</th>
+      <th>OSPI</th>
+      <th>ADS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1mV</td>
+      <td>-98.95</td>
+      <td>-99.01</td>
+    </tr>
+    <tr>
+      <td>5mV</td>
+      <td>-71.16</td>
+      <td>-71.15</td>
+    </tr>
+    <tr>
+      <td>10mV</td>
+      <td>-59.50</td>
+      <td>-59.49</td>
+    </tr>
+    <tr>
+      <td>50mV</td>
+      <td>-22.19</td>
+      <td>-22.13</td>
+    </tr>
+    <tr>
+      <td>100mV</td>
+      <td>-13.12</td>
+      <td>-14.72</td>
+    </tr>
+    <tr>
+      <td>500mV</td>
+      <td>-10.16</td>
+      <td>-12.97</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>Amplitude of the 9.9 kHz Mixing Product</h4>
+
+<p class="first">Shown below is a table illustrating the difference in the 9.9kHz
+mixing product.  The results differ by as much as 27% for the input
+amplitude of 500mV.</p>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Amplitude</th>
+      <th>OSPI</th>
+      <th>ADS</th>
+      <th>% Difference</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1mV</td>
+      <td>8.37689e-7 dB</td>
+      <td>8.3716e-7 dB</td>
+      <td>0.063</td>
+    </tr>
+    <tr>
+      <td>5mV</td>
+      <td>1.0298e-4 dB</td>
+      <td>1.0319e-4 dB</td>
+      <td>0.204</td>
+    </tr>
+    <tr>
+      <td>10mV</td>
+      <td>7.8247e-4 dB</td>
+      <td>7.8324e-4 dB</td>
+      <td>0.098</td>
+    </tr>
+    <tr>
+      <td>50mV</td>
+      <td>0.215811 dB</td>
+      <td>0.21461 dB</td>
+      <td>0.56</td>
+    </tr>
+    <tr>
+      <td>100mV</td>
+      <td>0.692871 dB</td>
+      <td>0.58087 dB</td>
+      <td>19.3</td>
+    </tr>
+    <tr>
+      <td>500mV</td>
+      <td>0.98589 dB</td>
+      <td>0.7756 dB</td>
+      <td>27.1</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h4>ADS Results</h4>
+
+<p class="first">I've included one of the tables of results taken directly from ADS.
+For the most part, I allowed ADS to run with harmonics of its own
+choosing.  This was mainly because I did not find the options to
+control the truncation scheme directly.  It is interesting to note
+that the ADS results seem to roughly follow a box truncation scheme
+but not symmetrical around the harmonics of f1.</p>
+
+<p>If you compare the results in the table below with those presented
+earlier for the 1mV case, you will find a very close correspondence.
+The results differ, of course, once below the error floor of 1e-9.</p>
+
+<h5>Input Amplitude = 1mV</h5>
+
+<table class="muse-table" border="2" cellpadding="5">
+  <thead>
+    <tr>
+      <th>freq</th>
+      <th>amplitude / phase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0.000000E0</td>
+      <td>0.000E0 / 0.000E0</td>
+    </tr>
+    <tr>
+      <td>1.0000111E2</td>
+      <td>4.690035E-4 / -1.799622E2</td>
+    </tr>
+    <tr>
+      <td>2.0000222E2</td>
+      <td>7.295042E-9 / 4.3259302E-2</td>
+    </tr>
+    <tr>
+      <td>9.9000036E3</td>
+      <td>8.371621E-7 / -5.888268E1</td>
+    </tr>
+    <tr>
+      <td>1.0000E4</td>
+      <td>7.46736E-2 / 1.19265851E2</td>
+    </tr>
+    <tr>
+      <td>1.0100001E4</td>
+      <td>7.46735E-2 / 1.19258504E2</td>
+    </tr>
+    <tr>
+      <td>1.0200002E4</td>
+      <td>8.36998E-7 / -5.9216949E1</td>
+    </tr>
+    <tr>
+      <td>1.99000066E4</td>
+      <td>4.87139E-9 / -1.2572721E2</td>
+    </tr>
+    <tr>
+      <td>2.0000E4</td>
+      <td>2.34420E-4 / 5.71966925E1</td>
+    </tr>
+    <tr>
+      <td>2.01000023E4</td>
+      <td>4.68848E-4 / 5.71826044E1</td>
+    </tr>
+    <tr>
+      <td>2.0200002E4</td>
+      <td>2.34418E-4 / 5.71686373E1</td>
+    </tr>
+    <tr>
+      <td>2.03000025E4</td>
+      <td>4.86977E-9 / -1.2572956E2</td>
+    </tr>
+    <tr>
+      <td>3.0000E4</td>
+      <td>2.80986E-7 / -1.7720671E2</td>
+    </tr>
+    <tr>
+      <td>3.01000023E4</td>
+      <td>8.43906E-7 / -1.7720074E2</td>
+    </tr>
+    <tr>
+      <td>3.02000046E4</td>
+      <td>8.43960E-7 / -1.7719182E2</td>
+    </tr>
+    <tr>
+      <td>3.03000025E4</td>
+      <td>2.81040E-7 / -1.7717989E2</td>
+    </tr>
+    <tr>
+      <td>4.0000E4</td>
+      <td>1.22249E-9 / 1.08604946E2</td>
+    </tr>
+    <tr>
+      <td>4.01E4</td>
+      <td>4.90049E-9 / 1.08595680E2</td>
+    </tr>
+    <tr>
+      <td>4.02000046E4</td>
+      <td>7.35450E-9 / 1.08571621E2</td>
+    </tr>
+    <tr>
+      <td>4.03E4</td>
+      <td>4.90085E-9 / 1.08538997E2</td>
+    </tr>
+    <tr>
+      <td>4.0400004E4</td>
+      <td>1.22195E-9 / 1.08492285E2</td>
+    </tr>
+    <tr>
+      <td>5.0000178E4</td>
+      <td>3.58995E-11 / -1.200482E2</td>
+    </tr>
+    <tr>
+      <td>5.05000160E4</td>
+      <td>3.59089E-11 / -1.200538E2</td>
+    </tr>
+    <tr>
+      <td>6.0000E4</td>
+      <td>2.60350E-13 / 1.7663551E2</td>
+    </tr>
+    <tr>
+      <td>6.06000050E4</td>
+      <td>2.59567E-13 / 1.7669593E2</td>
+    </tr>
+    <tr>
+      <td>7.0000E4</td>
+      <td>3.48040E-16 / -1.393478E2</td>
+    </tr>
+    <tr>
+      <td>7.07000028E4</td>
+      <td>4.24214E-16 / 7.6378027E1</td>
+    </tr>
+    <tr>
+      <td>8.0000E4</td>
+      <td>7.36907E-16 / -1.139286E2</td>
+    </tr>
+    <tr>
+      <td>8.0800007E4</td>
+      <td>2.90441E-15 / 1.1260383E2</td>
+    </tr>
+    <tr>
+      <td>9.00000355E4</td>
+      <td>3.73206E-16 / -6.444054E1</td>
+    </tr>
+    <tr>
+      <td>9.09E4</td>
+      <td>1.55666E-12 / 5.78078499E1</td>
+    </tr>
+    <tr>
+      <td>1.00044E5</td>
+      <td>4.60243E-16 / -1.3078212E2</td>
+    </tr>
+    <tr>
+      <td>1.010000023E5</td>
+      <td>1.77358E-10 / -9.3250324E0</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+<h3><a name="sec7" id="sec7"></a>
+Part IV: Source Code</h3>
+
+<p class="first">For the most part, the source code is unmodified from the 2nd
+assignment with the following exceptions:</p>
+
+<ul>
+<li>in previous versions, the HB solver was constructed with a base
+frequency and number of harmonics.  It was modified to take a
+list of harmonics and with multiple constructors for single-tone
+and multi-tone problems</li>
+<li>the results storage was also modified to account for the frequency
+mapping</li>
+<li>the construction of the y_bar matrix was modified slightly in order
+to account for an arbitrary list of frequencies</li>
+<li>the construction of the b_bar source vector was also modified
+slightly in order to account for multiple frequencies in the input
+and finding the correct location</li>
+</ul>
+
+<h4>Assignment 4 High-level Execution</h4>
+
+<p class="first">The first piece of code shown here is the top-level construction of
+the problem, invocation of the multi-tone harmonic balance solver, and
+associated calculation and output of results.</p>
+
+<p>    <pre>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Engine</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Recorder</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Circuit</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Runner</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Printf</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Util.MathHelpers</span>
+
+<span class="tuareg-font-lock-governing">module</span> <span class="type">BJT </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Circuit_models</span>.BJT
+
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">test_circuit_multihb</span><span class="variable-name"> mag </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c </span><span class="tuareg-font-lock-operator">=</span> new_circuit <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">vcc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rsig</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> re</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rc</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> rl</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> c2 </span><span class="tuareg-font-lock-operator">=</span>
+    15.<span class="tuareg-font-lock-operator">,</span> 2.5e3<span class="tuareg-font-lock-operator">,</span> 28.57e3<span class="tuareg-font-lock-operator">,</span> 20e3<span class="tuareg-font-lock-operator">,</span> 10e3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3<span class="tuareg-font-lock-operator">,</span> 20e<span class="tuareg-font-lock-operator">-</span>3 <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f1 </span><span class="tuareg-font-lock-operator">=</span> 10e3 <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f2 </span><span class="tuareg-font-lock-operator">=</span> 10.1e3 <span class="tuareg-font-lock-governing">in</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 10 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">50 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ac</span><span class="tuareg-font-lock-operator">:</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="type">Source</span>.vac <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src_type</span><span class="tuareg-font-lock-operator">:</span>`COS <span class="tuareg-font-lock-operator">~</span><span class="variable-name">freq</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1 </span><span class="tuareg-font-lock-operator">~</span>mag <span class="tuareg-font-lock-operator">~</span><span class="variable-name">phase</span><span class="tuareg-font-lock-operator">:(</span>pi <span class="tuareg-font-lock-operator">/.</span> 6.<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">());</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 1 10 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">60 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ac</span><span class="tuareg-font-lock-operator">:</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="type">Source</span>.vac <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src_type</span><span class="tuareg-font-lock-operator">:</span>`COS <span class="tuareg-font-lock-operator">~</span><span class="variable-name">freq</span><span class="tuareg-font-lock-operator">:</span><span class="type">f2 </span><span class="tuareg-font-lock-operator">~</span>mag <span class="tuareg-font-lock-operator">~</span><span class="variable-name">phase</span><span class="tuareg-font-lock-operator">:(</span>pi <span class="tuareg-font-lock-operator">/.</span> 6.<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">());</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 4 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">51 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dc</span><span class="tuareg-font-lock-operator">:</span><span class="type">vcc</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>vsrc 7 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">52 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dc</span><span class="tuareg-font-lock-operator">:(-.</span><span class="type">vcc</span><span class="tuareg-font-lock-operator">);</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 1 2 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rsig</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 3 4 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rc</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 6 7 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">re</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 6 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c2</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 3 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">c1</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 5 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">rl</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="type">BJT</span>.bjt_subckt c <span class="tuareg-font-lock-operator">~</span><span class="variable-name">nb</span><span class="tuareg-font-lock-operator">:</span><span class="type">2 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">nc</span><span class="tuareg-font-lock-operator">:</span><span class="type">3 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ne</span><span class="tuareg-font-lock-operator">:</span><span class="type">6 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ns</span><span class="tuareg-font-lock-operator">:</span><span class="type">0</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>dc <span class="string">"DC"</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>multiHB <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">~</span><span class="variable-name">k1</span><span class="tuareg-font-lock-operator">:</span><span class="type">5 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">w1</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">k2</span><span class="tuareg-font-lock-operator">:</span><span class="type">2 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">w2</span><span class="tuareg-font-lock-operator">:</span><span class="type">f2</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>print_table <span class="tuareg-font-lock-operator">~</span><span class="variable-name">file</span><span class="tuareg-font-lock-operator">:</span><span class="string">"1mv.html"</span> <span class="string">"HB"</span> <span class="tuareg-font-lock-operator">[</span>5<span class="tuareg-font-lock-operator">];</span>
+  printf <span class="string">"|Vout(f1)|: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f1</span><span class="tuareg-font-lock-operator">);</span>
+<span class="comment">  printf </span><span class="string">"|Vout(f2)|: %g\n"</span><span class="comment"> (c#vm </span><span class="string">"HB"</span><span class="comment"> 5 ~f:f2);
+</span>  printf <span class="string">"|IM|: %g\n"</span> <span class="tuareg-font-lock-operator">(</span>20. <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>log10 <span class="tuareg-font-lock-operator">((</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:(</span><span class="type">2. </span><span class="tuareg-font-lock-operator">*.</span><span class="type"> f1 </span><span class="tuareg-font-lock-operator">-.</span><span class="type"> f2</span><span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">/.</span>
+                         <span class="tuareg-font-lock-operator">(</span>c<span class="tuareg-font-lock-operator">#</span>vm <span class="string">"HB"</span> 5 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">f2</span><span class="tuareg-font-lock-operator">))))</span>
+
+<span class="string">let _ =
+</span>  <span class="type">Gsl_error</span>.init <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-operator">;</span>
+  test_circuit_multihb 100e<span class="tuareg-font-lock-operator">-</span>3</pre></p>
+
+
+
+
+<h4>Single and <a href="MultiTone">MultiTone</a> Harmonic Balance Module</h4>
+
+<p class="first">Here is the entire OCAML module which does both single-tone and
+two-tone harmonic balance (with box truncation).  Pay special
+attention to the module constructors titled &quot;create_single_tone&quot; and
+&quot;create_two_tone&quot;.  These two different constructors are the <em>only</em>
+difference between the two cases.  All the rest of the code is
+entirely shared.</p>
+
+<p>    <pre>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Printf</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Solver</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Recorder</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Complex</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Gsl_helpers</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">ExtList</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Util.ListHelpers</span>
+
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">debug </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Circuit</span>.debug
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">info </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Circuit</span>.info
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">warn </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Circuit</span>.warn
+
+<span class="tuareg-font-lock-governing">module</span> <span class="type">HB </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">functor</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">Solver</span><span class="tuareg-font-lock-operator">:</span> <span class="type">SOLVER</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-governing">struct</span>
+  <span class="tuareg-font-lock-governing">type</span> <span class="type">t </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span>
+    <span class="variable-name">circuit_size</span> <span class="tuareg-font-lock-operator">:</span> <span class="type">int</span><span class="tuareg-font-lock-operator">;</span>      <span class="comment">(* Number of variables in the MNA *)</span>
+    <span class="variable-name">sample_size</span>  <span class="tuareg-font-lock-operator">:</span> <span class="type">int</span><span class="tuareg-font-lock-operator">;</span>      <span class="comment">(* Total number of time domain samples *)</span>
+    <span class="variable-name">harmonic_map</span> <span class="tuareg-font-lock-operator">:</span> <span class="tuareg-font-lock-operator">(</span><span class="type">int</span><span class="tuareg-font-lock-operator">*</span><span class="type">float</span><span class="tuareg-font-lock-operator">)</span><span class="type"> list</span><span class="tuareg-font-lock-operator">;</span>  <span class="comment">(* Map of harmonics in solution *)</span>
+    <span class="variable-name">total_size</span>   <span class="tuareg-font-lock-operator">:</span> <span class="type">int</span><span class="tuareg-font-lock-operator">;</span>      <span class="comment">(* Total size of the HB matrix *)</span>
+    <span class="variable-name">permut_m</span>     <span class="tuareg-font-lock-operator">:</span> <span class="type">M.matrix</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Permutation matrix *)</span>
+    <span class="variable-name">permut_m</span><span class="tuareg-font-lock-operator">'</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">M.matrix</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Inverse/transpose permutation matrix *)</span>
+    <span class="variable-name">y_bar</span>        <span class="tuareg-font-lock-operator">:</span> <span class="type">M.matrix</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Static HB matrix *)</span>
+    <span class="variable-name">dft_m</span>        <span class="tuareg-font-lock-operator">:</span> <span class="type">M.matrix</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Block diagonal DFT matrix *)</span>
+    <span class="variable-name">idft_m</span>       <span class="tuareg-font-lock-operator">:</span> <span class="type">M.matrix</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Block diagonal inverse DFT matrix *)</span>
+    <span class="variable-name">b_bar</span>        <span class="tuareg-font-lock-operator">:</span> <span class="type">V.vector</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Source vector *)</span>
+    <span class="variable-name">x_bar</span>        <span class="tuareg-font-lock-operator">:</span> <span class="type">V.vector</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* Results vector *)</span>
+    <span class="variable-name">x_init</span>       <span class="tuareg-font-lock-operator">:</span> <span class="type">V.vector</span><span class="tuareg-font-lock-operator">;</span> <span class="comment">(* DC solution to start with *)</span>
+  <span class="tuareg-font-lock-operator">}</span>
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">print</span><span class="variable-name"> t </span><span class="tuareg-font-lock-operator">=</span>
+    fhtml_of_matrix <span class="tuareg-font-lock-operator">~</span><span class="variable-name">file</span><span class="tuareg-font-lock-operator">:</span><span class="string">"hb_engine.xml"</span>
+      <span class="tuareg-font-lock-operator">[(</span><span class="string">"y_bar"</span><span class="tuareg-font-lock-operator">,(</span>`M t.y_bar<span class="tuareg-font-lock-operator">));</span> <span class="tuareg-font-lock-operator">(</span><span class="string">"permut"</span><span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>`M t.permut_m<span class="tuareg-font-lock-operator">));</span>
+       <span class="tuareg-font-lock-operator">(</span><span class="string">"b_bar"</span><span class="tuareg-font-lock-operator">,(</span>`V t.b_bar<span class="tuareg-font-lock-operator">));</span> <span class="tuareg-font-lock-operator">(</span><span class="string">"x_bar"</span><span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>`V t.x_bar<span class="tuareg-font-lock-operator">));</span>
+       <span class="tuareg-font-lock-operator">(</span><span class="string">"idft"</span><span class="tuareg-font-lock-operator">,(</span>`M t.idft_m<span class="tuareg-font-lock-operator">));</span> <span class="tuareg-font-lock-operator">(</span><span class="string">"dft"</span><span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>`M t.dft_m<span class="tuareg-font-lock-operator">));]</span>
+    
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">harmonic_to_node</span><span class="variable-name"> t v_h </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">v_n </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.total_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.total_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>i <span class="tuareg-font-lock-operator">*</span> t.circuit_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">/</span> t.total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">mod</span> t.total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      v_n.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> v_h.<span class="tuareg-font-lock-operator">{</span>index<span class="tuareg-font-lock-operator">}</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    v_n
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">node_to_harmonic</span><span class="variable-name"> t v_n </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">v_h </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.total_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.total_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> t.sample_size <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">/</span> t.total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">mod</span> t.total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      v_h.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> v_n.<span class="tuareg-font-lock-operator">{</span>index<span class="tuareg-font-lock-operator">}</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    v_h
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">apply_gamma_gamma</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> t dfdx </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="comment">(* Now, we have to apply gamma and gamma' to the sub matrices *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">count </span><span class="tuareg-font-lock-operator">=</span> t.sample_size <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">gamma</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Dft</span>.gamma<span class="tuareg-font-lock-operator">'</span> count <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">gamma </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Dft</span>.gamma count <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_m1 </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create count count <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_m2 </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create count count <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">dfdx_bar_node </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create t.total_size t.total_size <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.circuit_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      <span class="keyword">for</span> j <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.circuit_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">offset_i </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> count <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">offset_j </span><span class="tuareg-font-lock-operator">=</span> j <span class="tuareg-font-lock-operator">*</span> count <span class="tuareg-font-lock-governing">in</span>
+        <span class="keyword">for</span> k <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> count <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+          <span class="keyword">for</span> l <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> count <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+            temp_m1.<span class="tuareg-font-lock-operator">{</span>k<span class="tuareg-font-lock-operator">,</span>l<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> dfdx.<span class="tuareg-font-lock-operator">{</span>offset_i<span class="tuareg-font-lock-operator">+</span>k<span class="tuareg-font-lock-operator">,</span> offset_j<span class="tuareg-font-lock-operator">+</span>l<span class="tuareg-font-lock-operator">}</span>
+          <span class="keyword">done</span>
+        <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-operator">(</span>gamma <span class="tuareg-font-lock-operator">|*|</span> temp_m1<span class="tuareg-font-lock-operator">)</span> temp_m2<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-operator">(</span>temp_m2 <span class="tuareg-font-lock-operator">|*|</span> gamma<span class="tuareg-font-lock-operator">')</span> temp_m1<span class="tuareg-font-lock-operator">;</span>
+        <span class="keyword">for</span> k <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> count <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+          <span class="keyword">for</span> l <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> count <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+            dfdx_bar_node.<span class="tuareg-font-lock-operator">{</span>offset_i<span class="tuareg-font-lock-operator">+</span>k<span class="tuareg-font-lock-operator">,</span> offset_j<span class="tuareg-font-lock-operator">+</span>l<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> temp_m1.<span class="tuareg-font-lock-operator">{</span>k<span class="tuareg-font-lock-operator">,</span>l<span class="tuareg-font-lock-operator">}</span>
+          <span class="keyword">done</span>
+        <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    dfdx_bar_node
+      
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve_nonlinear</span><span class="variable-name"> solver t </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">maxiter</span><span class="tuareg-font-lock-operator">=</span>200 <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">epsabs</span><span class="tuareg-font-lock-operator">=</span>1e<span class="tuareg-font-lock-operator">-</span>9 
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">solver_method </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.HYBRIDSJ <span class="tuareg-font-lock-governing">in</span>  <span class="comment">(* HYBRIDSJ *)</span>
+    <span class="comment">(* Create some intermediate vectors/matrices *)</span>
+<span class="comment">    let x_node = V.create ~init:0. t.total_size
+</span>    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f_node </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.total_size</span>
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f_bar_node </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.total_size </span><span class="tuareg-font-lock-governing">in</span>
+
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">dfdx </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.total_size t.total_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. t.circuit_size t.circuit_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp2_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create t.total_size t.total_size
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">dfdx_bar </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create t.total_size t.total_size <span class="tuareg-font-lock-governing">in</span>
+    
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f_count </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">df_count </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0 <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f_time </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0. <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">df_time </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0. <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">f</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_bar </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">y </span><span class="tuareg-font-lock-operator">=</span>
+      incr f_count<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">t1 </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="comment">(* Y*X + F(X) - B *)</span>
+      <span class="comment">(* First the hard part, computation of F(X) *)</span>
+      <span class="comment">(* Step 1: convert last guess to node major ordering *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_bar_node </span><span class="tuareg-font-lock-operator">=</span> harmonic_to_node t x_bar <span class="tuareg-font-lock-governing">in</span>
+      <span class="comment">(* Step 2: perform IFFT on each node --&gt; time domain waveforms *)</span>
+      <span class="tuareg-font-lock-operator">(</span>t.idft_m <span class="tuareg-font-lock-operator">|*&gt;</span> x_bar_node<span class="tuareg-font-lock-operator">)</span> x_node<span class="tuareg-font-lock-operator">;</span>
+      <span class="comment">(* Step 3: compute the nonlinear components *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> node_to_harmonic t x_node <span class="tuareg-font-lock-governing">in</span> <span class="comment">(* groups things correctly *)</span>
+      <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.sample_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span> <span class="comment">(* for each time point *)</span> 
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">offset </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> t.circuit_size <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name">_sub </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.subvector x_node<span class="tuareg-font-lock-operator">'</span> <span class="tuareg-font-lock-operator">~</span><span class="variable-name">off</span><span class="tuareg-font-lock-operator">:</span><span class="type">offset </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">len</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.circuit_size</span>
+        <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">f_node_sub </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.subvector f_node <span class="tuareg-font-lock-operator">~</span><span class="variable-name">off</span><span class="tuareg-font-lock-operator">:</span><span class="type">offset </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">len</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.circuit_size </span><span class="tuareg-font-lock-governing">in</span>
+        <span class="type">Solver</span>.apply_nonlinear_functions solver <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="type">_sub </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">y</span><span class="tuareg-font-lock-operator">:</span><span class="type">f_node_sub</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f_node </span><span class="tuareg-font-lock-operator">=</span> harmonic_to_node t f_node <span class="tuareg-font-lock-governing">in</span> <span class="comment">(* ungroup things back *)</span>
+      <span class="comment">(* Step 4: perform FFT on each node *)</span>
+      <span class="tuareg-font-lock-operator">(</span>t.dft_m <span class="tuareg-font-lock-operator">|*&gt;</span> f_node<span class="tuareg-font-lock-operator">)</span> f_bar_node<span class="tuareg-font-lock-operator">;</span>
+      <span class="comment">(* Step 5: reorder to harmonic-major form *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f_bar </span><span class="tuareg-font-lock-operator">=</span> node_to_harmonic t f_bar_node <span class="tuareg-font-lock-governing">in</span>
+      <span class="comment">(* Final Computations *)</span>
+      <span class="tuareg-font-lock-operator">(</span>t.y_bar <span class="tuareg-font-lock-operator">|*&gt;</span> x_bar<span class="tuareg-font-lock-operator">)</span> y<span class="tuareg-font-lock-operator">;</span>  <span class="comment">(* y &lt;- Y * X *)</span>
+      <span class="type">V</span>.add y f_bar<span class="tuareg-font-lock-operator">;</span>          <span class="comment">(* Y &lt;- Y + F *)</span>
+      <span class="type">V</span>.sub y t.b_bar<span class="tuareg-font-lock-operator">;</span>        <span class="comment">(* Y &lt;- Y - B *)</span>
+      f_time <span class="tuareg-font-lock-operator">:=</span> <span class="tuareg-font-lock-operator">!</span>f_time <span class="tuareg-font-lock-operator">+.</span> <span class="tuareg-font-lock-operator">((</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> t1<span class="tuareg-font-lock-operator">)</span>
+
+    <span class="tuareg-font-lock-governing">and</span> <span class="function-name">df</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_bar </span><span class="tuareg-font-lock-operator">~</span>j <span class="tuareg-font-lock-operator">=</span>
+      incr df_count<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">t1 </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">count </span><span class="tuareg-font-lock-operator">=</span> t.sample_size <span class="tuareg-font-lock-governing">in</span>
+      <span class="comment">(* Y + dF(x)/dX *)</span>
+      <span class="comment">(* Step 1: convert last guess to node major ordering *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_bar_node </span><span class="tuareg-font-lock-operator">=</span> harmonic_to_node t x_bar <span class="tuareg-font-lock-governing">in</span>
+      <span class="comment">(* Step 2: perform IFFT on each node --&gt; time domain samples *)</span>
+      <span class="tuareg-font-lock-operator">(</span>t.idft_m <span class="tuareg-font-lock-operator">|*&gt;</span> x_bar_node<span class="tuareg-font-lock-operator">)</span> x_node<span class="tuareg-font-lock-operator">;</span>
+      <span class="comment">(* Step 3: compute the partial derivatives *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> node_to_harmonic t x_node <span class="tuareg-font-lock-governing">in</span> <span class="comment">(* groups things correctly *)</span>
+      <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> count <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span> <span class="comment">(* for each sample/time point *)</span>
+        <span class="type">M</span>.set_zero temp_m<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">offset </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> t.circuit_size <span class="tuareg-font-lock-governing">in</span>
+        <span class="comment">(* x_node'_sub is the vector of circuit values at time ti *)</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name">_sub </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.subvector x_node<span class="tuareg-font-lock-operator">'</span> <span class="tuareg-font-lock-operator">~</span><span class="variable-name">off</span><span class="tuareg-font-lock-operator">:</span><span class="type">offset </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">len</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.circuit_size </span><span class="tuareg-font-lock-governing">in</span>
+        <span class="type">Solver</span>.apply_nonlinear_derivatives solver <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_node</span><span class="tuareg-font-lock-operator">'</span><span class="type">_sub </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">j</span><span class="tuareg-font-lock-operator">:</span><span class="type">temp_m</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="keyword">for</span> j <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.circuit_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+          <span class="keyword">for</span> k <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.circuit_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+            <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">row </span><span class="tuareg-font-lock-operator">=</span> j <span class="tuareg-font-lock-operator">*</span> count <span class="tuareg-font-lock-operator">+</span> i
+            <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">col </span><span class="tuareg-font-lock-operator">=</span> k <span class="tuareg-font-lock-operator">*</span> count <span class="tuareg-font-lock-operator">+</span> i <span class="tuareg-font-lock-governing">in</span>
+            dfdx.<span class="tuareg-font-lock-operator">{</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> temp_m.<span class="tuareg-font-lock-operator">{</span>j<span class="tuareg-font-lock-operator">,</span>k<span class="tuareg-font-lock-operator">}</span>
+          <span class="keyword">done</span>
+        <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">dfdx_bar_node </span><span class="tuareg-font-lock-operator">=</span> apply_gamma_gamma<span class="tuareg-font-lock-operator">'</span> t dfdx <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-operator">(</span>t.permut_m<span class="tuareg-font-lock-operator">'</span> <span class="tuareg-font-lock-operator">|*|</span> dfdx_bar_node<span class="tuareg-font-lock-operator">)</span> temp2_m<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-operator">(</span>temp2_m <span class="tuareg-font-lock-operator">|*|</span> t.permut_m<span class="tuareg-font-lock-operator">)</span> dfdx_bar<span class="tuareg-font-lock-operator">;</span>
+      <span class="type">M</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.y_bar </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">j</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="type">M</span>.add j dfdx_bar<span class="tuareg-font-lock-operator">;</span>
+      df_time <span class="tuareg-font-lock-operator">:=</span> <span class="tuareg-font-lock-operator">!</span>df_time <span class="tuareg-font-lock-operator">+.</span> <span class="tuareg-font-lock-operator">((</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> t1<span class="tuareg-font-lock-operator">)</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">fdf</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">x </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">y </span><span class="tuareg-font-lock-operator">~</span>j <span class="tuareg-font-lock-operator">=</span>
+      f <span class="tuareg-font-lock-operator">~</span>x <span class="tuareg-font-lock-operator">~</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">:</span><span class="type">y</span><span class="tuareg-font-lock-operator">;</span>
+      df <span class="tuareg-font-lock-operator">~</span>x <span class="tuareg-font-lock-operator">~</span>j <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">gf </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span>
+      <span class="type">Gsl_fun</span>.multi_f <span class="tuareg-font-lock-operator">=</span> f<span class="tuareg-font-lock-operator">;</span>
+      <span class="type">Gsl_fun</span>.multi_df <span class="tuareg-font-lock-operator">=</span> df<span class="tuareg-font-lock-operator">;</span>
+      <span class="type">Gsl_fun</span>.multi_fdf <span class="tuareg-font-lock-operator">=</span> fdf<span class="tuareg-font-lock-operator">;</span> <span class="tuareg-font-lock-operator">}</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">solv </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.make solver_method t.total_size gf t.x_bar <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">proc</span><span class="variable-name"> iter </span><span class="tuareg-font-lock-operator">=</span>
+      <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.iterate solv<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">status </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.test_residual solv epsabs <span class="tuareg-font-lock-governing">in</span>
+      <span class="keyword">match</span> status <span class="keyword">with</span>
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">true</span> <span class="tuareg-font-lock-operator">-&gt;</span> Converged<span class="tuareg-font-lock-operator">,</span> iter
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">false</span> <span class="keyword">when</span> iter <span class="tuareg-font-lock-operator">&gt;=</span> maxiter <span class="tuareg-font-lock-operator">-&gt;</span> IterationLimitExceeded<span class="tuareg-font-lock-operator">,</span> iter
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">false</span> <span class="tuareg-font-lock-operator">-&gt;</span> proc <span class="tuareg-font-lock-operator">(</span>succ iter<span class="tuareg-font-lock-operator">)</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">status</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> iters </span><span class="tuareg-font-lock-operator">=</span> proc 1 <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.get_state solv <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.x_bar </span><span class="tuareg-font-lock-operator">();</span>
+    info <span class="string">"Solver Stats: iters=%d f=%d (%g s) df=%d (%g s)"</span>
+      iters <span class="tuareg-font-lock-operator">!</span>f_count <span class="tuareg-font-lock-operator">!</span>f_time <span class="tuareg-font-lock-operator">!</span>df_count <span class="tuareg-font-lock-operator">!</span>df_time<span class="tuareg-font-lock-operator">;</span>
+    status
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">set_source_vector</span><span class="variable-name"> freq_mapping solver </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">b_bar </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">alpha </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">circuitSize </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.size solver <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(* First, lets retrieve the DC components *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">b_vec </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_b_vec solver <span class="tuareg-font-lock-operator">(</span>`DC 0.<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.length b_vec<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      b_bar.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> b_vec.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">};</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(* Now, go through the remaining frequencies *)</span>
+    <span class="type">List</span>.iter
+      <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">i</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> f</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">-&gt;</span>
+         <span class="comment">(* Second, the REAL (cosine) terms of the AC sources *)</span>
+         <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">b_vec_real </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.get_b_vec solver <span class="tuareg-font-lock-operator">(</span>`AC_REAL f<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-governing">in</span>
+         <span class="keyword">for</span> j <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.length b_vec<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+           b_bar.<span class="tuareg-font-lock-operator">{</span>j <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>2<span class="tuareg-font-lock-operator">*</span>i<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)*</span>circuitSize<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> alpha <span class="tuareg-font-lock-operator">*.</span> b_vec_real.<span class="tuareg-font-lock-operator">{</span>j<span class="tuareg-font-lock-operator">};</span>
+         <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+         <span class="comment">(* Finally, the IMAG (sine) terms of the AC sources *)</span>
+         <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">b_vec_imag </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.get_b_vec solver <span class="tuareg-font-lock-operator">(</span>`AC_IMAG f<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-governing">in</span>
+         <span class="keyword">for</span> j <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.length b_vec<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+           b_bar.<span class="tuareg-font-lock-operator">{</span>j <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>2<span class="tuareg-font-lock-operator">*</span>i<span class="tuareg-font-lock-operator">)*</span>circuitSize<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> alpha <span class="tuareg-font-lock-operator">*.</span> b_vec_imag.<span class="tuareg-font-lock-operator">{</span>j<span class="tuareg-font-lock-operator">};</span>
+         <span class="keyword">done</span>
+      <span class="tuareg-font-lock-operator">)</span> freq_mapping
+      
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">create</span><span class="variable-name"> solver </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">harmonic_map </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array xinit <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">circuitSize </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.size solver <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">sample_size </span><span class="tuareg-font-lock-operator">=</span> 2 <span class="tuareg-font-lock-operator">*</span> <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.length harmonic_map<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">+</span> 1 <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">total_size </span><span class="tuareg-font-lock-operator">=</span> circuitSize <span class="tuareg-font-lock-operator">*</span> sample_size <span class="tuareg-font-lock-governing">in</span>
+    info <span class="string">"HB Problem Size: MNA=%d harmonics=%d size=%d"</span> circuitSize
+      sample_size total_size<span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(* Construct the permutation and permutation transform matrices *)</span>
+<span class="string">    let permut = M.create ~init:0. total_size total_size in
+</span>    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">permut</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. total_size total_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> total_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>i <span class="tuareg-font-lock-operator">*</span> circuitSize<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">/</span> total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>index <span class="tuareg-font-lock-operator">mod</span> total_size<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      permut.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">,</span>index<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> 1.<span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="type">M</span>.transpose permut<span class="tuareg-font-lock-operator">'</span> permut<span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(* Ask for the y_bar matrix to be calculated *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">y_bar </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_y_bar_matrix2 solver
+      <span class="tuareg-font-lock-operator">~</span><span class="variable-name">harmonics</span><span class="tuareg-font-lock-operator">:(</span><span class="type">List.length harmonic_map</span><span class="tuareg-font-lock-operator">)</span>
+      <span class="tuareg-font-lock-operator">~</span><span class="variable-name">ws</span><span class="tuareg-font-lock-operator">:(</span><span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">_</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name">w</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">-&gt;</span> w<span class="tuareg-font-lock-operator">)</span> harmonic_map<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(* Create the source b_bar vector *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">b_bar </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. total_size </span><span class="tuareg-font-lock-governing">in</span>
+    set_source_vector harmonic_map solver <span class="tuareg-font-lock-operator">~</span>b_bar <span class="tuareg-font-lock-operator">~</span><span class="variable-name">alpha</span><span class="tuareg-font-lock-operator">:</span><span class="type">1.</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(* Create the x_bar initial vector *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_bar </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. total_size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.length xinit<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      x_bar.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> xinit.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(* Create the IDFTT, and DFT matrix *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">idft_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. total_size total_size </span>
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">dft_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">0. total_size total_size</span>
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">gamma</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Dft</span>.gamma<span class="tuareg-font-lock-operator">'</span> sample_size
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">gamma </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Dft</span>.gamma sample_size <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> circuitSize <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">shift </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> sample_size <span class="tuareg-font-lock-governing">in</span>
+      blit gamma<span class="tuareg-font-lock-operator">'</span> shift shift idft_m<span class="tuareg-font-lock-operator">;</span>
+      blit gamma shift shift dft_m<span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">t </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span> circuit_size   <span class="tuareg-font-lock-operator">=</span> circuitSize<span class="tuareg-font-lock-operator">;</span>
+              sample_size    <span class="tuareg-font-lock-operator">=</span> sample_size<span class="tuareg-font-lock-operator">;</span>
+              harmonic_map   <span class="tuareg-font-lock-operator">=</span> harmonic_map<span class="tuareg-font-lock-operator">;</span>
+              total_size     <span class="tuareg-font-lock-operator">=</span> total_size<span class="tuareg-font-lock-operator">;</span>
+              permut_m       <span class="tuareg-font-lock-operator">=</span> permut<span class="tuareg-font-lock-operator">;</span>
+              permut_m<span class="tuareg-font-lock-operator">'</span>      <span class="tuareg-font-lock-operator">=</span> permut<span class="tuareg-font-lock-operator">';</span>
+              idft_m         <span class="tuareg-font-lock-operator">=</span> idft_m<span class="tuareg-font-lock-operator">;</span>
+              dft_m          <span class="tuareg-font-lock-operator">=</span> dft_m<span class="tuareg-font-lock-operator">;</span>
+              y_bar          <span class="tuareg-font-lock-operator">=</span> y_bar<span class="tuareg-font-lock-operator">;</span>
+              b_bar          <span class="tuareg-font-lock-operator">=</span> b_bar<span class="tuareg-font-lock-operator">;</span>
+              x_bar          <span class="tuareg-font-lock-operator">=</span> x_bar<span class="tuareg-font-lock-operator">;</span>
+              x_init         <span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.copy xinit<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(*Solver.print solver;*)</span>
+    <span class="comment">(*print t;*)</span>
+    t
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">create_single_tone</span><span class="variable-name"> solver </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">size </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">w </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">harmonic_map </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.init size
+      <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">i </span><span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-operator">((</span>i<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">),</span> <span class="tuareg-font-lock-operator">(</span>w <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>float <span class="tuareg-font-lock-operator">(</span>i<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">)))))</span> <span class="tuareg-font-lock-governing">in</span>
+    create solver <span class="tuareg-font-lock-operator">~</span>xinit <span class="tuareg-font-lock-operator">~</span>harmonic_map
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">create_two_tone</span><span class="variable-name"> solver </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">k1 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">w1 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">k2 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">w2 </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">forward</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> reverse </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Assign3</span>.frequency_mapping <span class="tuareg-font-lock-operator">[</span>k1<span class="tuareg-font-lock-operator">;</span>k2<span class="tuareg-font-lock-operator">]</span> <span class="tuareg-font-lock-operator">[</span>w1<span class="tuareg-font-lock-operator">;</span>w2<span class="tuareg-font-lock-operator">]</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">forward </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.sort <span class="tuareg-font-lock-operator">~</span><span class="variable-name">cmp</span><span class="tuareg-font-lock-operator">:(</span><span class="keyword">fun</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">p1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name">_</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">(</span><span class="variable-name">p2</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name">_</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">-&gt;</span> compare p1 p2<span class="tuareg-font-lock-operator">)</span> forward <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">forward </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.filter <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">p</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name">_</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">-&gt;</span> p <span class="tuareg-font-lock-operator">&lt;&gt;</span> 0<span class="tuareg-font-lock-operator">)</span> forward <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">harmonic_map </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">p</span><span class="tuareg-font-lock-operator">,(</span><span class="variable-name">_</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name">f</span><span class="tuareg-font-lock-operator">))</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-operator">(</span>p<span class="tuareg-font-lock-operator">,</span>f<span class="tuareg-font-lock-operator">))</span> forward <span class="tuareg-font-lock-governing">in</span>
+    create solver <span class="tuareg-font-lock-operator">~</span>xinit <span class="tuareg-font-lock-operator">~</span>harmonic_map
+
+  <span class="comment">(*List.iter (fun (p,(ks,f)) -&gt;
+    printf "p=%d --&gt; " p;
+    list_iteri (fun i k -&gt; printf "k(%d)=%d " (i+1) k) ks;
+    printf " f=%g\n%!" f) forward;
+    List.iter (fun (f, p) -&gt; printf "f=%g --&gt; %d\n" f p) reverse;*)</span>
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">dump_results</span><span class="variable-name"> t </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.sample_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      printf <span class="string">"-- %d th Harmonic -- \n%!"</span> i<span class="tuareg-font-lock-operator">;</span>
+      <span class="keyword">for</span> j <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> t.circuit_size <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">index </span><span class="tuareg-font-lock-operator">=</span> i <span class="tuareg-font-lock-operator">*</span> t.circuit_size <span class="tuareg-font-lock-operator">+</span> j <span class="tuareg-font-lock-governing">in</span>
+        printf <span class="string">"xbar(%d) = %g\n"</span> j t.x_bar.<span class="tuareg-font-lock-operator">{</span>index<span class="tuareg-font-lock-operator">}</span>
+      <span class="keyword">done</span>
+    <span class="keyword">done</span>
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">ratio_threshold </span><span class="tuareg-font-lock-operator">=</span> 1e<span class="tuareg-font-lock-operator">-</span>6
+  <span class="keyword">exception</span> <span class="variable-name">ConvergenceFailed</span> <span class="tuareg-font-lock-operator">of</span> string
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve_with_stepping</span><span class="variable-name"> t solver </span><span class="tuareg-font-lock-operator">=</span>
+    info <span class="string">"HB: starting source stepping"</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">num_steps </span><span class="tuareg-font-lock-operator">=</span> 50 <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">start_time </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(* Set the x_bar initial vector *)</span>
+    <span class="type">V</span>.set_zero t.x_bar<span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.length t.x_init<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      t.x_bar.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> t.x_init.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> num_steps <span class="keyword">do</span>
+      printf <span class="string">".%!"</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">alpha </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>float i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float num_steps<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      set_source_vector t.harmonic_map solver <span class="tuareg-font-lock-operator">~</span><span class="variable-name">b_bar</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.b_bar </span><span class="tuareg-font-lock-operator">~</span>alpha<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> solve_nonlinear solver t <span class="tuareg-font-lock-governing">in</span>
+      <span class="keyword">match</span> result <span class="keyword">with</span>
+        <span class="tuareg-font-lock-operator">|</span> Converged <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-operator">()</span>
+        <span class="tuareg-font-lock-operator">|</span> IterationLimitExceeded <span class="tuareg-font-lock-operator">-&gt;</span>
+            <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">s </span><span class="tuareg-font-lock-operator">=</span> sprintf <span class="string">"HB source stepping failed at alpha=%g\n%!"</span> alpha <span class="tuareg-font-lock-governing">in</span>
+            <span class="keyword">raise</span> <span class="tuareg-font-lock-operator">(</span>ConvergenceFailed s<span class="tuareg-font-lock-operator">)</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    printf <span class="string">"\n"</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">duration </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> start_time <span class="tuareg-font-lock-governing">in</span>
+<span class="string">    info "HB: source stepping finished (steps=%d time=%g)" num_steps duration
+</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">store_results</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">name t </span><span class="tuareg-font-lock-operator">(</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">recorder</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">=</span>
+    <span class="comment">(* Check the answer
+       - for each node, compare the magnitude of the highest
+       component to the fundamental and see if exceeds our threshold *)</span>
+    <span class="comment">(*let ratios = V.create t.circuit_size in
+    let max_freq = Array.fold_left max neg_infinity t.harmonics in
+    let max_freqi = Array.findi (fun x -&gt; x=max_freq) t.harmonics in*)</span>
+    <span class="comment">(*for i = 0 to t.circuit_size - 1 do
+      let w0_real = t.x_bar.{ t.circuit_size + i }
+      and w0_imag = t.x_bar.{ (t.circuit_size * 2) + i }
+</span>      <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">wn_real </span><span class="tuareg-font-lock-operator">=</span> t.x_bar.<span class="tuareg-font-lock-operator">{</span> <span class="tuareg-font-lock-operator">(</span>t.circuit_size <span class="tuareg-font-lock-operator">*</span> <span class="tuareg-font-lock-operator">(</span>t.harmonics<span class="tuareg-font-lock-operator">*</span>2 <span class="tuareg-font-lock-operator">-</span> 1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">+</span> i <span class="tuareg-font-lock-operator">}</span>
+      <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">wn_imag </span><span class="tuareg-font-lock-operator">=</span> t.x_bar.<span class="tuareg-font-lock-operator">{</span> <span class="tuareg-font-lock-operator">(</span>t.circuit_size <span class="tuareg-font-lock-operator">*</span> <span class="tuareg-font-lock-operator">(</span>t.harmonics<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">+</span> i <span class="tuareg-font-lock-operator">}</span>
+      <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">ratio </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Complex</span>.norm <span class="tuareg-font-lock-operator">{</span>re<span class="tuareg-font-lock-operator">=</span>wn_real<span class="tuareg-font-lock-operator">;</span> im<span class="tuareg-font-lock-operator">=</span>wn_imag<span class="tuareg-font-lock-operator">})</span> <span class="tuareg-font-lock-operator">/.</span>
+        <span class="tuareg-font-lock-operator">(</span><span class="type">Complex</span>.norm <span class="tuareg-font-lock-operator">{</span>re<span class="tuareg-font-lock-operator">=</span>w0_real<span class="tuareg-font-lock-operator">;</span> im<span class="tuareg-font-lock-operator">=</span>w0_imag<span class="tuareg-font-lock-operator">})</span> <span class="tuareg-font-lock-governing">in</span>
+      ratios.<span class="tuareg-font-lock-operator">{</span>i<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> <span class="keyword">match</span> classify_float ratio <span class="keyword">with</span>
+        <span class="tuareg-font-lock-operator">|</span> FP_normal <span class="tuareg-font-lock-operator">-&gt;</span> ratio
+        <span class="tuareg-font-lock-operator">|</span> FP_nan <span class="tuareg-font-lock-operator">-&gt;</span> 0.
+        <span class="tuareg-font-lock-operator">|</span> FP_infinite <span class="tuareg-font-lock-operator">-&gt;</span> warn <span class="string">"Got an infinite ratio!!!"</span><span class="tuareg-font-lock-operator">;</span> 0.
+        <span class="tuareg-font-lock-operator">|</span> _ <span class="tuareg-font-lock-operator">-&gt;</span> 0.
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+<span class="comment">    (*let max_ratio = V.max ratios in*)
+    let max_ratio = ratios.{ (V.length ratios) - 1} in
+    if max_ratio &gt; ratio_threshold then begin
+</span>      warn <span class="string">"Ratio of w[n] to w[1] exceeds threshold: %g &gt; %g"</span>
+        max_ratio ratio_threshold<span class="tuareg-font-lock-operator">;</span>
+      warn <span class="string">"You should run the simulation with more harmonics!!!"</span>
+    <span class="tuareg-font-lock-governing">end</span><span class="tuareg-font-lock-operator">;</span>
+<span class="comment">    info "Max Ratio: %g" (V.max ratios);*)</span>
+    <span class="comment">(* record the answer *)</span>
+    r<span class="tuareg-font-lock-operator">#</span>append_complex name 0. <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">j </span><span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-operator">{</span>re<span class="tuareg-font-lock-operator">=</span>t.x_bar.<span class="tuareg-font-lock-operator">{</span>j<span class="tuareg-font-lock-operator">};</span> im<span class="tuareg-font-lock-operator">=</span>0.<span class="tuareg-font-lock-operator">});</span>
+    <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.length t.harmonic_map<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1 <span class="keyword">do</span>
+      r<span class="tuareg-font-lock-operator">#</span>append_complex name <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.assoc <span class="tuareg-font-lock-operator">(</span>i<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">)</span> t.harmonic_map<span class="tuareg-font-lock-operator">)</span>
+        <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">j </span><span class="tuareg-font-lock-operator">-&gt;</span>
+          <span class="tuareg-font-lock-operator">{</span>re<span class="tuareg-font-lock-operator">=</span>t.x_bar.<span class="tuareg-font-lock-operator">{(</span>2<span class="tuareg-font-lock-operator">*</span>i<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">)*</span>t.circuit_size <span class="tuareg-font-lock-operator">+</span> j<span class="tuareg-font-lock-operator">};</span>
+           im<span class="tuareg-font-lock-operator">=</span>t.x_bar.<span class="tuareg-font-lock-operator">{(</span>2<span class="tuareg-font-lock-operator">*</span>i<span class="tuareg-font-lock-operator">+</span>2<span class="tuareg-font-lock-operator">)*</span>t.circuit_size <span class="tuareg-font-lock-operator">+</span> j<span class="tuareg-font-lock-operator">}})</span>
+    <span class="keyword">done</span>
+      
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">name t solver r </span><span class="tuareg-font-lock-operator">=</span>
+    info <span class="string">"Performing HB analysis (%s)"</span> name<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">start_time </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> solve_nonlinear solver t <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">duration </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> start_time <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">match</span> result <span class="keyword">with</span>
+      <span class="tuareg-font-lock-operator">|</span> Converged <span class="tuareg-font-lock-operator">-&gt;</span>
+          info <span class="string">"HB analysis complete (WALL time=%g s). Storing results."</span> duration<span class="tuareg-font-lock-operator">;</span>
+          store_results <span class="tuareg-font-lock-operator">~</span>name t r
+      <span class="tuareg-font-lock-operator">|</span> IterationLimitExceeded <span class="tuareg-font-lock-operator">-&gt;</span>
+          warn <span class="string">"HB analysis: failed to converge (WALL time=%g s)"</span> duration<span class="tuareg-font-lock-operator">;</span>
+          info <span class="string">"Starting source stepping algorithm"</span><span class="tuareg-font-lock-operator">;</span>
+          solve_with_stepping t solver<span class="tuareg-font-lock-operator">;</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">total_duration </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> start_time <span class="tuareg-font-lock-governing">in</span>
+          info <span class="string">"HB analysis: PROBLEM_SIZE=%d TOTAL WALL TIME=%g s"</span>
+            t.total_size total_duration<span class="tuareg-font-lock-operator">;</span>
+          store_results <span class="tuareg-font-lock-operator">~</span>name t r
+<span class="string">
+</span>  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve_linear</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">name t r </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">mna_matrix </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_matrix</span>.copy t.y_bar <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">answer </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_linalg</span>.solve_LU <span class="tuareg-font-lock-operator">(</span>`M mna_matrix<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span>`V t.b_bar<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">V</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:(</span><span class="type">V.of_array answer</span><span class="tuareg-font-lock-operator">)</span><span class="type"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">t.x_bar</span><span class="tuareg-font-lock-operator">;</span>
+    warn <span class="string">"results are not being stored"</span><span class="tuareg-font-lock-operator">;</span>
+    dump_results t
+  
+<span class="tuareg-font-lock-governing">end</span><span class="tuareg-font-lock-operator">;;</span></pre></p>
+
+
+
+
+
+<h3><a name="sec8" id="sec8"></a>
+Part V: Future Work</h3>
+
+<ul>
+<li>Bugs
+
+<ul>
+<li>creation of the GSL multiroot solver seems to fail past a size of
+around 1000.  This severely restricts the size of problem which
+can be run.  An alternate solution needs to be found.</li>
+</ul></li>
+<li>Performance
+
+<ul>
+<li>my routine that computes the Jacobian is <em>extremely</em> inefficient
+and needs a lot of work; a quick profile of the code clearly
+showed that this is where most of the time is spent</li>
+<li>Intelligent homotopy algorithms seem like low hanging fruit in
+terms of making the Harmonic Balance algorithm converge much faster.</li>
+<li>I experimented a bit with different non-linear solvers such as
+Powell's Hybrid method and got some interesting results.  In some
+cases, there was significant speedups because the solver was able
+to converge without source stepping.  In other cases, it is
+quicker to try source stepping immediately rather than waiting a
+long time for the non-linear solver to fail on the initial
+problem</li>
+</ul></li>
+<li>Interface
+
+<ul>
+<li>the system is desperately in need of a scripted interface <em>or</em> a
+parseable netlist format.  It is ridiculous to need to recompile
+the system just to modify one of the input values.  Fortunately,
+compiling in OCAML is very fast.</li>
+</ul></li>
+</ul>
+
+
+
+</div>
+</div>
+</body>
+</html>

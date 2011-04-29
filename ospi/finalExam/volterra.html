@@ -1,0 +1,96 @@
+    <pre>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Circuit</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Solver</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Gsl_helpers</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Printf</span>
+
+<span class="tuareg-font-lock-governing">module</span> <span class="type">Input </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">struct</span>
+  <span class="tuareg-font-lock-governing">type</span> <span class="type">input_src_spec </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span>
+    <span class="variable-name">id</span>       <span class="tuareg-font-lock-operator">:</span> <span class="type">int</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">pos</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">circuit_node</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">neg</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">circuit_node</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">src</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">Source.AC.source</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="tuareg-font-lock-operator">}</span>
+<span class="tuareg-font-lock-governing">end</span>
+
+<span class="tuareg-font-lock-governing">module</span> <span class="type">Conductance </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">struct</span>
+  <span class="tuareg-font-lock-governing">type</span> <span class="type">nonlinear_conductance </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span>
+    <span class="variable-name">g1_fn</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">float </span><span class="tuareg-font-lock-operator">-&gt;</span><span class="type"> float</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">g2_fn</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">float </span><span class="tuareg-font-lock-operator">-&gt;</span><span class="type"> float</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">g3_fn</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">float </span><span class="tuareg-font-lock-operator">-&gt;</span><span class="type"> float</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">pos</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">circuit_node</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="variable-name">neg</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">circuit_node</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="tuareg-font-lock-operator">}</span>
+<span class="tuareg-font-lock-governing">end</span>
+
+<span class="tuareg-font-lock-governing">module</span> <span class="type">Volterra </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">functor</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">Solver</span><span class="tuareg-font-lock-operator">:</span><span class="type">SOLVER</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-governing">struct</span>
+  <span class="comment">(*
+    Implements the method of non-linear currents
+  *)</span>
+  <span class="tuareg-font-lock-governing">module</span> <span class="type">I </span><span class="tuareg-font-lock-operator">=</span> Input
+  <span class="tuareg-font-lock-governing">module</span> <span class="type">C </span><span class="tuareg-font-lock-operator">=</span> Conductance
+  <span class="tuareg-font-lock-governing">open</span> <span class="type">Gsl_helpers.ComplexHelpers</span>
+
+  <span class="comment">(* This solves the system at a particular frequency w *)</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve_at</span><span class="variable-name"> w g_matrix c_matrix b_vec </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">size </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_vector_complex</span>.length b_vec <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_vec </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_vector_complex</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">zero size </span><span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">mna_matrix </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_matrix_complex</span>.copy c_matrix <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">Gsl_matrix_complex</span>.scale mna_matrix <span class="tuareg-font-lock-operator">(</span>complex 0. w<span class="tuareg-font-lock-operator">);</span>
+    <span class="type">Gsl_matrix_complex</span>.add mna_matrix g_matrix<span class="tuareg-font-lock-operator">;</span>
+    
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">permut </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_permut</span>.create size <span class="tuareg-font-lock-governing">in</span>
+    ignore <span class="tuareg-font-lock-operator">(</span><span class="type">Gsl_linalg</span>.complex_LU_decomp <span class="tuareg-font-lock-operator">(</span>`CM mna_matrix<span class="tuareg-font-lock-operator">)</span> permut<span class="tuareg-font-lock-operator">);</span>
+    <span class="type">Gsl_linalg</span>.complex_LU_solve <span class="tuareg-font-lock-operator">(</span>`CM mna_matrix<span class="tuareg-font-lock-operator">)</span> permut <span class="tuareg-font-lock-operator">(</span>`CV b_vec<span class="tuareg-font-lock-operator">)</span>
+      <span class="tuareg-font-lock-operator">(</span>`CV x_vec<span class="tuareg-font-lock-operator">);</span>
+    x_vec
+
+  <span class="comment">(* This is the general Volterra solver *)</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve</span><span class="variable-name"> name s </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">~(</span><span class="variable-name">src1</span><span class="tuareg-font-lock-operator">:</span><span class="type">I.input_src_spec</span><span class="tuareg-font-lock-operator">)</span>
+      <span class="tuareg-font-lock-operator">~(</span><span class="variable-name">src2</span><span class="tuareg-font-lock-operator">:</span><span class="type">I.input_src_spec</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">~</span>conductance <span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c </span><span class="tuareg-font-lock-operator">=</span> conductance <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">size </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.size s <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">voltage</span><span class="variable-name"> vec node </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> node <span class="keyword">with</span>
+        `Ground <span class="tuareg-font-lock-operator">-&gt;</span> 0.
+      <span class="tuareg-font-lock-operator">|</span> `Node loc <span class="tuareg-font-lock-operator">-&gt;</span> vec.<span class="tuareg-font-lock-operator">(</span>loc<span class="tuareg-font-lock-operator">)</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">vdc </span><span class="tuareg-font-lock-operator">=</span> voltage xinit c.<span class="type">C</span>.pos <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">g1 </span><span class="tuareg-font-lock-operator">=</span> conductance.<span class="type">C</span>.g1_fn vdc
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">g2 </span><span class="tuareg-font-lock-operator">=</span> conductance.<span class="type">C</span>.g2_fn vdc
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">g3 </span><span class="tuareg-font-lock-operator">=</span> conductance.<span class="type">C</span>.g3_fn vdc
+    <span class="tuareg-font-lock-governing">in</span>
+    printf <span class="string">"vdc=%g g1=%g g2=%g g3=%g\n%!"</span> vdc g1 g2 g3<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="keyword">match</span> c.<span class="type">C</span>.neg <span class="keyword">with</span>
+         `Ground <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-operator">()</span>
+       <span class="tuareg-font-lock-operator">|</span> `Node _ <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">failwith</span> <span class="string">"non ground node not supported"</span>
+    <span class="tuareg-font-lock-operator">);</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">pos_id </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> c.<span class="type">C</span>.pos <span class="keyword">with</span>
+        `Ground <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">failwith</span> <span class="string">"positive node cannot be grounded"</span>
+      <span class="tuareg-font-lock-operator">|</span> `Node loc <span class="tuareg-font-lock-operator">-&gt;</span> loc
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(* retrieve the exiting c_matrix and g_matrix in complex form *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">g_linear </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_ac_matrix s <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c_matrix </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_cc_matrix s <span class="tuareg-font-lock-governing">in</span>
+    <span class="comment">(* Add the g1 admittance to the g_matrix *)</span>
+    g_linear.<span class="tuareg-font-lock-operator">{</span>pos_id<span class="tuareg-font-lock-operator">,</span> pos_id<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span>
+      <span class="type">Gsl_complex</span>.add g_linear.<span class="tuareg-font-lock-operator">{</span>pos_id<span class="tuareg-font-lock-operator">,</span> pos_id<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">(</span>complex g1 0.<span class="tuareg-font-lock-operator">);</span>
+    
+    <span class="comment">(* Step 1... solve DC... skip this for now *)</span>
+
+    <span class="comment">(* Step 2: solver using b1 ... 1st order mixing products *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">w1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> mag1 </span><span class="tuareg-font-lock-operator">=</span> src1.<span class="type">I</span>.src.<span class="type">Source</span>.<span class="type">AC</span>.freq<span class="tuareg-font-lock-operator">,</span> src1.<span class="type">I</span>.src.<span class="type">Source</span>.<span class="type">AC</span>.mag
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">w2</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> mag2 </span><span class="tuareg-font-lock-operator">=</span> src2.<span class="type">I</span>.src.<span class="type">Source</span>.<span class="type">AC</span>.freq<span class="tuareg-font-lock-operator">,</span> src2.<span class="type">I</span>.src.<span class="type">Source</span>.<span class="type">AC</span>.mag <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">b_vec </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_vector_complex</span>.create <span class="tuareg-font-lock-operator">~</span><span class="variable-name">init</span><span class="tuareg-font-lock-operator">:</span><span class="type">zero size </span><span class="tuareg-font-lock-governing">in</span>
+    b_vec.<span class="tuareg-font-lock-operator">{</span>pos_id<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> complex mag1 0.<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x1 </span><span class="tuareg-font-lock-operator">=</span> solve_at w1 g_linear c_matrix b_vec <span class="tuareg-font-lock-governing">in</span>
+    b_vec.<span class="tuareg-font-lock-operator">{</span>pos_id<span class="tuareg-font-lock-operator">}</span> <span class="tuareg-font-lock-operator">&lt;-</span> complex mag2 0.<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x2 </span><span class="tuareg-font-lock-operator">=</span> solve_at w2 g_linear c_matrix b_vec <span class="tuareg-font-lock-governing">in</span>
+    print_complex_vector <span class="string">"x1"</span> x1<span class="tuareg-font-lock-operator">;</span>
+    print_complex_vector <span class="string">"x2"</span> x2<span class="tuareg-font-lock-operator">;</span>
+
+    <span class="comment">(* Step 3: solve using b2 = g2 * (u1 ^ 2) .. 2nd order mixing products*)</span>
+
+    <span class="comment">(* Step 4: solve using b3 = g3 * (u1 ^ 3) + g2 * u1 * u2 ... 3rd order *)</span>
+    <span class="comment">(*Circuit.add_admittance *)</span>
+
+<span class="tuareg-font-lock-governing">end</span><span class="tuareg-font-lock-operator">;;</span></pre>

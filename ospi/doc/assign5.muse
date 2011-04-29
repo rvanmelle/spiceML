@@ -1,0 +1,170 @@
+
+* ELG7132D: Assign 5
+
+*** By: Reid van Melle
+*** Student No: 5107751
+
+** Table of Contents
+
+<contents>
+
+** Overview
+
+I implemented both a vanilla transient analysis module as well as a
+shooting method analysis.  The results agree very closely with
+simulations performed in ADS within a small margin of error.
+Performance and converge of the shooting method analysis relies very
+heavily on the implementation of the IVP analysis.
+
+The implementation, my results, ADS results, and discussion/comparison
+are presented below.
+
+** Implementation
+
+The entire circuit, all values, and most configuration options are
+inputs to the circuit.  As in past assignments, I used the language
+OCAML and bindings for the GNU Scientific Library to develop solutions
+for the assignment.  
+
+I will first show the high-level driver for the shooting method
+analysis.  Basically we have the circuit declaration including the
+description of the piece-wise linear source input which drives the
+circuit.  At then end of the routine, the shooting method analysis is
+invoked and then the results are plotted.
+
+<include file="../assign5/assign5.html" markup="nil">
+
+The primary piece of code developed for this assignment is shown
+below.  This is the module which implements the Newton Shooting
+Method.  The routine called "run" is called to perform the analysis.
+It contains a few sub-functions of interest.  The "run_transient"
+function is called in order to solve the IVP at a new MNA state
+starting point.  It additionally contains several sub-functions of
+interest.  The function called "ode_func" is called by the GNU ODE
+solver whenever it takes another step.  The updated time and state
+vectors are passed as inputs to this routine.  There are also
+functions called "jac_func_tr" and "jac_func_be" which implement the
+trapezoidal and backward-euler based jacobian calculations for the
+shooting method.  Of course, only one of them is used during a
+particular run.  Finally, at the end of the "run" routine is the
+creation of the Newton non-linear solver using the built-in GSL
+multi-dimensional root finding library.
+
+<include file="../assign5/sm.xhtml" markup="nil">
+
+
+*** Transient Analysis
+
+The transient analysis was implemented using the GNU Scientific
+Library ordinary differential equation solvers.  A number of different
+stepping algorithms were available, but the results from this
+assignment were obtained using an embedded Runge-Kutta (2,3) method.
+A few knobs were available such as the absolute and relative error
+thresholds which were set to 1e-12 and 1e-9 respectively.  I
+discovered through experimentation just how sensitive speed and
+convergence are on these parameter.  Loosening the error bounds
+allowed vastly faster run times but with occasional non-convergence
+problems.
+
+*** Non-linear Solver
+
+The non-linear solver was implemented using a standard NEWTON RAPHSON
+solver with an absolute error threshold of 1e-6 and a maximum number
+of iterations of 200.  The shooting method jacobian was implemented
+using the backward-euler based jacobian calculation.  The jacobian
+updates were performed by adding a hook into the transient inner loop.
+
+** Results
+
+Results for both a transient analysis and shooting method analysis are
+presented below.  Following that, results from the ADS simulations are
+shown.  Finally, a discussion and comparison of the results is given.
+
+*** Transient Analysis
+
+I ended up implementing a vanilla transient analysis for comparison
+and verification purposes since it was more-or-less required for the
+shooting method analysis anyway.
+
+The transient analysis was run for a total of 10ms requiring 480,000
+steps during the analysis (for abs_tol=1e-12 & rel_tol=1e-9).  The
+total run time was approximately 18.8 seconds.  Results are shown
+below for both the ADS transient simulation and my transient
+analysis.  It is easy to see that the results match very well though
+the lines *do not* overlap perfectly at all times.  It is worth noting
+that I left the current source in the circuit rather than converting
+to an equivalent voltage source, so perhaps this impacts the
+performance of the algorithms.
+
+<literal>
+<br/>
+<embed src="../assign5/tran.svg" width="700" height="450"/>
+</literal>
+
+*** Shooting Method Analysis
+
+The shooting method analysis took a total of 33.8 seconds to converge
+with a total of 14 steps required by the non-linear solver.
+Typically a single iteration of the transient analysis would take
+approximately 1.8 seconds.
+
+The results from the ADS Harmonic Balance analysis and my Shooting
+Method Analysis are shown in the plot below.  There is a slight and
+consistent difference in the predicted circuit performance.  I have no
+real explanation for this discrepancy except that perhaps tighter
+error bounds are required.  I did try tightening the error bounds for
+the NR solver and this had no effect on the results.
+
+<literal>
+<br/>
+<embed src="../assign5/sm.svg" width="700" height="450"/>
+</literal>
+
+*** ADS Results
+
+**** Harmonic Balance
+
+Some additional data about the ADS harmonic balance simulation:
+
+ - number of harmonics = 700
+ - run time = 796 seconds
+
+**** Transient Analysis
+
+Some additional data about the ADS transient simulation:
+
+ - duration = 10ms
+ - time steps = 1400
+ - time = 1.48 seconds
+ - max time step = 1ms
+
+*** Comparison and Discussion
+
+The harmonic balance in ADS took a long time to run simply because of
+the large number of harmonics required to accurately capture the high
+frequency content of the input signal and hence the output waveforms.
+For this assignment, the ADS harmonic balance was configured to use
+700 harmonics.  This requires a very large amount of computation and
+high memory requirements resulting in a very long run time
+(approximately 800 seconds in this case).  The HB run-time (796 s) is
+significantly longer than the time required by my shooting method
+analysis (33.8 s).  This is exactly as expected since the input source
+contains sharp non-linearities.  This makes the circuit much better
+suited to analysis by transient simulation rather than harmonic
+balance where the number of harmonics required is prohibitive.
+
+It is also interesting to observe the timesteps taken by ADS during
+the transient analysis integration.  The stepping function takes a
+very large number of steps during the period when the input is
+changing sharply and then far fewer steps during the periods when the
+input signal is static.  Of course, this is totally as expected.
+Accurate results require many small timesteps during periods when the
+state of the circuit is changing quickly.
+
+** Conclusions and Future Work
+
+ - experiment with various ODE solver in terms of performance and
+   convergence
+ - finish the trapezoidal jacobian update function and compare this to
+   the backward euler version
+

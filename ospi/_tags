@@ -1,0 +1,7 @@
+<*>: use_bigarray, use_str, use_gsl, use_unix, use_gtk2, use_cairo
+<ospi_waveform.*cm?>: for-pack(Ospi)
+<plotter.*cm?>: for-pack(Ospi)
+<assign1>: include
+<plotter.cm*>: use_gtk2, use_cairo
+<ospi_window.*>: use_nums, camlp4o, use_sexplib
+<test_*> or <assign4.*> or <assign2.*> or <assign5.*> or <finalExam.*>: camlp4o, use_sexplib

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<?xml-stylesheet type="text/xsl" href="../etc/mathml.xsl"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <head>
+    <title>OSPI</title>
+
+<link href="../../doc-src/static/blueprint/screen.css" type="text/css" media="screen"/>
+<link href="../../doc-src/static/blueprint/print.css" type="text/css" media="print"/>
+    
+    <style type="text/css">
+    <![CDATA[
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .comment {
+        color: #FF0000;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    ]]>
+    </style>
+    
+  </head>
+  
+  <body>
+
+    <div class="container">
+      <div class="column span-14">
+    
+	
+     
+    
+
+
+
+<h2><a name="sec1" id="sec1"></a>
+ELG7132D: Assign 3</h2>
+
+<h4>By: Reid van Melle</h4>
+
+
+<h4>Student No: 5107751</h4>
+
+
+<h3><a name="sec2" id="sec2"></a>
+Table of Contents</h3>
+
+<div class="contents">
+<dl>
+<dt>
+<a href="#sec1">ELG7132D: Assign 3</a>
+</dt>
+<dd>
+<dl>
+<dt>
+<a href="#sec2">Table of Contents</a>
+</dt>
+<dt>
+<a href="#sec3">Question 1: Part 1</a>
+</dt>
+<dt>
+<a href="#sec4">Question 1: Part 2</a>
+</dt>
+<dt>
+<a href="#sec5">Question 2</a>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+
+
+
+<h3><a name="sec3" id="sec3"></a>
+Question 1: Part 1</h3>
+
+<ul>
+<li>all code was written using OCAML</li>
+<li>all code is recursive and completely generalizable to any number of
+dimensions</li>
+<li>duplicate frequencies were filtered from the final results</li>
+<li>for both box and diamond truncations, the list of truncated indices
+is first generated</li>
+<li>I left DC in the final solution just to verify that things are
+working properly</li>
+<li>results were verified by comparing to the expected sizes and by
+inspecting the results to ensure there were no duplicate
+frequencies</li>
+<li>tables were generated directly from the result list and translated
+to HTML for this report</li>
+</ul>
+
+<h4>Code for Box Truncation</h4>
+
+<p class="first">    <pre>
+<span class="comment">(* Performs a box trunction using the box truncation indices defined
+   by ks... returns a int list list of the indices *)</span>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">box_truncation</span><span class="variable-name"> ks </span><span class="tuareg-font-lock-operator">:</span> <span class="type">int list list </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">box_aux</span><span class="variable-name"> ks last </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">start</span><span class="variable-name"> cur </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">if</span> last <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">then</span> 0 <span class="keyword">else</span> <span class="tuareg-font-lock-operator">-</span>cur <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">match</span> ks <span class="keyword">with</span>
+      <span class="tuareg-font-lock-operator">|</span> kcur <span class="tuareg-font-lock-operator">::</span> <span class="tuareg-font-lock-operator">[]</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="comment">(* last index... non-recursive base case *)</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">aux</span><span class="variable-name"> pos </span><span class="tuareg-font-lock-operator">=</span>
+            <span class="keyword">if</span> pos <span class="tuareg-font-lock-operator">&gt;</span> kcur <span class="keyword">then</span> <span class="tuareg-font-lock-operator">[]</span> <span class="keyword">else</span> <span class="tuareg-font-lock-operator">[</span>pos<span class="tuareg-font-lock-operator">]</span> <span class="tuareg-font-lock-operator">::</span> <span class="tuareg-font-lock-operator">(</span>aux <span class="tuareg-font-lock-operator">(</span>pos <span class="tuareg-font-lock-operator">+</span> 1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-governing">in</span>
+          aux <span class="tuareg-font-lock-operator">(</span>start kcur<span class="tuareg-font-lock-operator">)</span>
+      <span class="tuareg-font-lock-operator">|</span> kcur <span class="tuareg-font-lock-operator">::</span> rest <span class="tuareg-font-lock-operator">-&gt;</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> <span class="tuareg-font-lock-operator">[]</span> <span class="tuareg-font-lock-governing">in</span>
+          <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>start kcur<span class="tuareg-font-lock-operator">)</span> <span class="keyword">to</span> kcur <span class="keyword">do</span>
+            <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">ith </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">r </span><span class="tuareg-font-lock-operator">-&gt;</span> i <span class="tuareg-font-lock-operator">::</span> r<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span>box_aux rest i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+            result <span class="tuareg-font-lock-operator">:=</span> <span class="type">List</span>.append ith <span class="tuareg-font-lock-operator">!</span>result
+          <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+          <span class="tuareg-font-lock-operator">!</span>result
+      <span class="tuareg-font-lock-operator">|</span> <span class="tuareg-font-lock-operator">[]</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">failwith</span> <span class="string">"this should not happen"</span>
+  <span class="tuareg-font-lock-governing">in</span>
+  <span class="type">List</span>.sort <span class="tuareg-font-lock-operator">(</span>box_aux ks 0<span class="tuareg-font-lock-operator">)</span></pre></p>
+
+
+
+
+<h4>Code for Diamond Truncation</h4>
+
+<p class="first">    <pre>
+<span class="comment">(* Performs a diamond trunction with truncation index k and dimension
+   dims... returns a int list list of the indices *)</span>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">diamond_truncation</span><span class="variable-name"> k dims </span><span class="tuareg-font-lock-operator">:</span> <span class="type">int list list </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">dmd_aux</span><span class="variable-name"> dim last </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="keyword">match</span> dim <span class="keyword">with</span>
+      <span class="tuareg-font-lock-operator">|</span> d <span class="keyword">when</span> d <span class="tuareg-font-lock-operator">=</span> dims <span class="tuareg-font-lock-operator">-&gt;</span> <span class="comment">(* last dimension... non-recursive base case *)</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">start </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">if</span> last <span class="tuareg-font-lock-operator">&lt;</span> 0 <span class="keyword">then</span> 1 <span class="keyword">else</span> 0 <span class="tuareg-font-lock-governing">in</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">aux</span><span class="variable-name"> pos </span><span class="tuareg-font-lock-operator">=</span>
+            <span class="keyword">if</span> <span class="tuareg-font-lock-operator">(</span>pos <span class="tuareg-font-lock-operator">+</span> <span class="tuareg-font-lock-operator">(</span>abs last<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">&gt;</span> k <span class="keyword">then</span> <span class="tuareg-font-lock-operator">[]</span> <span class="keyword">else</span> <span class="tuareg-font-lock-operator">[</span>pos<span class="tuareg-font-lock-operator">]</span> <span class="tuareg-font-lock-operator">::</span> <span class="tuareg-font-lock-operator">(</span>aux <span class="tuareg-font-lock-operator">(</span>pos <span class="tuareg-font-lock-operator">+</span> 1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-governing">in</span>
+          aux start
+      <span class="tuareg-font-lock-operator">|</span> d <span class="keyword">when</span> d <span class="tuareg-font-lock-operator">&lt;</span> dims <span class="tuareg-font-lock-operator">-&gt;</span>
+          <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> <span class="tuareg-font-lock-operator">[]</span> <span class="tuareg-font-lock-governing">in</span>
+          <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">-(</span>k<span class="tuareg-font-lock-operator">-</span>last<span class="tuareg-font-lock-operator">)</span> <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>k<span class="tuareg-font-lock-operator">-</span>last<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+            <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">ith </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">r </span><span class="tuareg-font-lock-operator">-&gt;</span> i <span class="tuareg-font-lock-operator">::</span> r<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span>dmd_aux <span class="tuareg-font-lock-operator">(</span>d<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">)</span> i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+            result <span class="tuareg-font-lock-operator">:=</span> <span class="type">List</span>.append ith <span class="tuareg-font-lock-operator">!</span>result
+          <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+          <span class="tuareg-font-lock-operator">!</span>result
+      <span class="tuareg-font-lock-operator">|</span> _ <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">failwith</span> <span class="string">"this is very very bad"</span>
+  <span class="tuareg-font-lock-governing">in</span>
+  <span class="type">List</span>.sort <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">x </span><span class="tuareg-font-lock-operator">-&gt;</span> <span class="type">List</span>.rev x<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span>dmd_aux 1 0<span class="tuareg-font-lock-operator">))</span></pre></p>
+
+
+
+
+
+<h3><a name="sec4" id="sec4"></a>
+Question 1: Part 2</h3>
+
+<h4>Box Truncation</h4>
+
+<p class="first">Below are the results for the box truncation with the following settings:</p>
+
+<ul>
+<li>K1=3; K2=4; K3=5</li>
+<li>f1=10GHz; f2=10.1GHz; f3=9.9GHz</li>
+</ul>
+
+<p>NOTE: all frequency results are in gigahertz.</p>
+
+<table>
+<tr><th>k1</th><th>k2</th><th>k3</th><th>Freq</th></tr><tr><td>3</td><td>4</td><td>5</td><td>119.9</td></tr>
+<tr><td>3</td><td>4</td><td>4</td><td>110</td></tr>
+<tr><td>3</td><td>4</td><td>3</td><td>100.1</td></tr>
+<tr><td>3</td><td>4</td><td>2</td><td>90.2</td></tr>
+<tr><td>3</td><td>4</td><td>1</td><td>80.3</td></tr>
+<tr><td>3</td><td>4</td><td>0</td><td>70.4</td></tr>
+<tr><td>3</td><td>4</td><td>-1</td><td>60.5</td></tr>
+<tr><td>3</td><td>4</td><td>-2</td><td>50.6</td></tr>
+<tr><td>3</td><td>4</td><td>-3</td><td>40.7</td></tr>
+<tr><td>3</td><td>4</td><td>-4</td><td>30.8</td></tr>
+<tr><td>3</td><td>4</td><td>-5</td><td>20.9</td></tr>
+<tr><td>3</td><td>3</td><td>5</td><td>109.8</td></tr>
+<tr><td>3</td><td>2</td><td>5</td><td>99.7</td></tr>
+<tr><td>3</td><td>1</td><td>5</td><td>89.6</td></tr>
+<tr><td>3</td><td>0</td><td>5</td><td>79.5</td></tr>
+<tr><td>3</td><td>-1</td><td>5</td><td>69.4</td></tr>
+<tr><td>3</td><td>-2</td><td>5</td><td>59.3</td></tr>
+<tr><td>3</td><td>-3</td><td>5</td><td>49.2</td></tr>
+<tr><td>3</td><td>-4</td><td>5</td><td>39.1</td></tr>
+<tr><td>2</td><td>4</td><td>5</td><td>109.9</td></tr>
+<tr><td>2</td><td>4</td><td>4</td><td>100</td></tr>
+<tr><td>2</td><td>4</td><td>3</td><td>90.1</td></tr>
+<tr><td>2</td><td>4</td><td>2</td><td>80.2</td></tr>
+<tr><td>2</td><td>4</td><td>1</td><td>70.3</td></tr>
+<tr><td>2</td><td>4</td><td>0</td><td>60.4</td></tr>
+<tr><td>2</td><td>4</td><td>-1</td><td>50.5</td></tr>
+<tr><td>2</td><td>4</td><td>-2</td><td>40.6</td></tr>
+<tr><td>2</td><td>4</td><td>-3</td><td>30.7</td></tr>
+<tr><td>2</td><td>4</td><td>-4</td><td>20.8</td></tr>
+<tr><td>2</td><td>4</td><td>-5</td><td>10.9</td></tr>
+<tr><td>2</td><td>3</td><td>5</td><td>99.8</td></tr>
+<tr><td>2</td><td>2</td><td>5</td><td>89.7</td></tr>
+<tr><td>2</td><td>1</td><td>5</td><td>79.6</td></tr>
+<tr><td>2</td><td>0</td><td>5</td><td>69.5</td></tr>
+<tr><td>2</td><td>-1</td><td>5</td><td>59.4</td></tr>
+<tr><td>2</td><td>-2</td><td>5</td><td>49.3</td></tr>
+<tr><td>2</td><td>-3</td><td>5</td><td>39.2</td></tr>
+<tr><td>2</td><td>-4</td><td>5</td><td>29.1</td></tr>
+<tr><td>1</td><td>4</td><td>5</td><td>99.9</td></tr>
+<tr><td>1</td><td>4</td><td>4</td><td>90</td></tr>
+<tr><td>1</td><td>4</td><td>3</td><td>80.1</td></tr>
+<tr><td>1</td><td>4</td><td>2</td><td>70.2</td></tr>
+<tr><td>1</td><td>4</td><td>1</td><td>60.3</td></tr>
+<tr><td>1</td><td>4</td><td>0</td><td>50.4</td></tr>
+<tr><td>1</td><td>4</td><td>-1</td><td>40.5</td></tr>
+<tr><td>1</td><td>4</td><td>-2</td><td>30.6</td></tr>
+<tr><td>1</td><td>4</td><td>-3</td><td>20.7</td></tr>
+<tr><td>1</td><td>4</td><td>-4</td><td>10.8</td></tr>
+<tr><td>1</td><td>4</td><td>-5</td><td>0.9</td></tr>
+<tr><td>1</td><td>3</td><td>5</td><td>89.8</td></tr>
+<tr><td>1</td><td>2</td><td>5</td><td>79.7</td></tr>
+<tr><td>1</td><td>1</td><td>5</td><td>69.6</td></tr>
+<tr><td>1</td><td>0</td><td>5</td><td>59.5</td></tr>
+<tr><td>1</td><td>-1</td><td>5</td><td>49.4</td></tr>
+<tr><td>1</td><td>-1</td><td>4</td><td>39.5</td></tr>
+<tr><td>1</td><td>-1</td><td>3</td><td>29.6</td></tr>
+<tr><td>1</td><td>-1</td><td>2</td><td>19.7</td></tr>
+<tr><td>1</td><td>-1</td><td>1</td><td>9.8</td></tr>
+<tr><td>1</td><td>-1</td><td>0</td><td>0.1</td></tr>
+<tr><td>1</td><td>-1</td><td>-1</td><td>10</td></tr>
+<tr><td>1</td><td>-1</td><td>-2</td><td>19.9</td></tr>
+<tr><td>1</td><td>-1</td><td>-3</td><td>29.8</td></tr>
+<tr><td>1</td><td>-1</td><td>-4</td><td>39.7</td></tr>
+<tr><td>1</td><td>-1</td><td>-5</td><td>49.6</td></tr>
+<tr><td>1</td><td>-2</td><td>5</td><td>39.3</td></tr>
+<tr><td>1</td><td>-2</td><td>4</td><td>29.4</td></tr>
+<tr><td>1</td><td>-2</td><td>3</td><td>19.5</td></tr>
+<tr><td>1</td><td>-2</td><td>2</td><td>9.6</td></tr>
+<tr><td>1</td><td>-2</td><td>1</td><td>0.3</td></tr>
+<tr><td>1</td><td>-2</td><td>0</td><td>10.2</td></tr>
+<tr><td>1</td><td>-2</td><td>-1</td><td>20.1</td></tr>
+<tr><td>1</td><td>-2</td><td>-2</td><td>30</td></tr>
+<tr><td>1</td><td>-2</td><td>-3</td><td>39.9</td></tr>
+<tr><td>1</td><td>-2</td><td>-4</td><td>49.8</td></tr>
+<tr><td>1</td><td>-2</td><td>-5</td><td>59.7</td></tr>
+<tr><td>1</td><td>-3</td><td>5</td><td>29.2</td></tr>
+<tr><td>1</td><td>-3</td><td>4</td><td>19.3</td></tr>
+<tr><td>1</td><td>-3</td><td>3</td><td>9.4</td></tr>
+<tr><td>1</td><td>-3</td><td>2</td><td>0.5</td></tr>
+<tr><td>1</td><td>-3</td><td>1</td><td>10.4</td></tr>
+<tr><td>1</td><td>-3</td><td>0</td><td>20.3</td></tr>
+<tr><td>1</td><td>-3</td><td>-1</td><td>30.2</td></tr>
+<tr><td>1</td><td>-3</td><td>-2</td><td>40.1</td></tr>
+<tr><td>1</td><td>-3</td><td>-3</td><td>50</td></tr>
+<tr><td>1</td><td>-3</td><td>-4</td><td>59.9</td></tr>
+<tr><td>1</td><td>-3</td><td>-5</td><td>69.8</td></tr>
+<tr><td>1</td><td>-4</td><td>5</td><td>19.1</td></tr>
+<tr><td>1</td><td>-4</td><td>4</td><td>9.2</td></tr>
+<tr><td>1</td><td>-4</td><td>3</td><td>0.7</td></tr>
+<tr><td>1</td><td>-4</td><td>2</td><td>10.6</td></tr>
+<tr><td>1</td><td>-4</td><td>1</td><td>20.5</td></tr>
+<tr><td>1</td><td>-4</td><td>0</td><td>30.4</td></tr>
+<tr><td>1</td><td>-4</td><td>-1</td><td>40.3</td></tr>
+<tr><td>1</td><td>-4</td><td>-2</td><td>50.2</td></tr>
+<tr><td>1</td><td>-4</td><td>-3</td><td>60.1</td></tr>
+<tr><td>1</td><td>-4</td><td>-4</td><td>70</td></tr>
+<tr><td>1</td><td>-4</td><td>-5</td><td>79.9</td></tr>
+<tr><td>0</td><td>4</td><td>5</td><td>89.9</td></tr>
+<tr><td>0</td><td>4</td><td>4</td><td>80</td></tr>
+<tr><td>0</td><td>4</td><td>3</td><td>70.1</td></tr>
+<tr><td>0</td><td>4</td><td>2</td><td>60.2</td></tr>
+<tr><td>0</td><td>4</td><td>1</td><td>50.3</td></tr>
+<tr><td>0</td><td>4</td><td>0</td><td>40.4</td></tr>
+<tr><td>0</td><td>4</td><td>-1</td><td>30.5</td></tr>
+<tr><td>0</td><td>4</td><td>-2</td><td>20.6</td></tr>
+<tr><td>0</td><td>4</td><td>-3</td><td>10.7</td></tr>
+<tr><td>0</td><td>4</td><td>-4</td><td>0.8</td></tr>
+<tr><td>0</td><td>4</td><td>-5</td><td>9.1</td></tr>
+<tr><td>0</td><td>3</td><td>5</td><td>79.8</td></tr>
+<tr><td>0</td><td>3</td><td>4</td><td>69.9</td></tr>
+<tr><td>0</td><td>3</td><td>3</td><td>60</td></tr>
+<tr><td>0</td><td>3</td><td>2</td><td>50.1</td></tr>
+<tr><td>0</td><td>3</td><td>1</td><td>40.2</td></tr>
+<tr><td>0</td><td>3</td><td>0</td><td>30.3</td></tr>
+<tr><td>0</td><td>3</td><td>-1</td><td>20.4</td></tr>
+<tr><td>0</td><td>3</td><td>-2</td><td>10.5</td></tr>
+<tr><td>0</td><td>3</td><td>-3</td><td>0.6</td></tr>
+<tr><td>0</td><td>3</td><td>-4</td><td>9.3</td></tr>
+<tr><td>0</td><td>3</td><td>-5</td><td>19.2</td></tr>
+<tr><td>0</td><td>2</td><td>5</td><td>69.7</td></tr>
+<tr><td>0</td><td>2</td><td>4</td><td>59.8</td></tr>
+<tr><td>0</td><td>2</td><td>3</td><td>49.9</td></tr>
+<tr><td>0</td><td>2</td><td>2</td><td>40</td></tr>
+<tr><td>0</td><td>2</td><td>1</td><td>30.1</td></tr>
+<tr><td>0</td><td>2</td><td>0</td><td>20.2</td></tr>
+<tr><td>0</td><td>2</td><td>-1</td><td>10.3</td></tr>
+<tr><td>0</td><td>2</td><td>-2</td><td>0.4</td></tr>
+<tr><td>0</td><td>2</td><td>-3</td><td>9.5</td></tr>
+<tr><td>0</td><td>2</td><td>-4</td><td>19.4</td></tr>
+<tr><td>0</td><td>2</td><td>-5</td><td>29.3</td></tr>
+<tr><td>0</td><td>1</td><td>5</td><td>59.6</td></tr>
+<tr><td>0</td><td>1</td><td>4</td><td>49.7</td></tr>
+<tr><td>0</td><td>1</td><td>3</td><td>39.8</td></tr>
+<tr><td>0</td><td>1</td><td>2</td><td>29.9</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>20</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>10.1</td></tr>
+<tr><td>0</td><td>1</td><td>-1</td><td>0.2</td></tr>
+<tr><td>0</td><td>1</td><td>-2</td><td>9.7</td></tr>
+<tr><td>0</td><td>1</td><td>-3</td><td>19.6</td></tr>
+<tr><td>0</td><td>1</td><td>-4</td><td>29.5</td></tr>
+<tr><td>0</td><td>1</td><td>-5</td><td>39.4</td></tr>
+<tr><td>0</td><td>0</td><td>5</td><td>49.5</td></tr>
+<tr><td>0</td><td>0</td><td>4</td><td>39.6</td></tr>
+<tr><td>0</td><td>0</td><td>3</td><td>29.7</td></tr>
+<tr><td>0</td><td>0</td><td>2</td><td>19.8</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>9.9</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</table>
+
+
+<p>Beloware the results for the diamond trunction with the following settings:</p>
+
+<ul>
+<li>K=5</li>
+<li>f1=10GHz; f2=10.1GHz; f3=9.9GHz</li>
+</ul>
+
+<table>
+<tr><th>k1</th><th>k2</th><th>k3</th><th>Freq</th></tr><tr><td>4</td><td>0</td><td>4</td><td>79.6</td></tr>
+<tr><td>4</td><td>0</td><td>3</td><td>69.7</td></tr>
+<tr><td>3</td><td>1</td><td>3</td><td>69.8</td></tr>
+<tr><td>3</td><td>0</td><td>4</td><td>69.6</td></tr>
+<tr><td>3</td><td>0</td><td>3</td><td>59.7</td></tr>
+<tr><td>2</td><td>2</td><td>2</td><td>60</td></tr>
+<tr><td>2</td><td>2</td><td>1</td><td>50.1</td></tr>
+<tr><td>2</td><td>1</td><td>3</td><td>59.8</td></tr>
+<tr><td>2</td><td>1</td><td>2</td><td>49.9</td></tr>
+<tr><td>2</td><td>0</td><td>4</td><td>59.6</td></tr>
+<tr><td>2</td><td>0</td><td>3</td><td>49.7</td></tr>
+<tr><td>1</td><td>3</td><td>1</td><td>50.2</td></tr>
+<tr><td>1</td><td>3</td><td>0</td><td>40.3</td></tr>
+<tr><td>1</td><td>3</td><td>-1</td><td>30.4</td></tr>
+<tr><td>1</td><td>3</td><td>-2</td><td>20.5</td></tr>
+<tr><td>1</td><td>3</td><td>-3</td><td>10.6</td></tr>
+<tr><td>1</td><td>3</td><td>-4</td><td>0.7</td></tr>
+<tr><td>1</td><td>2</td><td>-3</td><td>0.5</td></tr>
+<tr><td>1</td><td>2</td><td>-4</td><td>9.4</td></tr>
+<tr><td>1</td><td>1</td><td>-4</td><td>19.5</td></tr>
+<tr><td>1</td><td>0</td><td>4</td><td>49.6</td></tr>
+<tr><td>1</td><td>-1</td><td>3</td><td>29.6</td></tr>
+<tr><td>1</td><td>-1</td><td>2</td><td>19.7</td></tr>
+<tr><td>1</td><td>-1</td><td>1</td><td>9.8</td></tr>
+<tr><td>1</td><td>-1</td><td>0</td><td>0.1</td></tr>
+<tr><td>1</td><td>-1</td><td>-1</td><td>10</td></tr>
+<tr><td>1</td><td>-1</td><td>-2</td><td>19.9</td></tr>
+<tr><td>1</td><td>-1</td><td>-3</td><td>29.8</td></tr>
+<tr><td>1</td><td>-1</td><td>-4</td><td>39.7</td></tr>
+<tr><td>1</td><td>-2</td><td>2</td><td>9.6</td></tr>
+<tr><td>1</td><td>-2</td><td>1</td><td>0.3</td></tr>
+<tr><td>1</td><td>-2</td><td>0</td><td>10.2</td></tr>
+<tr><td>1</td><td>-2</td><td>-1</td><td>20.1</td></tr>
+<tr><td>1</td><td>-2</td><td>-2</td><td>30</td></tr>
+<tr><td>1</td><td>-2</td><td>-3</td><td>39.9</td></tr>
+<tr><td>1</td><td>-2</td><td>-4</td><td>49.8</td></tr>
+<tr><td>1</td><td>-3</td><td>1</td><td>10.4</td></tr>
+<tr><td>1</td><td>-3</td><td>0</td><td>20.3</td></tr>
+<tr><td>1</td><td>-3</td><td>-1</td><td>30.2</td></tr>
+<tr><td>1</td><td>-3</td><td>-2</td><td>40.1</td></tr>
+<tr><td>1</td><td>-3</td><td>-3</td><td>50</td></tr>
+<tr><td>1</td><td>-3</td><td>-4</td><td>59.9</td></tr>
+<tr><td>0</td><td>4</td><td>0</td><td>40.4</td></tr>
+<tr><td>0</td><td>4</td><td>-1</td><td>30.5</td></tr>
+<tr><td>0</td><td>4</td><td>-2</td><td>20.6</td></tr>
+<tr><td>0</td><td>4</td><td>-3</td><td>10.7</td></tr>
+<tr><td>0</td><td>4</td><td>-4</td><td>0.8</td></tr>
+<tr><td>0</td><td>3</td><td>1</td><td>40.2</td></tr>
+<tr><td>0</td><td>3</td><td>0</td><td>30.3</td></tr>
+<tr><td>0</td><td>3</td><td>-1</td><td>20.4</td></tr>
+<tr><td>0</td><td>3</td><td>-2</td><td>10.5</td></tr>
+<tr><td>0</td><td>3</td><td>-3</td><td>0.6</td></tr>
+<tr><td>0</td><td>3</td><td>-4</td><td>9.3</td></tr>
+<tr><td>0</td><td>2</td><td>2</td><td>40</td></tr>
+<tr><td>0</td><td>2</td><td>1</td><td>30.1</td></tr>
+<tr><td>0</td><td>2</td><td>0</td><td>20.2</td></tr>
+<tr><td>0</td><td>2</td><td>-1</td><td>10.3</td></tr>
+<tr><td>0</td><td>2</td><td>-2</td><td>0.4</td></tr>
+<tr><td>0</td><td>2</td><td>-3</td><td>9.5</td></tr>
+<tr><td>0</td><td>2</td><td>-4</td><td>19.4</td></tr>
+<tr><td>0</td><td>1</td><td>3</td><td>39.8</td></tr>
+<tr><td>0</td><td>1</td><td>2</td><td>29.9</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>20</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>10.1</td></tr>
+<tr><td>0</td><td>1</td><td>-1</td><td>0.2</td></tr>
+<tr><td>0</td><td>1</td><td>-2</td><td>9.7</td></tr>
+<tr><td>0</td><td>1</td><td>-3</td><td>19.6</td></tr>
+<tr><td>0</td><td>1</td><td>-4</td><td>29.5</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>-1</td><td>9.9</td></tr>
+<tr><td>0</td><td>0</td><td>-2</td><td>19.8</td></tr>
+<tr><td>0</td><td>0</td><td>-3</td><td>29.7</td></tr>
+<tr><td>0</td><td>0</td><td>-4</td><td>39.6</td></tr>
+</table>
+
+
+
+
+<h3><a name="sec5" id="sec5"></a>
+Question 2</h3>
+
+<h4>The Code</h4>
+
+<p class="first">The mapping that performs artificial frequency mapping is shown
+below.  It first calls the box truncation routine and then maps the
+result to create two association lists (simple maps).  These maps can
+then be used to in either the forward or reverse direction.</p>
+
+<p>    <pre>
+<span class="comment">(* Performs a frequency mapping for the box-truncation defined by
+   the ks.  Returns two association lists which can be used to look stuff
+   up in either direction *)</span>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">frequency_mapping</span><span class="variable-name"> ks fs </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">trunc </span><span class="tuareg-font-lock-operator">=</span> box_truncation ks <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">ks</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> <span class="type">List</span>.take <span class="tuareg-font-lock-operator">((</span><span class="type">List</span>.length ks<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-</span> 1<span class="tuareg-font-lock-operator">)</span> ks <span class="tuareg-font-lock-governing">in</span>
+  <span class="type">List</span>.split <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.map <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">t </span><span class="tuareg-font-lock-operator">-&gt;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">p </span><span class="tuareg-font-lock-operator">=</span> abs<span class="tuareg-font-lock-operator">((</span><span class="type">List</span>.hd t<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">+</span> <span class="type">List</span>.fold_left2 <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">p k big_k </span><span class="tuareg-font-lock-operator">-&gt;</span>
+      p <span class="tuareg-font-lock-operator">*</span> k <span class="tuareg-font-lock-operator">*</span> <span class="tuareg-font-lock-operator">(</span>2<span class="tuareg-font-lock-operator">*</span>big_k <span class="tuareg-font-lock-operator">+</span> 1<span class="tuareg-font-lock-operator">))</span> 1 <span class="tuareg-font-lock-operator">(</span><span class="type">List</span>.tl t<span class="tuareg-font-lock-operator">)</span> ks<span class="tuareg-font-lock-operator">')</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-operator">(</span>p<span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>t<span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>freq_of_indices fs t<span class="tuareg-font-lock-operator">))),</span> <span class="tuareg-font-lock-operator">((</span>freq_of_indices fs t<span class="tuareg-font-lock-operator">),</span> p<span class="tuareg-font-lock-operator">)</span>
+  <span class="tuareg-font-lock-operator">)</span> trunc<span class="tuareg-font-lock-operator">)</span></pre></p>
+
+
+
+
+<h4>Map: Harmonic to Frequency</h4>
+
+<p class="first">An example of the output from the program is shown in the table below
+with the following settings:</p>
+
+<ul>
+<li>K1=2; K2=3</li>
+<li>F1=10; F2=1</li>
+</ul>
+
+<table>
+<tr><th>Harmonic</th><th>k(1)</th><th>k(2)</th><th>Freq</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>5</td><td>0</td><td>1</td><td>1</td></tr><tr><td>10</td><td>0</td><td>2</td><td>2</td></tr><tr><td>15</td><td>0</td><td>3</td><td>3</td></tr><tr><td>14</td><td>1</td><td>-3</td><td>7</td></tr><tr><td>9</td><td>1</td><td>-2</td><td>8</td></tr><tr><td>4</td><td>1</td><td>-1</td><td>9</td></tr><tr><td>1</td><td>1</td><td>0</td><td>10</td></tr><tr><td>6</td><td>1</td><td>1</td><td>11</td></tr><tr><td>11</td><td>1</td><td>2</td><td>12</td></tr><tr><td>16</td><td>1</td><td>3</td><td>13</td></tr><tr><td>13</td><td>2</td><td>-3</td><td>17</td></tr><tr><td>8</td><td>2</td><td>-2</td><td>18</td></tr><tr><td>3</td><td>2</td><td>-1</td><td>19</td></tr><tr><td>2</td><td>2</td><td>0</td><td>20</td></tr><tr><td>7</td><td>2</td><td>1</td><td>21</td></tr><tr><td>12</td><td>2</td><td>2</td><td>22</td></tr><tr><td>17</td><td>2</td><td>3</td><td>23</td></tr></table>
+
+
+
+<h4>Map: Frequency to Harmonic</h4>
+
+<p class="first">An example of the output from the program is shown in the table below
+with the following settings:</p>
+
+<ul>
+<li>K1=2; K2=3</li>
+<li>F1=10; F2=1</li>
+</ul>
+
+<table>
+<tr><th>Freq</th><th>Harmonic</th></tr><tr><td>0</td><td>0</td></tr><tr><td>1</td><td>5</td></tr><tr><td>2</td><td>10</td></tr><tr><td>3</td><td>15</td></tr><tr><td>7</td><td>14</td></tr><tr><td>8</td><td>9</td></tr><tr><td>9</td><td>4</td></tr><tr><td>10</td><td>1</td></tr><tr><td>11</td><td>6</td></tr><tr><td>12</td><td>11</td></tr><tr><td>13</td><td>16</td></tr><tr><td>17</td><td>13</td></tr><tr><td>18</td><td>8</td></tr><tr><td>19</td><td>3</td></tr><tr><td>20</td><td>2</td></tr><tr><td>21</td><td>7</td></tr><tr><td>22</td><td>12</td></tr><tr><td>23</td><td>17</td></tr></table>
+
+
+
+
+</div>
+</div>
+</body>
+</html>

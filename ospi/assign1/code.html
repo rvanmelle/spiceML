@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>dft.ml</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">gamma</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> n </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">m </span><span class="tuareg-font-lock-operator">=</span> ones n n <span class="tuareg-font-lock-governing">in</span>
+    <span class="keyword">for</span> row <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 1 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">/</span>2<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">value </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">((</span>float <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>float col<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">*.</span> 2. <span class="tuareg-font-lock-operator">*.</span> pi<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+          <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span> col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">(</span>cos value<span class="tuareg-font-lock-operator">);</span>
+          <span class="keyword">if</span> <span class="tuareg-font-lock-operator">(</span>col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">&lt;</span> n <span class="keyword">then</span> <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">(</span>sin value<span class="tuareg-font-lock-operator">);</span>
+      <span class="keyword">done</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    m
+
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">gamma</span><span class="variable-name"> n </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">m </span><span class="tuareg-font-lock-operator">=</span> gamma<span class="tuareg-font-lock-operator">'</span> n <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f1 </span><span class="tuareg-font-lock-operator">=</span> 1. <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f2 </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="comment">(*let f = 1. in*)</span>
+    <span class="type">M</span>.transpose_in_place m<span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>0<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">((</span>m <span class="tuareg-font-lock-operator">$@</span> <span class="tuareg-font-lock-operator">(</span>0<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> f1<span class="tuareg-font-lock-operator">)</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> row <span class="tuareg-font-lock-operator">=</span> 1 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+        <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">((</span>m <span class="tuareg-font-lock-operator">$@</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> f2<span class="tuareg-font-lock-operator">)</span>
+      <span class="keyword">done</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    m</pre>
+  </body>
+</html>

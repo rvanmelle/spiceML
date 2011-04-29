@@ -1,0 +1,1980 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<?xml-stylesheet type="text/xsl" href="etc/mathml.xsl"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head><title>Assignment 1</title>
+
+      <style type="text/css" id="internalStyle">
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+
+</head>
+<body>
+
+<h2> Question 1 Part 1 </h2>
+
+<p>The G, C, f, and b matrices are given below:</p>
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>G</mi>
+    <mo>=</mo>
+
+    <mfenced close="]" open="[">
+      <mtable columnalign="center center center center center center">
+        <mtr>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+
+              <msub>
+                <mi>R</mi>
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+
+                <mi>R</mi>
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>2</mn>
+              </msub>
+
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>2</mn>
+
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>C</mi>
+
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+      <mtable columnalign="center center center center center center">
+        <mtr>
+          <mtd>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+
+            </msub>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+
+              <mi>C</mi>
+              <mn>1</mn>
+            </msub>
+          </mtd>
+          <mtd>
+            <msub>
+              <mi>C</mi>
+
+              <mn>1</mn>
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <msub>
+              <mi>L</mi>
+              <mn>1</mn>
+            </msub>
+          </mtd>
+        </mtr>
+
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>f</mi>
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+
+      <mtable columnalign="center">
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <msup>
+              <mi>e</mi>
+              <msub>
+                <mi>v</mi>
+                <mn>2</mn>
+              </msub>
+            </msup>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+
+    <mspace linebreak="newline"/>
+  </math>
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>b</mi>
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+      <mtable columnalign="center">
+        <mtr>
+
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <msub>
+              <mi>I</mi>
+              <mi>S</mi>
+            </msub>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <msub>
+              <mi>E</mi>
+              <mi>S</mi>
+            </msub>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+
+<h2> Question 1 Part 2 </h2>
+
+<p>The G, C, f, and b matrices are given below:</p>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>G</mi>
+    <mo>=</mo>
+
+    <mfenced close="]" open="[">
+      <mtable columnalign="center center center center center center center center">
+        <mtr>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+            <mo>+</mo>
+            <mi>&#x03BC;</mi>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mi>&#x03BC;</mi>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+
+                <mi>R</mi>
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>1</mn>
+
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+
+                <mi>R</mi>
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>1</mn>
+              </msub>
+            </mfrac>
+
+          </mtd>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+                <mn>1</mn>
+
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>1</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+            <mfrac>
+              <mn>1</mn>
+
+              <msub>
+                <mi>R</mi>
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mfrac>
+              <mn>1</mn>
+              <msub>
+                <mi>R</mi>
+
+                <mn>2</mn>
+              </msub>
+            </mfrac>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mn>1</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mi>&#x03C3;</mi>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+  <math  xmlns="http://www.w3.org/1998/Math/MathML"  display="block" overflow="scroll">
+    <mi>C</mi>
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+      <mtable columnalign="center center center center center center center center">
+
+        <mtr>
+          <mtd>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+            </msub>
+            <mo>+</mo>
+
+            <msub>
+              <mi>C</mi>
+              <mn>2</mn>
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+            </msub>
+
+          </mtd>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+            </msub>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+              <mi>C</mi>
+              <mn>1</mn>
+
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <msub>
+              <mi>C</mi>
+
+              <mn>1</mn>
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+            <msub>
+              <mi>C</mi>
+
+              <mn>2</mn>
+            </msub>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <msub>
+              <mi>C</mi>
+              <mn>2</mn>
+            </msub>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mo>-</mo>
+            <mi>L</mi>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+
+  <math  xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+
+    <mi>f</mi>
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+      <mtable columnalign="center">
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+
+            <msub>
+              <mi>I</mi>
+              <mi>o</mi>
+            </msub>
+            <mfenced separators="">
+              <msup>
+                <mi>e</mi>
+
+                <mrow>
+                  <mfenced separators="">
+                    <msub>
+                      <mi>v</mi>
+                      <mn>5</mn>
+                    </msub>
+                    <mo>-</mo>
+
+                    <msub>
+                      <mi>v</mi>
+                      <mn>1</mn>
+                    </msub>
+                  </mfenced>
+                  <mo>/</mo>
+                  <msub>
+
+                    <mi>V</mi>
+                    <mi>T</mi>
+                  </msub>
+                </mrow>
+              </msup>
+              <mo>-</mo>
+              <mn>1</mn>
+
+            </mfenced>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <msub>
+              <mi>I</mi>
+              <mi>o</mi>
+            </msub>
+
+            <mfenced separators="">
+              <msup>
+                <mi>e</mi>
+                <mrow>
+                  <mfenced separators="">
+                    <msub>
+                      <mi>v</mi>
+                      <mn>5</mn>
+
+                    </msub>
+                    <mo>-</mo>
+                    <msub>
+                      <mi>v</mi>
+                      <mn>1</mn>
+                    </msub>
+                  </mfenced>
+
+                  <mo>/</mo>
+                  <msub>
+                    <mi>V</mi>
+                    <mi>T</mi>
+                  </msub>
+                </mrow>
+              </msup>
+
+              <mo>-</mo>
+              <mn>1</mn>
+            </mfenced>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+
+  <math  xmlns="http://www.w3.org/1998/Math/MathML" display="block" overflow="scroll">
+    <mi>b</mi>
+    <mo>=</mo>
+    <mfenced close="]" open="[">
+      <mtable columnalign="center">
+        <mtr>
+          <mtd>
+            <mo>-</mo>
+
+            <msub>
+              <mi>I</mi>
+              <mi>S</mi>
+            </msub>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <msub>
+              <mi>I</mi>
+              <mi>S</mi>
+            </msub>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+
+          </mtd>
+        </mtr>
+        <mtr>
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+        <mtr>
+
+          <mtd>
+            <mn>0</mn>
+          </mtd>
+        </mtr>
+      </mtable>
+    </mfenced>
+    <mspace linebreak="newline"/>
+  </math>
+
+<h2>Question 3 Part 1 </h2>
+
+<p>The OCAML code for computing the &#x0393; and &#x0393; inverse matrices
+  is shown below.  It uses the GNU Scientific library for all matrix
+  operations though this is largely hidden by the stylized
+  operators.  As you can see, the &#x0393; matrix is computed
+  directly from the &#x0393; inverse matrix through a simple
+  transpose and then scaling operation.</p>
+
+<pre>
+<span class="comment">(* Compute the gamma matrix *)</span>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">gamma</span><span class="tuareg-font-lock-operator">'</span><span class="variable-name"> n </span><span class="tuareg-font-lock-operator">=</span>
+<span class="comment">  let m = ones n n in
+</span>    <span class="keyword">for</span> row <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 1 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">/</span>2<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">value </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">((</span>float <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">+</span>1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>float col<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">*.</span> 2. <span class="tuareg-font-lock-operator">*.</span> pi<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+          <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span> col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">(</span>cos value<span class="tuareg-font-lock-operator">);</span>
+          <span class="keyword">if</span> <span class="tuareg-font-lock-operator">(</span>col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">&lt;</span> n <span class="keyword">then</span> <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">*</span>2<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">(</span>sin value<span class="tuareg-font-lock-operator">);</span>
+      <span class="keyword">done</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    m
+
+<span class="comment">(* Compute the gamma matrix based on the gamma' matrix *)</span>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">gamma</span><span class="variable-name"> n </span><span class="tuareg-font-lock-operator">=</span>
+<span class="comment">  let m = gamma' n in
+</span>  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f1 </span><span class="tuareg-font-lock-operator">=</span> 1. <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">f2 </span><span class="tuareg-font-lock-operator">=</span> 2. <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float n<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">M</span>.transpose_in_place m<span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>0<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">((</span>m <span class="tuareg-font-lock-operator">$@</span> <span class="tuareg-font-lock-operator">(</span>0<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> f1<span class="tuareg-font-lock-operator">)</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="keyword">for</span> row <span class="tuareg-font-lock-operator">=</span> 1 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+      <span class="keyword">for</span> col <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> <span class="tuareg-font-lock-operator">(</span>n<span class="tuareg-font-lock-operator">-</span>1<span class="tuareg-font-lock-operator">)</span> <span class="keyword">do</span>
+        <span class="tuareg-font-lock-operator">(</span>m <span class="tuareg-font-lock-operator">=&gt;</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">((</span>m <span class="tuareg-font-lock-operator">$@</span> <span class="tuareg-font-lock-operator">(</span>row<span class="tuareg-font-lock-operator">,</span>col<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-operator">*.</span> f2<span class="tuareg-font-lock-operator">)</span>
+      <span class="keyword">done</span>
+    <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+    m</pre>
+
+<p>The matrices satisy the relation given by Eq 2.10 in the notes.
+  This is demonstrated for the two cases of H=5 and H=9 below:</p>
+
+
+<h3>H=5</h3>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!--<mi>gamma inverse T x gamma inverse</mi>-->
+<msup>
+      <mfenced close=")" open="(">
+        <msup>
+          <mi>&#x0393;</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mfenced>
+      <mi>T</mi>
+
+    </msup>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>2.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>2.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>2.5</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>2.5</cn>
+</matrixrow>
+</matrix>
+</math>
+<br/>
+
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!--<mi>gamma inverse</mi>-->
+<msup>
+          <mi>&#x0393;</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>1</cn>
+<cn>0.309017</cn>
+<cn>0.951057</cn>
+<cn>-0.809017</cn>
+<cn>0.587785</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.809017</cn>
+<cn>0.587785</cn>
+<cn>0.309017</cn>
+<cn>-0.951057</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.809017</cn>
+<cn>-0.587785</cn>
+<cn>0.309017</cn>
+<cn>0.951057</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>0.309017</cn>
+<cn>-0.951057</cn>
+<cn>-0.809017</cn>
+<cn>-0.587785</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+</matrixrow>
+</matrix>
+</math>
+
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!--<mi>gamma</mi>-->
+<mi>&#x0393;</mi>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>0.2</cn>
+<cn>0.2</cn>
+<cn>0.2</cn>
+<cn>0.2</cn>
+<cn>0.2</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.123607</cn>
+<cn>-0.323607</cn>
+<cn>-0.323607</cn>
+<cn>0.123607</cn>
+<cn>0.4</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.380423</cn>
+<cn>0.235114</cn>
+<cn>-0.235114</cn>
+<cn>-0.380423</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>-0.323607</cn>
+<cn>0.123607</cn>
+<cn>0.123607</cn>
+<cn>-0.323607</cn>
+<cn>0.4</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.235114</cn>
+<cn>-0.380423</cn>
+<cn>0.380423</cn>
+<cn>-0.235114</cn>
+<cn>0</cn>
+</matrixrow>
+</matrix>
+</math>
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<!--<mi>gamma inverse x gamma</mi>-->
+<msup>
+      <mi>&#x0393;</mi>
+      <mrow>
+
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </msup>
+    <mi>&#x0393;</mi>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+</matrixrow>
+</matrix>
+</math>
+
+<h3>H=9</h3>
+
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+      <mfenced close=")" open="(">
+        <msup>
+          <mi>&#x0393;</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+      </mfenced>
+      <mi>T</mi>
+
+    </msup>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>9</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>4.5</cn>
+</matrixrow>
+</matrix>
+</math>
+
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <msup>
+          <mi>&#x0393;</mi>
+          <mrow>
+            <mo>-</mo>
+            <mn>1</mn>
+          </mrow>
+        </msup>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>1</cn>
+<cn>0.766044</cn>
+<cn>0.642788</cn>
+<cn>0.173648</cn>
+<cn>0.984808</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+<cn>-0.939693</cn>
+<cn>0.34202</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>0.173648</cn>
+<cn>0.984808</cn>
+<cn>-0.939693</cn>
+<cn>0.34202</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+<cn>0.766044</cn>
+<cn>-0.642788</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.939693</cn>
+<cn>0.34202</cn>
+<cn>0.766044</cn>
+<cn>-0.642788</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+<cn>0.173648</cn>
+<cn>-0.984808</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.939693</cn>
+<cn>-0.34202</cn>
+<cn>0.766044</cn>
+<cn>0.642788</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+<cn>0.173648</cn>
+<cn>0.984808</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>0.173648</cn>
+<cn>-0.984808</cn>
+<cn>-0.939693</cn>
+<cn>-0.34202</cn>
+<cn>-0.5</cn>
+<cn>0.866025</cn>
+<cn>0.766044</cn>
+<cn>0.642788</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>0.766044</cn>
+<cn>-0.642788</cn>
+<cn>0.173648</cn>
+<cn>-0.984808</cn>
+<cn>-0.5</cn>
+<cn>-0.866025</cn>
+<cn>-0.939693</cn>
+<cn>-0.34202</cn>
+</matrixrow>
+<matrixrow>
+<cn>1</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+</matrixrow>
+</matrix>
+</math>
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mi>&#x0393;</mi><mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+<cn>0.111111</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.170232</cn>
+<cn>0.0385885</cn>
+<cn>-0.111111</cn>
+<cn>-0.208821</cn>
+<cn>-0.208821</cn>
+<cn>-0.111111</cn>
+<cn>0.0385885</cn>
+<cn>0.170232</cn>
+<cn>0.222222</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.142842</cn>
+<cn>0.218846</cn>
+<cn>0.19245</cn>
+<cn>0.0760045</cn>
+<cn>-0.0760045</cn>
+<cn>-0.19245</cn>
+<cn>-0.218846</cn>
+<cn>-0.142842</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.0385885</cn>
+<cn>-0.208821</cn>
+<cn>-0.111111</cn>
+<cn>0.170232</cn>
+<cn>0.170232</cn>
+<cn>-0.111111</cn>
+<cn>-0.208821</cn>
+<cn>0.0385885</cn>
+<cn>0.222222</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.218846</cn>
+<cn>0.0760045</cn>
+<cn>-0.19245</cn>
+<cn>-0.142842</cn>
+<cn>0.142842</cn>
+<cn>0.19245</cn>
+<cn>-0.0760045</cn>
+<cn>-0.218846</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>-0.111111</cn>
+<cn>-0.111111</cn>
+<cn>0.222222</cn>
+<cn>-0.111111</cn>
+<cn>-0.111111</cn>
+<cn>0.222222</cn>
+<cn>-0.111111</cn>
+<cn>-0.111111</cn>
+<cn>0.222222</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.19245</cn>
+<cn>-0.19245</cn>
+<cn>0</cn>
+<cn>0.19245</cn>
+<cn>-0.19245</cn>
+<cn>0</cn>
+<cn>0.19245</cn>
+<cn>-0.19245</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>-0.208821</cn>
+<cn>0.170232</cn>
+<cn>-0.111111</cn>
+<cn>0.0385885</cn>
+<cn>0.0385885</cn>
+<cn>-0.111111</cn>
+<cn>0.170232</cn>
+<cn>-0.208821</cn>
+<cn>0.222222</cn>
+</matrixrow>
+<matrixrow>
+<cn>0.0760045</cn>
+<cn>-0.142842</cn>
+<cn>0.19245</cn>
+<cn>-0.218846</cn>
+<cn>0.218846</cn>
+<cn>-0.19245</cn>
+<cn>0.142842</cn>
+<cn>-0.0760045</cn>
+<cn>0</cn>
+</matrixrow>
+</matrix>
+</math>
+
+<br/>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msup>
+      <mi>&#x0393;</mi>
+      <mrow>
+
+        <mo>-</mo>
+        <mn>1</mn>
+      </mrow>
+    </msup>
+    <mi>&#x0393;</mi>
+<mo>=</mo>
+<matrix>
+<matrixrow>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+<cn>0</cn>
+</matrixrow>
+<matrixrow>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>0</cn>
+<cn>1</cn>
+</matrixrow>
+</matrix>
+</math>
+
+
+</body>
+</html>

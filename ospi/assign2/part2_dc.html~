@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.34 in css mode. -->
+<html>
+  <head>
+    <title>engine.ml</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .comment {
+        /* font-lock-comment-face */
+        color: #b22222;
+      }
+      .constant {
+        /* font-lock-constant-face */
+        color: #5f9ea0;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .string {
+        /* font-lock-string-face */
+        color: #bc8f8f;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="tuareg-font-lock-governing">module</span> <span class="type">DcAnalysis </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">functor</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">Solver</span><span class="tuareg-font-lock-operator">:</span> <span class="type">SOLVER</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-governing">struct</span>
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">stepping </span><span class="tuareg-font-lock-operator">=</span> <span class="constant">true</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">solver_type </span><span class="tuareg-font-lock-operator">=</span> `DERIV
+  <span class="keyword">exception</span> <span class="variable-name">ConvergenceFailed</span> <span class="tuareg-font-lock-operator">of</span> string
+    
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">print_status</span><span class="variable-name"> result alpha </span><span class="tuareg-font-lock-operator">=</span> 
+    <span class="keyword">match</span> result <span class="keyword">with</span>
+      <span class="tuareg-font-lock-operator">|</span> Converged <span class="tuareg-font-lock-operator">-&gt;</span>
+          debug <span class="string">"converged at alpha=%g"</span> alpha<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-operator">|</span> IterationLimitExceeded <span class="tuareg-font-lock-operator">-&gt;</span>
+          debug <span class="string">"failed at alpha=%g"</span> alpha
+
+<span class="string">  let solve_at (s:Solver.t) (r:recorder) source_val =
+</span>    <span class="keyword">if</span> stepping <span class="keyword">then</span> <span class="tuareg-font-lock-governing">begin</span>
+      info <span class="string">"DC: starting source stepping "</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">num_steps </span><span class="tuareg-font-lock-operator">=</span> 50 <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">init_x </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Array</span>.make <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.size s<span class="tuareg-font-lock-operator">)</span> 0. <span class="tuareg-font-lock-governing">in</span>
+      <span class="keyword">for</span> i <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">to</span> num_steps <span class="keyword">do</span>
+        printf <span class="string">"."</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">alpha </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>float i<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float num_steps<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">Solver</span>.set_b_vec <span class="tuareg-font-lock-operator">~</span>alpha s source_val<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> solver_type <span class="keyword">with</span>
+          <span class="tuareg-font-lock-operator">|</span> `DERIV <span class="tuareg-font-lock-operator">-&gt;</span> <span class="type">Solver</span>.solve_nonlinear <span class="tuareg-font-lock-operator">~</span>init_x s
+          <span class="tuareg-font-lock-operator">|</span> `NODERIV <span class="tuareg-font-lock-operator">-&gt;</span> <span class="type">Solver</span>.solve_nonlinear_noderiv <span class="tuareg-font-lock-operator">~</span>init_x s
+        <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-operator">(</span><span class="keyword">match</span> result <span class="keyword">with</span>
+          <span class="tuareg-font-lock-operator">|</span> Converged <span class="tuareg-font-lock-operator">-&gt;</span>
+              <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">soln </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_solution s <span class="tuareg-font-lock-governing">in</span>
+              <span class="type">Array</span>.blit soln 0 init_x 0 <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.size s<span class="tuareg-font-lock-operator">);</span>
+          <span class="tuareg-font-lock-operator">|</span> IterationLimitExceeded <span class="tuareg-font-lock-operator">-&gt;</span>
+              <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">s </span><span class="tuareg-font-lock-operator">=</span> sprintf <span class="string">"DC source stepping failed at alpha=%g\n%!"</span> alpha <span class="tuareg-font-lock-governing">in</span>
+              <span class="keyword">raise</span> <span class="tuareg-font-lock-operator">(</span>ConvergenceFailed s<span class="tuareg-font-lock-operator">)</span>
+        <span class="tuareg-font-lock-operator">);</span>
+      <span class="keyword">done</span><span class="tuareg-font-lock-operator">;</span>
+      info <span class="string">"\nDC: finished!"</span><span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">end</span> <span class="keyword">else</span> <span class="tuareg-font-lock-governing">begin</span>
+<span class="string">      Solver.set_b_vec s source_val;
+</span>      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">result </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> solver_type <span class="keyword">with</span>
+        <span class="tuareg-font-lock-operator">|</span> `DERIV <span class="tuareg-font-lock-operator">-&gt;</span> <span class="type">Solver</span>.solve_nonlinear s
+        <span class="tuareg-font-lock-operator">|</span> `NODERIV <span class="tuareg-font-lock-operator">-&gt;</span> <span class="type">Solver</span>.solve_nonlinear_noderiv s
+      <span class="tuareg-font-lock-governing">in</span>
+      print_status result 1.<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">end</span>
+      
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">solve</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">?(</span>name<span class="tuareg-font-lock-operator">=</span><span class="string">"dc"</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">?</span>source_val <span class="tuareg-font-lock-operator">(</span><span class="variable-name">s</span><span class="tuareg-font-lock-operator">:</span><span class="type">Solver.t</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">recorder</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">source_val </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Option</span>.default <span class="tuareg-font-lock-operator">(</span>`DC <span class="tuareg-font-lock-operator">(</span>0<span class="tuareg-font-lock-operator">,</span> 0.<span class="tuareg-font-lock-operator">))</span> source_val <span class="tuareg-font-lock-governing">in</span>
+    solve_at s r source_val<span class="tuareg-font-lock-operator">;</span>
+    <span class="comment">(*r#dump_reals name 0.*)</span>
+    r<span class="tuareg-font-lock-operator">#</span>append_real name 0. <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.get_real s<span class="tuareg-font-lock-operator">)</span>
+    
+      
+  <span class="tuareg-font-lock-governing">type</span> <span class="type">sweep_spec </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span> <span class="variable-name">name</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">string</span><span class="tuareg-font-lock-operator">;</span>  <span class="comment">(* name of the sweep *)</span>
+                      <span class="variable-name">id</span>      <span class="tuareg-font-lock-operator">:</span> <span class="type">int</span><span class="tuareg-font-lock-operator">;</span>     <span class="comment">(* ID of source to be swept *)</span>
+                      <span class="variable-name">start</span>   <span class="tuareg-font-lock-operator">:</span> <span class="type">float</span><span class="tuareg-font-lock-operator">;</span>   <span class="comment">(* starting value *)</span>
+                      <span class="variable-name">stop</span>    <span class="tuareg-font-lock-operator">:</span> <span class="type">float</span><span class="tuareg-font-lock-operator">;</span>   <span class="comment">(* final value *)</span>
+                      <span class="variable-name">steps</span>   <span class="tuareg-font-lock-operator">:</span> <span class="type">int </span><span class="tuareg-font-lock-operator">}</span>    <span class="comment">(* # of steps *)</span>
+
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">create_sweep</span><span class="variable-name"> name id start stop steps </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-operator">{</span> name<span class="tuareg-font-lock-operator">=</span>name<span class="tuareg-font-lock-operator">;</span> id<span class="tuareg-font-lock-operator">=</span>id<span class="tuareg-font-lock-operator">;</span> start<span class="tuareg-font-lock-operator">=</span>start<span class="tuareg-font-lock-operator">;</span> stop<span class="tuareg-font-lock-operator">=</span>stop<span class="tuareg-font-lock-operator">;</span> steps<span class="tuareg-font-lock-operator">=</span>steps<span class="tuareg-font-lock-operator">}</span>
+      
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">sweep</span><span class="variable-name"> s r spec </span><span class="tuareg-font-lock-operator">=</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">sweep_aux</span><span class="variable-name"> cur_step </span><span class="tuareg-font-lock-operator">=</span>
+      <span class="keyword">if</span> cur_step <span class="tuareg-font-lock-operator">&lt;</span> spec.steps <span class="keyword">then</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">cur_val </span><span class="tuareg-font-lock-operator">=</span> spec.start <span class="tuareg-font-lock-operator">+.</span> <span class="tuareg-font-lock-operator">(</span>float cur_step<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>
+          <span class="tuareg-font-lock-operator">(</span>spec.stop <span class="tuareg-font-lock-operator">-.</span> spec.start<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">/.</span> <span class="tuareg-font-lock-operator">(</span>float spec.steps<span class="tuareg-font-lock-operator">))</span> <span class="tuareg-font-lock-governing">in</span>
+        info <span class="string">"Solving DC sweep at %g"</span> cur_val<span class="tuareg-font-lock-operator">;</span>
+        solve_at s r <span class="tuareg-font-lock-operator">(</span>`DC <span class="tuareg-font-lock-operator">(</span>spec.id<span class="tuareg-font-lock-operator">,</span> cur_val<span class="tuareg-font-lock-operator">));</span>
+<span class="string">        r#append_real spec.name cur_val (Solver.get_real s);
+</span>        sweep_aux <span class="tuareg-font-lock-operator">(</span>cur_step <span class="tuareg-font-lock-operator">+</span> 1<span class="tuareg-font-lock-operator">)</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    sweep_aux 0
+        
+      
+<span class="tuareg-font-lock-governing">end</span><span class="tuareg-font-lock-operator">;;</span></pre>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+
+* ELG7132D: Assign 4
+
+*** By: Reid van Melle
+*** Student No: 5107751
+
+** Table of Contents
+
+<contents>
+
+** Part I
+
+I never did this part of the assignment, because it seemed to offer no
+benefit other than requiring larger modifications to the source code
+developed in Assignment #2.  Instead, I made the minimum number of
+modifications necessary in order to make my single-tone code from
+Assignment #2 work for this assignment.
+
+The box truncation code was taken directly from Assignment #3 without
+modification and used to produce forward and reverse frequency
+mappings for this assignment.
+
+** Part II: Question 1
+
+The entire circuit, all values, and most configuration options are
+inputs to the circuit.  As in past assignments, I used the language
+OCAML and bindings for the GNU Scientific Library to develop solutions
+for the assignment.  All results were obtained using a standard NEWTON
+RAPHSON solver with an absolute error threshold of 1e-9 and a maximum
+number of iterations of 200.
+
+** Part III: Testing
+
+Tables of results are shown below for a number of different input
+amplitude sizes.
+
+*** Input Amplitude = 1mV
+
+<include file="../assign4/1mv.html" markup="nil">
+
+*** Input Amplitude = 5mV
+
+<include file="../assign4/5mv.html" markup="nil">
+
+*** Input Amplitude = 10mV
+
+<include file="../assign4/10mv.html" markup="nil">
+
+*** Input Amplitude = 50mV
+
+<include file="../assign4/50mv.html" markup="nil">
+
+** Part IV: Comparison
+
+*** 3rd Order Intermodulation Distortion
+
+Results from both my program (OSPI) and ADS are shown in the table
+below for the 3rd order intermodulation distortion.  The results match
+very well for the cases with less distortion and a smaller number of
+harmonics.  The cases with 100mV and 500mV input amplitudes fail
+miserably.  I believe that this is because I was not able to run with
+enough harmonics.  Unfortunately, running with more was not an option
+due to a problem with either the GSL Library or the OCAML bindings.
+Whenever I tried to create a problem of size > 1000, I encountered a
+segmentation fault.  With an MNA size of around 14, this limited my
+program to around 35 harmonics.
+
+ - calculated as 20*log10(HB[9.9kHz] / HB[10.1kHz])
+
+Amplitude || OSPI || ADS
+1mV   | -98.95 | -99.01
+5mV   | -71.16 | -71.15
+10mV  | -59.50 | -59.49
+50mV  | -22.19 | -22.13
+100mV | -13.12 | -14.72
+500mV | -10.16 | -12.97
+
+*** Amplitude of the 9.9 kHz Mixing Product
+
+Shown below is a table illustrating the difference in the 9.9kHz
+mixing product.  The results differ by as much as 27% for the input
+amplitude of 500mV.
+
+Amplitude || OSPI || ADS  || % Difference
+1mV   | 8.37689e-7 dB | 8.3716e-7 dB | 0.063
+5mV   | 1.0298e-4 dB  | 1.0319e-4 dB | 0.204
+10mV  | 7.8247e-4 dB  | 7.8324e-4 dB | 0.098
+50mV  | 0.215811 dB   | 0.21461 dB   | 0.56
+100mV | 0.692871 dB   | 0.58087 dB   | 19.3
+500mV | 0.98589 dB    | 0.7756 dB    | 27.1
+
+*** ADS Results
+
+I've included one of the tables of results taken directly from ADS.
+For the most part, I allowed ADS to run with harmonics of its own
+choosing.  This was mainly because I did not find the options to
+control the truncation scheme directly.  It is interesting to note
+that the ADS results seem to roughly follow a box truncation scheme
+but not symmetrical around the harmonics of f1.
+
+If you compare the results in the table below with those presented
+earlier for the 1mV case, you will find a very close correspondence.
+The results differ, of course, once below the error floor of 1e-9.
+
+**** Input Amplitude = 1mV
+
+freq || amplitude / phase
+0.000000E0  |  0.000E0 / 0.000E0
+1.0000111E2  |  4.690035E-4 / -1.799622E2
+2.0000222E2  |  7.295042E-9 / 4.3259302E-2
+9.9000036E3  |  8.371621E-7 / -5.888268E1
+1.0000E4  |  7.46736E-2 / 1.19265851E2
+1.0100001E4  |  7.46735E-2 / 1.19258504E2
+1.0200002E4  |  8.36998E-7 / -5.9216949E1
+1.99000066E4  |  4.87139E-9 / -1.2572721E2
+2.0000E4  |  2.34420E-4 / 5.71966925E1
+2.01000023E4  |  4.68848E-4 / 5.71826044E1
+2.0200002E4  |  2.34418E-4 / 5.71686373E1
+2.03000025E4  |  4.86977E-9 / -1.2572956E2
+3.0000E4  |  2.80986E-7 / -1.7720671E2
+3.01000023E4  |  8.43906E-7 / -1.7720074E2
+3.02000046E4  |  8.43960E-7 / -1.7719182E2
+3.03000025E4  |  2.81040E-7 / -1.7717989E2
+4.0000E4  |  1.22249E-9 / 1.08604946E2
+4.01E4  |  4.90049E-9 / 1.08595680E2
+4.02000046E4  |  7.35450E-9 / 1.08571621E2
+4.03E4  |  4.90085E-9 / 1.08538997E2
+4.0400004E4  |  1.22195E-9 / 1.08492285E2
+5.0000178E4  |  3.58995E-11 / -1.200482E2
+5.05000160E4  |  3.59089E-11 / -1.200538E2
+6.0000E4  |  2.60350E-13 / 1.7663551E2
+6.06000050E4  |  2.59567E-13 / 1.7669593E2
+7.0000E4  |  3.48040E-16 / -1.393478E2
+7.07000028E4  |  4.24214E-16 / 7.6378027E1
+8.0000E4  |  7.36907E-16 / -1.139286E2
+8.0800007E4  |  2.90441E-15 / 1.1260383E2
+9.00000355E4  |  3.73206E-16 / -6.444054E1
+9.09E4  |  1.55666E-12 / 5.78078499E1
+1.00044E5  |  4.60243E-16 / -1.3078212E2
+1.010000023E5  |  1.77358E-10 / -9.3250324E0
+
+** Part IV: Source Code
+
+For the most part, the source code is unmodified from the 2nd
+assignment with the following exceptions:
+
+ - in previous versions, the HB solver was constructed with a base
+   frequency and number of harmonics.  It was modified to take a
+   list of harmonics and with multiple constructors for single-tone
+   and multi-tone problems
+ - the results storage was also modified to account for the frequency
+   mapping
+ - the construction of the y_bar matrix was modified slightly in order
+   to account for an arbitrary list of frequencies
+ - the construction of the b_bar source vector was also modified
+   slightly in order to account for multiple frequencies in the input
+   and finding the correct location
+
+*** Assignment 4 High-level Execution
+
+The first piece of code shown here is the top-level construction of
+the problem, invocation of the multi-tone harmonic balance solver, and
+associated calculation and output of results.
+
+<include file="../assign4/assign4.html" markup="nil">
+
+*** Single and MultiTone Harmonic Balance Module
+
+Here is the entire OCAML module which does both single-tone and
+two-tone harmonic balance (with box truncation).  Pay special
+attention to the module constructors titled "create_single_tone" and
+"create_two_tone".  These two different constructors are the *only*
+difference between the two cases.  All the rest of the code is
+entirely shared.
+
+<include file="../assign4/harmonicBalance.html" markup="nil">
+
+** Part V: Future Work
+
+ - Bugs
+   - creation of the GSL multiroot solver seems to fail past a size of
+     around 1000.  This severely restricts the size of problem which
+     can be run.  An alternate solution needs to be found.
+ - Performance
+   - my routine that computes the Jacobian is *extremely* inefficient
+     and needs a lot of work; a quick profile of the code clearly
+     showed that this is where most of the time is spent
+   - Intelligent homotopy algorithms seem like low hanging fruit in
+     terms of making the Harmonic Balance algorithm converge much faster.
+   - I experimented a bit with different non-linear solvers such as
+     Powell's Hybrid method and got some interesting results.  In some
+     cases, there was significant speedups because the solver was able
+     to converge without source stepping.  In other cases, it is
+     quicker to try source stepping immediately rather than waiting a
+     long time for the non-linear solver to fail on the initial
+     problem
+ - Interface
+   - the system is desperately in need of a scripted interface *or* a
+     parseable netlist format.  It is ridiculous to need to recompile
+     the system just to modify one of the input values.  Fortunately,
+     compiling in OCAML is very fast.

@@ -1,0 +1,226 @@
+
+* ELG7132D: Assign 2 
+
+ - By: Reid van Melle
+ - Student No: 5107751
+
+** Table of Contents
+
+<contents>
+
+** Part 1: MNA Formulation
+
+The MNA G, C, and b matrices are shown in the appedices.  These
+matrices were generated automatically from the input circuit
+description. The f matrix is impossible to print because it is
+composed of compiled functions.
+
+<comment>
+<include file="../assign2/part1_mna.xml" markup="nil">
+</comment>
+
+** Part 2: Implementation
+
+The solution was written in OCAML and developed using the GNU
+Scientific Library (GSL).  The GSL is written in C but has bindings
+for many different languages including OCAML.  The solution is written
+to be a completely general purpose simulation engine (i.e. nothing is
+hardcoded) and it meant to be completely extensible.  Therefore, all
+of the circuit parameters are inputs to the program and it is
+completely programmable.
+
+Some key points about the solution:
+
+ - source stepping is included in both the DC solver and the HB solver
+ - in both cases, the source stepper is hardcoded to use 50 linear
+   steps
+ - the GSL multi-dimensional linear solver is used in order to solve
+   sets of non-linear equations.  The solver requires that the output
+   vector and Jacobian are computed periodically.  Several different
+   algorithms are available, but I used the Newton solver in all cases.
+ - I chose the maximum number of iterations to be 100 and an error
+   epsilon of 1e-7 for the non-linear solvers
+ - Once the HB solver has computed the final solution, it computes the
+   ratio of the highest harmonic to the fundamental.  If the ratio
+   exceeds a threshold of 1e-3, a warning is issued to the user.
+
+Instead of including all the code, I have elected to choose several
+key pieces of the solution and include them along with comments.
+
+The first pieces of code shows the declaration of the main circuit,
+invoking first a DC analysis and then a Harmonic Balance analysis.
+The analysis engines automatically store the results in a database.
+After the analysis is done, the calculation of the measurements of
+interest are shown including DC shift, Gain, 2nd/3rd order harmonic
+distortion, and THD.  Finally, the plotter is invoked to display the
+results... some plots will be shown later.  NOTE: The code for the
+metric calculations have been modified slightly since this document
+was generated.
+
+<include file="../assign2/part2_assign2.html" markup="nil">
+
+You may have noticed that in the preceeding piece of code, there was a
+reference to the BJT subcircuit.  The code for this subcircuit and
+associated non-linear equations is shown below.  This is one of the
+trickier parts of the code because the subcircuit must be able to
+function in any part of the circuit including various nodes being
+connected to ground.
+
+Because the non-linear functions are compiled and reused, they must be
+able to dynamically lookup the correct location in the output vector
+and/or Jacobian in which to insert computed results.  This is
+accomplished through simple lookup functions which are passed into the
+functions during creation.  It is worth noting that all of the input
+node names and IDs are mapped to internal names when the circuit is
+instantiated which creates some of the complication.
+
+<include file="../assign2/part2_bjt.html" markup="nil">
+
+The DC solver is shown below.  The main function to observe is the
+"solve_at" function which is a non-linear source-stepping solver
+taking a total of 50 steps.  The DC module also supports DC sweeps
+which can be seen in the "sweep" and "create_sweep" functions.  This
+required that the DC sources all have "id's" and the actual voltage
+values are parameterizable at runtime.
+
+<include file="../assign2/part2_dc.html" markup="nil">
+
+The final piece of code that I've included it the actual Harmonic
+Balance solver module.  There are several things that I will draw
+attention to.  At the top of the module is the main declaration of the
+data structure for the HB analysis including various constants and
+matrices which are computed once and then reused.
+
+The "create" function is where the HB analysis is initialized.  All of
+the constant vectors and matrices are pre-computed and/or initialized
+at this point and stored in the HB data structure.  It is expected
+that the DC analysis has already been run at this point.  The function
+called "solve" attempts to solve the HB equations.  It first tries
+directly computing the solution (i.e. without homotopy).  If this
+fails, it falls back to a source stepping algorithm which is found in
+the function called "solve_with_stepping".  The stepping algorithm is
+very simple.  Since the DC solution may have been source-stepped
+previously, only the AC sources are scaled by alpha.  The stepping
+algorithm is hard-coded to try to compute the solution in 50 linear
+steps which was found to work by experimentation.
+
+<include file="../assign2/part2_hb.html" markup="nil">
+
+** Part 3: Testing
+
+ - the DC analysis (which was always performed prior to HB analysis)
+   required source stepping in order to converge
+ - for the HB anlaysis, only the cases of 100mV and 500mV required source
+   stepping
+ - I chose an arbitrary ratio of 1e-3 for the highest harmonic to the
+   fundamental.  In all cases except the 100mV and 500mV case, I was
+   able to achieve this ratio by increasing the number of samples.  I
+   feel relatively confident that I could have achieved this ratio for
+   these cases, if I was willing to be a bit more patient with the
+   run-time.  Unfortunately, the CPU fans on my laptop are not running
+   properly, so I was hesitant to the run the CPU full-out for a long
+   time.
+
+*** Results
+
+The results from running my simulation engine are shown below.  I've
+also included a "Max Ratio" column which shows the ratio of the
+magnitude of the highest harmonic to the fundamental.  Clearly, I need
+even more harmonics for the 100 mV and 500 mV amplitudes.  However,
+the runtimes were increasing and I did not want to burn out my CPUs.
+
+Amplitude || M || Max Ratio || DC shift || Gain || 2nd HD || 3rd HD || THD
+1 mV   | 5  | 3.327e-11 | 0 | 37.462 | -50.0646 | -108.457 | -122.665
+5 mV   | 5  | 2.193e-8 | 0 | 37.455 | -36.088 | -80.5149 | -80.7412
+10 mV  | 5  | 1.036e-6 | 0 | 37.424 | -30.025 | -68.62 | -62.626
+50 mV  | 7  | 3.411e-6 | 0 | 36.389 | -15.232 | -47.38 | -20.087
+100 mV | 20 | 0.0017  | 0 | 33.446 | -10.444 | -26.54 | -6.466
+500 mV | 20 | 0.018   | 0 | 19.995 | -10.485 | -13.682 | 1.6756
+
+I've also included a graph showing the output signal when the input
+amplitude is 500mV. The distortion is seen very clearly.  It is
+obvious that the output is essentially railing due to biasing and
+source voltage limitations.  Of course, this is the explanation for
+requiring more and more harmonics for the higher input voltages.  The
+distorted output signals requires many more harmonics in order to
+capture its shape (it is almost a square pulse).
+
+<include file="../assign2/v_5.svg" markup="nil">
+
+
+*** Comments
+
+ - the run-time increased significantly when the harmonic truncation
+   was increased in order to produce more accurate results
+ - many more sampling points were required as soon as the input
+   amplitude was increased to a point where there was a lot of
+   distortion
+
+** Part 4: Verification
+
+Results from running ADS are shown in the table below.  For the most
+part, they match the results from Part 3 very well with the following
+exceptions:
+
+ - None of the THD numbers match.  I think this is a problem with my
+   THD equation in ADS.  I never had a chance to debug this fully
+   since I got my computer account working rather late to spend a lot
+   of time on it.
+ - The results for the 2nd and 3rd order harmonic distortion diverge a
+   bit from my results for the cases of 100mV and 500mV input
+   amplitudes.  I did not find the required settings for controlling
+   the NR stopping criteria.  I suspect this may account for the
+   differences at these higher input levels.
+
+
+Amplitude || M || DC Shift || Gain || 2nd HD || 3rd HD || THD
+1mV    | 5  | 0 | 37.46 | -50.064 | -108.465 | -23.120
+5 mV   | 5  | 0 | 37.45 | -36.073 | -80.54 | -12.622
+10 mV  | 5  | 0 | 37.42 | -30.019 | -68.626 | -14.408
+50 mV  | 7  | 0 | 36.37 | -15.208 | -47.524 | 17.918
+100 mV | 20 | 0 | 33.47 | -9.998  | -30.075 | 25.987
+500 mV | 20 | 0 | 22.23 | -8.031  | -18.852 | 29.163
+
+** Part 5: Comparison 
+
+A graph showing the magnitude of V(out) for my program and for ADS is
+shown below.  The x-axis is the input voltage and is not rendered
+properly due to some buggy behavior in the Firefox SVG renderer.  The
+"circles" are my program and the "crosses" are from ADS.  The results
+almost match exactly except for the case of 500mV where there is a
+slighly difference.
+
+<include file="../assign2/compare.svg" markup="nil">
+
+
+** Part 6: Future Work
+
+Of course, there are a lot of things that I would like to spend more
+time on:
+
+ - figure out the discrepancy in the results for the cases with a lot
+   of distortion
+ - run with even more harmonics for the cases of 100mV and 500mV in
+   order to get more accurate results
+ - debug the THD calculation in ADS in order to figure out what is
+   going on.  NOTE: I also tried the built-in routine "thd_func",
+   however, this produced even more confusing results.
+ - Both the HB and DC source stepping algorithms should be much more
+   sophisticated.  I would like to try adaptive step sizes.  Other
+   types of homotopy may be more appropriate and require less steps
+   (such as varying transistor gain)
+ - automatic adjustment of the number of harmonics would be nice
+ - there is a lot of duplicated calculation that should be cleaned up
+   and would make the simulation run much faster
+ - I would like to experiment with algorithms other than standard
+   Newton Raphson
+ - many more unit tests should be written
+ - add a "netlist"/scripted front-end (easier for testing, debuggin,
+   generating results)
+
+
+
+
+
+
+

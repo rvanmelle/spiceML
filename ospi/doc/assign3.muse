@@ -1,0 +1,90 @@
+
+* ELG7132D: Assign 3
+
+*** By: Reid van Melle
+*** Student No: 5107751
+
+** Table of Contents
+
+<contents>
+
+** Question 1: Part 1
+
+ - all code was written using OCAML
+ - all code is recursive and completely generalizable to any number of
+   dimensions
+ - duplicate frequencies were filtered from the final results
+ - for both box and diamond truncations, the list of truncated indices
+   is first generated
+ - I left DC in the final solution just to verify that things are
+   working properly
+ - results were verified by comparing to the expected sizes and by
+   inspecting the results to ensure there were no duplicate
+   frequencies
+ - tables were generated directly from the result list and translated
+   to HTML for this report
+
+*** Code for Box Truncation
+
+<include file="../assign3/box_code.html" markup="nil">
+
+*** Code for Diamond Truncation
+
+<include file="../assign3/dmd_code.html" markup="nil">
+
+** Question 1: Part 2
+
+*** Box Truncation
+
+Below are the results for the box truncation with the following settings:
+
+ - K1=3; K2=4; K3=5
+ - f1=10GHz; f2=10.1GHz; f3=9.9GHz
+
+NOTE: all frequency results are in gigahertz.
+
+<include file="../assign3/q1_box.html" markup="nil">
+
+Beloware the results for the diamond trunction with the following settings:
+
+ - K=5
+ - f1=10GHz; f2=10.1GHz; f3=9.9GHz
+
+<include file="../assign3/q1_diamond.html" markup="nil">
+
+** Question 2
+
+*** The Code
+
+The mapping that performs artificial frequency mapping is shown
+below.  It first calls the box truncation routine and then maps the
+result to create two association lists (simple maps).  These maps can
+then be used to in either the forward or reverse direction.
+
+<include file="../assign3/mapping_code.html" markup="nil">
+
+*** Map: Harmonic to Frequency
+An example of the output from the program is shown in the table below
+with the following settings:
+
+  - K1=2; K2=3
+  - F1=10; F2=1
+
+<include file="../assign3/q2_forward.html" markup="nil">
+
+*** Map: Frequency to Harmonic
+
+An example of the output from the program is shown in the table below
+with the following settings:
+
+  - K1=2; K2=3
+  - F1=10; F2=1
+
+<include file="../assign3/q2_reverse.html" markup="nil">
+
+
+
+
+
+
+

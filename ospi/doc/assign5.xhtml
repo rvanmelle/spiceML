@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN"
+    "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<?xml-stylesheet type="text/xsl" href="../etc/mathml.xsl"?>
+<?xml-stylesheet href="#internalStyle" type="text/css"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+  <head>
+    <title>OSPI</title>
+
+<link href="../../doc-src/static/blueprint/screen.css" type="text/css" media="screen"/>
+<link href="../../doc-src/static/blueprint/print.css" type="text/css" media="print"/>
+    
+    <style type="text/css">
+    <![CDATA[
+      body {
+        color: #000000;
+        background-color: #ffffff;
+      }
+      .function-name {
+        /* font-lock-function-name-face */
+        color: #0000ff;
+      }
+      .keyword {
+        /* font-lock-keyword-face */
+        color: #a020f0;
+      }
+      .tuareg-font-lock-governing {
+        /* tuareg-font-lock-governing-face */
+        color: #0000ff;
+        font-weight: bold;
+      }
+      .tuareg-font-lock-operator {
+        /* tuareg-font-lock-operator-face */
+        color: #a52a2a;
+      }
+      .comment {
+        color: #FF0000;
+      }
+      .type {
+        /* font-lock-type-face */
+        color: #228b22;
+      }
+      .variable-name {
+        /* font-lock-variable-name-face */
+        color: #b8860b;
+      }
+
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    ]]>
+    </style>
+    
+  </head>
+  
+  <body>
+
+    <div class="container">
+      <div class="column span-14">
+    
+	
+     
+    
+
+
+
+<h2><a name="sec1" id="sec1"></a>
+ELG7132D: Assign 5</h2>
+
+<h4>By: Reid van Melle</h4>
+
+
+<h4>Student No: 5107751</h4>
+
+
+<h3><a name="sec2" id="sec2"></a>
+Table of Contents</h3>
+
+<div class="contents">
+<dl>
+<dt>
+<a href="#sec1">ELG7132D: Assign 5</a>
+</dt>
+<dd>
+<dl>
+<dt>
+<a href="#sec2">Table of Contents</a>
+</dt>
+<dt>
+<a href="#sec3">Overview</a>
+</dt>
+<dt>
+<a href="#sec4">Implementation</a>
+</dt>
+<dt>
+<a href="#sec5">Results</a>
+</dt>
+<dt>
+<a href="#sec6">Conclusions and Future Work</a>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+
+
+
+<h3><a name="sec3" id="sec3"></a>
+Overview</h3>
+
+<p class="first">I implemented both a vanilla transient analysis module as well as a
+shooting method analysis.  The results agree very closely with
+simulations performed in ADS within a small margin of error.
+Performance and converge of the shooting method analysis relies very
+heavily on the implementation of the IVP analysis.</p>
+
+<p>The implementation, my results, ADS results, and discussion/comparison
+are presented below.</p>
+
+
+<h3><a name="sec4" id="sec4"></a>
+Implementation</h3>
+
+<p class="first">The entire circuit, all values, and most configuration options are
+inputs to the circuit.  As in past assignments, I used the language
+OCAML and bindings for the GNU Scientific Library to develop solutions
+for the assignment.</p>
+
+<p>I will first show the high-level driver for the shooting method
+analysis.  Basically we have the circuit declaration including the
+description of the piece-wise linear source input which drives the
+circuit.  At then end of the routine, the shooting method analysis is
+invoked and then the results are plotted.</p>
+
+<p>    <pre>
+<span class="tuareg-font-lock-governing">let</span> <span class="function-name">test_circuit_sm</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">()</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c </span><span class="tuareg-font-lock-operator">=</span> new_circuit <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+  c<span class="tuareg-font-lock-operator">#</span>isrc 1 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">id</span><span class="tuareg-font-lock-operator">:</span><span class="type">50 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dc</span><span class="tuareg-font-lock-operator">:</span>
+    <span class="tuareg-font-lock-operator">(</span><span class="type">Source</span>.<span class="type">DC</span>.pwl <span class="tuareg-font-lock-operator">[(</span>0.<span class="tuareg-font-lock-operator">,</span> 0.<span class="tuareg-font-lock-operator">);</span> <span class="tuareg-font-lock-operator">(</span>1e<span class="tuareg-font-lock-operator">-</span>9<span class="tuareg-font-lock-operator">,</span> 0.5<span class="tuareg-font-lock-operator">);</span> <span class="tuareg-font-lock-operator">((</span>0.5e<span class="tuareg-font-lock-operator">-</span>3 <span class="tuareg-font-lock-operator">-.</span> 1e<span class="tuareg-font-lock-operator">-</span>9<span class="tuareg-font-lock-operator">),</span> 0.5<span class="tuareg-font-lock-operator">);</span>
+                    <span class="tuareg-font-lock-operator">(</span>0.5e<span class="tuareg-font-lock-operator">-</span>3<span class="tuareg-font-lock-operator">,</span> 0.<span class="tuareg-font-lock-operator">);</span> <span class="tuareg-font-lock-operator">(</span>1e<span class="tuareg-font-lock-operator">-</span>3<span class="tuareg-font-lock-operator">,</span> 0.<span class="tuareg-font-lock-operator">)]);</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 1 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">2.</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 1 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">0.2e</span><span class="tuareg-font-lock-operator">-</span><span class="type">6</span><span class="tuareg-font-lock-operator">;</span>
+  <span class="type">Diode</span>.diode_subckt c <span class="tuareg-font-lock-operator">~</span><span class="variable-name">nb</span><span class="tuareg-font-lock-operator">:</span><span class="type">1 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">ne</span><span class="tuareg-font-lock-operator">:</span><span class="type">2</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>cap 2 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">c</span><span class="tuareg-font-lock-operator">:</span><span class="type">0.2e</span><span class="tuareg-font-lock-operator">-</span><span class="type">3</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>res 2 0 <span class="tuareg-font-lock-operator">~</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">100.</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>sm <span class="string">"SM"</span> 0.001<span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>load <span class="string">"v(out)"</span> <span class="string">"ospi/assign5/tran_vout.csv"</span><span class="tuareg-font-lock-operator">;</span>
+  c<span class="tuareg-font-lock-operator">#</span>plot <span class="tuareg-font-lock-operator">~</span><span class="variable-name">named</span><span class="tuareg-font-lock-operator">:[</span><span class="string">"v(out)"</span><span class="tuareg-font-lock-operator">]</span> `SM <span class="string">"SM"</span> <span class="tuareg-font-lock-operator">[</span>2<span class="tuareg-font-lock-operator">]</span></pre></p>
+
+
+<p>The primary piece of code developed for this assignment is shown
+below.  This is the module which implements the Newton Shooting
+Method.  The routine called &quot;run&quot; is called to perform the analysis.
+It contains a few sub-functions of interest.  The &quot;run_transient&quot;
+function is called in order to solve the IVP at a new MNA state
+starting point.  It additionally contains several sub-functions of
+interest.  The function called &quot;ode_func&quot; is called by the GNU ODE
+solver whenever it takes another step.  The updated time and state
+vectors are passed as inputs to this routine.  There are also
+functions called &quot;jac_func_tr&quot; and &quot;jac_func_be&quot; which implement the
+trapezoidal and backward-euler based jacobian calculations for the
+shooting method.  Of course, only one of them is used during a
+particular run.  Finally, at the end of the &quot;run&quot; routine is the
+creation of the Newton non-linear solver using the built-in GSL
+multi-dimensional root finding library.</p>
+
+<p>    <pre>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Solver</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Recorder</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Gsl_helpers</span>
+<span class="tuareg-font-lock-governing">open</span> <span class="type">Printf</span>
+
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">info </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Circuit</span>.info
+<span class="tuareg-font-lock-governing">let</span> <span class="variable-name">wall_time </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday
+<span class="comment">(*
+  This module implements the Newton Shooting Method for solving
+  steady-state solutions of non-linear circuits with a periodic input.
+  This is particularly well-suited to solutions with inputs that
+  exhibit sharp non-linearities.
+
+  - we are looking for an initial condition x_o such that
+  phi(x_0, 0, T) - x_0 = 0     *where*
+  T = the period of the input
+  x_0 = our guess at the initial condition
+*)</span>
+  
+<span class="tuareg-font-lock-governing">module</span> <span class="type">ShootingMethod </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-governing">functor</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">Solver</span><span class="tuareg-font-lock-operator">:</span> <span class="type">SOLVER</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">-&gt;</span> <span class="tuareg-font-lock-governing">struct</span>
+
+  <span class="keyword">exception</span> <span class="variable-name">SingularMatrix</span>
+  <span class="tuareg-font-lock-governing">type</span> <span class="type">t </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span> <span class="variable-name">name</span> <span class="tuareg-font-lock-operator">:</span> <span class="type">string</span><span class="tuareg-font-lock-operator">;</span>
+             <span class="variable-name">period</span> <span class="tuareg-font-lock-operator">:</span> <span class="type">float </span><span class="tuareg-font-lock-operator">}</span>
+
+  <span class="comment">(* Settings for the transient ODE stepper algorithm *)</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">stepper </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_odeiv</span>.RK2
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">reltol </span><span class="tuareg-font-lock-operator">=</span> 1e<span class="tuareg-font-lock-operator">-</span>9
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">abstol </span><span class="tuareg-font-lock-operator">=</span> 1e<span class="tuareg-font-lock-operator">-</span>12
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">step_size </span><span class="tuareg-font-lock-operator">=</span> 1e<span class="tuareg-font-lock-operator">-</span>10
+
+  <span class="comment">(* Settings for the multi-dimensional root-solver *)</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">root_solver </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.NEWTON
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">max_iter </span><span class="tuareg-font-lock-operator">=</span> 200
+  <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">eps_abs </span><span class="tuareg-font-lock-operator">=</span> 1e<span class="tuareg-font-lock-operator">-</span>4
+    
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">create</span><span class="variable-name"> name period </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span> name <span class="tuareg-font-lock-operator">=</span> name<span class="tuareg-font-lock-operator">;</span> period <span class="tuareg-font-lock-operator">=</span> period <span class="tuareg-font-lock-operator">}</span>
+
+  <span class="comment">(* Main routine for actually running the analysis *)</span>
+  <span class="tuareg-font-lock-governing">let</span> <span class="function-name">run</span><span class="variable-name"> sm </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">xinit </span><span class="tuareg-font-lock-operator">(</span><span class="variable-name">s</span><span class="tuareg-font-lock-operator">:</span><span class="type">Solver.t</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span><span class="variable-name">r</span><span class="tuareg-font-lock-operator">:</span><span class="type">recorder</span><span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">=</span>
+    info <span class="string">"Starting Newton Shooting Method analysis..."</span><span class="tuareg-font-lock-operator">;</span>
+
+    <span class="comment">(* Allocate a bunch of matrices which are reused throughout *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">size </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.size s <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create size <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create size size <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">temp_m2 </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create size size <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">y_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.create size <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">c_matrix </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_c_matrix s <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">g_matrix </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Solver</span>.get_a_matrix s <span class="tuareg-font-lock-governing">in</span>
+
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">run_transient</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">?(</span><span class="variable-name">periods</span><span class="tuareg-font-lock-operator">=</span><span class="variable-name">1</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">?(</span><span class="variable-name">save</span><span class="tuareg-font-lock-operator">=</span><span class="constant">false</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> xinit </span><span class="tuareg-font-lock-operator">=</span>
+      <span class="comment">(* Runs a transient analysis starting with xinit for a period of
+         sm.period. Returns the (xfinal, d_phi / d_x0) *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">start_t </span><span class="tuareg-font-lock-operator">=</span> wall_time <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_start </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array xinit <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="function-name">ode_func</span><span class="variable-name"> t x y </span><span class="tuareg-font-lock-operator">=</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array x <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">V</span>.set_zero y_v<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">Solver</span>.apply_nonlinear_functions s <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_v </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">y</span><span class="tuareg-font-lock-operator">:</span><span class="type">y_v</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="type">V</span>.scale y_v <span class="tuareg-font-lock-operator">(-.</span>1.<span class="tuareg-font-lock-operator">);</span>
+        <span class="type">V</span>.add y_v <span class="tuareg-font-lock-operator">(</span><span class="type">Solver</span>.get_b_vec s <span class="tuareg-font-lock-operator">(</span>`DC t<span class="tuareg-font-lock-operator">));</span>
+        <span class="tuareg-font-lock-operator">(</span>g_matrix <span class="tuareg-font-lock-operator">|*&gt;</span> x_v<span class="tuareg-font-lock-operator">)</span> temp_v<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">V</span>.sub y_v temp_v<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">soln </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_linalg</span>.solve_LU <span class="tuareg-font-lock-operator">~</span><span class="variable-name">protect</span><span class="tuareg-font-lock-operator">:</span><span class="constant">true</span><span class="type"> </span><span class="tuareg-font-lock-operator">(</span>`M c_matrix<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">(</span>`V y_v<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">Array</span>.blit soln 0 y 0 <span class="tuareg-font-lock-operator">(</span><span class="type">Array</span>.length soln<span class="tuareg-font-lock-operator">)</span>
+      <span class="tuareg-font-lock-governing">in</span>
+
+      <span class="comment">(* Create the ODE solver stepper, evolver, etc. *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">step    </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_odeiv</span>.make_step stepper <span class="tuareg-font-lock-operator">~</span><span class="variable-name">dim</span><span class="tuareg-font-lock-operator">:</span><span class="type">size </span><span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">control </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_odeiv</span>.make_control_yp_new
+        <span class="tuareg-font-lock-operator">~</span><span class="variable-name">eps_abs</span><span class="tuareg-font-lock-operator">:</span><span class="type">abstol </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">eps_rel</span><span class="tuareg-font-lock-operator">:</span><span class="type">reltol </span><span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">evolve  </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_odeiv</span>.make_evolve size <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">system  </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_odeiv</span>.make_system ode_func size <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">(</span><span class="variable-name">t</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> t1</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> h</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> y</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span>0.<span class="tuareg-font-lock-operator">,</span> <span class="tuareg-font-lock-operator">(</span>sm.period <span class="tuareg-font-lock-operator">*.</span> <span class="tuareg-font-lock-operator">(</span>float periods<span class="tuareg-font-lock-operator">)),</span> step_size<span class="tuareg-font-lock-operator">,</span> xinit<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">num_steps </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0 <span class="tuareg-font-lock-governing">in</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">cur_j </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create size size <span class="tuareg-font-lock-governing">in</span>
+
+      <span class="comment">(* Trapezoidal based jacobian calculation function *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="function-name">jac_func_tr</span><span class="variable-name"> h x </span><span class="tuareg-font-lock-operator">=</span>
+        <span class="comment">(* WARNING: this is not yet right --&gt; DO NOT USE *)</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array x <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">V</span>.set_zero y_v<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">Solver</span>.apply_nonlinear_derivatives s <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_v </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">j</span><span class="tuareg-font-lock-operator">:</span><span class="type">temp_m</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.add temp_m g_matrix<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.scale temp_m <span class="tuareg-font-lock-operator">(</span>h <span class="tuareg-font-lock-operator">/.</span> 2.<span class="tuareg-font-lock-operator">);</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">lhs_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.copy c_matrix <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">rhs_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.copy c_matrix <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">M</span>.add lhs_m temp_m<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.sub rhs_m temp_m<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">lhs_inverse </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_linalg</span>.invert_LU <span class="tuareg-font-lock-operator">(</span>`M lhs_m<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">lhs_inverse </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> lhs_inverse <span class="keyword">with</span>
+          <span class="tuareg-font-lock-operator">|</span> `M x <span class="tuareg-font-lock-operator">-&gt;</span> x
+          <span class="tuareg-font-lock-operator">|</span> _ <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">raise</span> SingularMatrix
+        <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-operator">(</span>lhs_inverse <span class="tuareg-font-lock-operator">|*|</span> rhs_m<span class="tuareg-font-lock-operator">)</span> temp_m2<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-operator">(</span>temp_m2 <span class="tuareg-font-lock-operator">|*|</span> cur_j<span class="tuareg-font-lock-operator">)</span> temp_m<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:</span><span class="type">temp_m </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">cur_j</span>
+      <span class="tuareg-font-lock-governing">in</span>
+
+      <span class="comment">(* Backward euler-based jacobian calculation function *)</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="function-name">jac_func_be</span><span class="variable-name"> h x </span><span class="tuareg-font-lock-operator">=</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">x_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array x <span class="tuareg-font-lock-governing">in</span>
+        <span class="type">V</span>.set_zero y_v<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">Solver</span>.apply_nonlinear_derivatives s <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">x_v </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">j</span><span class="tuareg-font-lock-operator">:</span><span class="type">temp_m</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.add temp_m g_matrix<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.scale temp_m h<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.add temp_m c_matrix<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">lhs_inverse </span><span class="tuareg-font-lock-operator">=</span> <span class="keyword">match</span> <span class="type">Gsl_linalg</span>.invert_LU <span class="tuareg-font-lock-operator">(</span>`M temp_m<span class="tuareg-font-lock-operator">)</span> <span class="keyword">with</span>
+          <span class="tuareg-font-lock-operator">|</span> `M x <span class="tuareg-font-lock-operator">-&gt;</span> x
+          <span class="tuareg-font-lock-operator">|</span> _ <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">raise</span> SingularMatrix
+        <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">rhs_m </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.copy c_matrix <span class="tuareg-font-lock-governing">in</span>
+        <span class="tuareg-font-lock-operator">(</span>lhs_inverse <span class="tuareg-font-lock-operator">|*|</span> rhs_m<span class="tuareg-font-lock-operator">)</span> temp_m2<span class="tuareg-font-lock-operator">;</span>
+        <span class="tuareg-font-lock-operator">(</span>temp_m2 <span class="tuareg-font-lock-operator">|*|</span> cur_j<span class="tuareg-font-lock-operator">)</span> temp_m<span class="tuareg-font-lock-operator">;</span>
+        <span class="type">M</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:</span><span class="type">temp_m </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">cur_j</span>
+      <span class="tuareg-font-lock-governing">in</span>
+
+      <span class="comment">(* This is where we actually drive the transient analysis to completion *)</span>
+      <span class="type">M</span>.set_id cur_j<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">loop</span><span class="variable-name"> t h </span><span class="tuareg-font-lock-operator">=</span>
+        incr num_steps<span class="tuareg-font-lock-operator">;</span>
+        <span class="keyword">if</span> <span class="tuareg-font-lock-operator">(!</span>num_steps <span class="tuareg-font-lock-operator">mod</span> 10000<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">=</span> 0 <span class="keyword">then</span> printf <span class="string">".%!"</span><span class="tuareg-font-lock-operator">;</span>
+        <span class="keyword">if</span> t <span class="tuareg-font-lock-operator">&lt;</span> t1 <span class="keyword">then</span> <span class="tuareg-font-lock-governing">begin</span>
+          <span class="tuareg-font-lock-governing">let</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">(</span><span class="variable-name">t</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> h</span><span class="tuareg-font-lock-operator">)</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">=</span>
+            jac_func_be h y<span class="tuareg-font-lock-operator">;</span>  <span class="comment">(* Update the jacobian *)</span>
+            <span class="type">Gsl_odeiv</span>.evolve_apply evolve control step system <span class="tuareg-font-lock-operator">~</span>t <span class="tuareg-font-lock-operator">~</span>t1 <span class="tuareg-font-lock-operator">~</span>h <span class="tuareg-font-lock-operator">~</span>y
+<span class="comment">          in
+</span>          <span class="keyword">if</span> save <span class="keyword">then</span> r<span class="tuareg-font-lock-operator">#</span>append_real sm.name t <span class="tuareg-font-lock-operator">(</span><span class="keyword">fun</span> <span class="variable-name">i </span><span class="tuareg-font-lock-operator">-&gt;</span> y.<span class="tuareg-font-lock-operator">(</span>i<span class="tuareg-font-lock-operator">));</span>
+          loop t h
+        <span class="tuareg-font-lock-governing">end</span> 
+      <span class="tuareg-font-lock-governing">in</span>
+      loop t h<span class="tuareg-font-lock-operator">;</span>
+      info <span class="string">" tran --&gt; time=%g steps=%d"</span> <span class="tuareg-font-lock-operator">((</span>wall_time <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> start_t<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-operator">!</span>num_steps<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">y_v </span><span class="tuareg-font-lock-operator">=</span> <span class="type">V</span>.of_array y <span class="tuareg-font-lock-governing">in</span>
+      print_vector <span class="string">"xstart"</span> x_start<span class="tuareg-font-lock-operator">;</span>
+      print_array <span class="string">"xfinal"</span> y<span class="tuareg-font-lock-operator">;</span>
+      <span class="type">V</span>.sub y_v x_start<span class="tuareg-font-lock-operator">;</span>
+      print_vector<span class="string">"error vec"</span> y_v<span class="tuareg-font-lock-operator">;</span>
+      y_v<span class="tuareg-font-lock-operator">,</span> cur_j
+<span class="string">    in
+</span>    
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">start_time </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">()</span> <span class="tuareg-font-lock-governing">in</span>
+
+    <span class="comment">(* This is the non-linear *newton* part of the shooting method *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">maxiter</span><span class="tuareg-font-lock-operator">=</span>max_iter
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">epsabs</span><span class="tuareg-font-lock-operator">=</span>eps_abs
+    <span class="tuareg-font-lock-governing">and</span> <span class="variable-name">solver_method </span><span class="tuareg-font-lock-operator">=</span> root_solver <span class="tuareg-font-lock-governing">in</span>  <span class="comment">(* HYBRIDSJ *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">m_ident </span><span class="tuareg-font-lock-operator">=</span> <span class="type">M</span>.create size size <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">M</span>.set_id m_ident<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="function-name">fdf</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">x </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">f </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">j </span><span class="tuareg-font-lock-operator">=</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">y</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> cur_j </span><span class="tuareg-font-lock-operator">=</span> run_transient <span class="tuareg-font-lock-operator">(</span><span class="type">V</span>.to_array x<span class="tuareg-font-lock-operator">)</span> <span class="tuareg-font-lock-governing">in</span>
+      <span class="type">V</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:</span><span class="type">y </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">f</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="type">M</span>.memcpy <span class="tuareg-font-lock-operator">~</span><span class="variable-name">src</span><span class="tuareg-font-lock-operator">:</span><span class="type">cur_j </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">dst</span><span class="tuareg-font-lock-operator">:</span><span class="type">j</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="type">M</span>.sub j m_ident<span class="tuareg-font-lock-operator">;</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">gf </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">{</span>
+      <span class="type">Gsl_fun</span>.multi_f <span class="tuareg-font-lock-operator">=</span> <span class="keyword">fun</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span>x <span class="tuareg-font-lock-operator">~</span>f <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">raise</span> <span class="string">"shell routine"</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="type">Gsl_fun</span>.multi_df <span class="tuareg-font-lock-operator">=</span> <span class="keyword">fun</span><span class="variable-name"> </span><span class="tuareg-font-lock-operator">~</span>x <span class="tuareg-font-lock-operator">~</span>j <span class="tuareg-font-lock-operator">-&gt;</span> <span class="keyword">raise</span> <span class="string">"shell routine"</span><span class="tuareg-font-lock-operator">;</span>
+      <span class="type">Gsl_fun</span>.multi_fdf <span class="tuareg-font-lock-operator">=</span> fdf<span class="tuareg-font-lock-operator">;</span> <span class="tuareg-font-lock-operator">}</span>
+<span class="string">    in
+</span>    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">solv </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.make solver_method size gf xinit <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">root_solver_steps </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">ref</span> 0 <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="tuareg-font-lock-governing">rec</span> <span class="function-name">proc</span><span class="variable-name"> iter </span><span class="tuareg-font-lock-operator">=</span>
+      incr root_solver_steps<span class="tuareg-font-lock-operator">;</span>
+      <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.iterate solv<span class="tuareg-font-lock-operator">;</span>
+      <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">status </span><span class="tuareg-font-lock-operator">=</span> <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.test_residual solv epsabs <span class="tuareg-font-lock-governing">in</span>
+      <span class="keyword">match</span> status <span class="keyword">with</span>
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">true</span> <span class="tuareg-font-lock-operator">-&gt;</span> Converged<span class="tuareg-font-lock-operator">,</span> iter
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">false</span> <span class="keyword">when</span> iter <span class="tuareg-font-lock-operator">&gt;=</span> maxiter <span class="tuareg-font-lock-operator">-&gt;</span> IterationLimitExceeded<span class="tuareg-font-lock-operator">,</span> iter
+        <span class="tuareg-font-lock-operator">|</span> <span class="constant">false</span> <span class="tuareg-font-lock-operator">-&gt;</span> proc <span class="tuareg-font-lock-operator">(</span>succ iter<span class="tuareg-font-lock-operator">)</span>
+    <span class="tuareg-font-lock-governing">in</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">status</span><span class="tuareg-font-lock-operator">,</span><span class="variable-name"> iters </span><span class="tuareg-font-lock-operator">=</span> proc 1 <span class="tuareg-font-lock-governing">in</span>
+    <span class="type">Gsl_multiroot</span>.<span class="type">Deriv</span>.get_state solv <span class="tuareg-font-lock-operator">~</span><span class="variable-name">x</span><span class="tuareg-font-lock-operator">:</span><span class="type">xinit </span><span class="tuareg-font-lock-operator">();</span>
+    
+    <span class="comment">(* Calculate total time and report the result *)</span>
+    <span class="tuareg-font-lock-governing">let</span> <span class="variable-name">duration </span><span class="tuareg-font-lock-operator">=</span> <span class="tuareg-font-lock-operator">(</span><span class="type">Unix</span>.gettimeofday <span class="tuareg-font-lock-operator">())</span> <span class="tuareg-font-lock-operator">-.</span> start_time <span class="tuareg-font-lock-governing">in</span>
+    run_transient <span class="tuareg-font-lock-operator">~</span><span class="variable-name">periods</span><span class="tuareg-font-lock-operator">:</span><span class="type">4 </span><span class="tuareg-font-lock-operator">~</span><span class="variable-name">save</span><span class="tuareg-font-lock-operator">:</span><span class="constant">true</span><span class="type"> </span><span class="tuareg-font-lock-operator">(</span><span class="type">V.to_array xinit</span><span class="tuareg-font-lock-operator">);</span>
+
+    <span class="comment">(*  Report results *)</span>
+    <span class="keyword">match</span> status <span class="keyword">with</span>
+      <span class="tuareg-font-lock-operator">|</span> Converged <span class="tuareg-font-lock-operator">-&gt;</span>
+          info <span class="string">"Newton Shooting Method: finished (steps=%d time=%g)"</span>
+            <span class="tuareg-font-lock-operator">!</span>root_solver_steps duration
+      <span class="tuareg-font-lock-operator">|</span> IterationLimitExceeded <span class="tuareg-font-lock-operator">-&gt;</span>
+          info <span class="string">"FAILURE: Newton Shooting Method (steps=%d time=%g)"</span>
+            <span class="tuareg-font-lock-operator">!</span>root_solver_steps duration
+    
+<span class="tuareg-font-lock-governing">end</span><span class="tuareg-font-lock-operator">;;</span></pre></p>
+
+
+
+
+<h4>Transient Analysis</h4>
+
+<p class="first">The transient analysis was implemented using the GNU Scientific
+Library ordinary differential equation solvers.  A number of different
+stepping algorithms were available, but the results from this
+assignment were obtained using an embedded Runge-Kutta (2,3) method.
+A few knobs were available such as the absolute and relative error
+thresholds which were set to 1e-12 and 1e-9 respectively.  I
+discovered through experimentation just how sensitive speed and
+convergence are on these parameter.  Loosening the error bounds
+allowed vastly faster run times but with occasional non-convergence
+problems.</p>
+
+
+<h4>Non-linear Solver</h4>
+
+<p class="first">The non-linear solver was implemented using a standard NEWTON RAPHSON
+solver with an absolute error threshold of 1e-6 and a maximum number
+of iterations of 200.  The shooting method jacobian was implemented
+using the backward-euler based jacobian calculation.  The jacobian
+updates were performed by adding a hook into the transient inner loop.</p>
+
+
+
+<h3><a name="sec5" id="sec5"></a>
+Results</h3>
+
+<p class="first">Results for both a transient analysis and shooting method analysis are
+presented below.  Following that, results from the ADS simulations are
+shown.  Finally, a discussion and comparison of the results is given.</p>
+
+<h4>Transient Analysis</h4>
+
+<p class="first">I ended up implementing a vanilla transient analysis for comparison
+and verification purposes since it was more-or-less required for the
+shooting method analysis anyway.</p>
+
+<p>The transient analysis was run for a total of 10ms requiring 480,000
+steps during the analysis (for abs_tol=1e-12 &amp; rel_tol=1e-9).  The
+total run time was approximately 18.8 seconds.  Results are shown
+below for both the ADS transient simulation and my transient
+analysis.  It is easy to see that the results match very well though
+the lines <em>do not</em> overlap perfectly at all times.  It is worth noting
+that I left the current source in the circuit rather than converting
+to an equivalent voltage source, so perhaps this impacts the
+performance of the algorithms.
+
+
+<br/>
+<embed src="../assign5/tran.svg" width="700" height="450"/></p>
+
+
+
+<h4>Shooting Method Analysis</h4>
+
+<p class="first">The shooting method analysis took a total of 33.8 seconds to converge
+with a total of 14 steps required by the non-linear solver.
+Typically a single iteration of the transient analysis would take
+approximately 1.8 seconds.</p>
+
+<p>The results from the ADS Harmonic Balance analysis and my Shooting
+Method Analysis are shown in the plot below.  There is a slight and
+consistent difference in the predicted circuit performance.  I have no
+real explanation for this discrepancy except that perhaps tighter
+error bounds are required.  I did try tightening the error bounds for
+the NR solver and this had no effect on the results.
+
+
+<br/>
+<embed src="../assign5/sm.svg" width="700" height="450"/></p>
+
+
+
+<h4>ADS Results</h4>
+
+<h5>Harmonic Balance</h5>
+
+<p>Some additional data about the ADS harmonic balance simulation:</p>
+
+<ul>
+<li>number of harmonics = 700</li>
+<li>run time = 796 seconds</li>
+</ul>
+
+
+<h5>Transient Analysis</h5>
+
+<p>Some additional data about the ADS transient simulation:</p>
+
+<ul>
+<li>duration = 10ms</li>
+<li>time steps = 1400</li>
+<li>time = 1.48 seconds</li>
+<li>max time step = 1ms</li>
+</ul>
+
+
+
+<h4>Comparison and Discussion</h4>
+
+<p class="first">The harmonic balance in ADS took a long time to run simply because of
+the large number of harmonics required to accurately capture the high
+frequency content of the input signal and hence the output waveforms.
+For this assignment, the ADS harmonic balance was configured to use
+700 harmonics.  This requires a very large amount of computation and
+high memory requirements resulting in a very long run time
+(approximately 800 seconds in this case).  The HB run-time (796 s) is
+significantly longer than the time required by my shooting method
+analysis (33.8 s).  This is exactly as expected since the input source
+contains sharp non-linearities.  This makes the circuit much better
+suited to analysis by transient simulation rather than harmonic
+balance where the number of harmonics required is prohibitive.</p>
+
+<p>It is also interesting to observe the timesteps taken by ADS during
+the transient analysis integration.  The stepping function takes a
+very large number of steps during the period when the input is
+changing sharply and then far fewer steps during the periods when the
+input signal is static.  Of course, this is totally as expected.
+Accurate results require many small timesteps during periods when the
+state of the circuit is changing quickly.</p>
+
+
+
+<h3><a name="sec6" id="sec6"></a>
+Conclusions and Future Work</h3>
+
+<ul>
+<li>experiment with various ODE solver in terms of performance and
+convergence</li>
+<li>finish the trapezoidal jacobian update function and compare this to
+the backward euler version</li>
+</ul>
+
+
+
+</div>
+</div>
+</body>
+</html>
